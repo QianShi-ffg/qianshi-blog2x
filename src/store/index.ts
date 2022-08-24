@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { createPinia, defineStore } from 'pinia'
 
 export const useStore = defineStore('store',{
     state: () => { 
@@ -17,3 +17,5 @@ export const useStore = defineStore('store',{
         }
     }
 })
+
+export const store = createPinia()
