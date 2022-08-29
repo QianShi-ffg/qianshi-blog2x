@@ -2,9 +2,13 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    name: 'index',
     path: '/',
     component: () => import('@/views/index.vue')
+  },
+  {
+    name: 'home',
+    path: '/home',
+    component: () => import('@/views/home/index.vue')
   },
   {
     name: 'friendshipChain',

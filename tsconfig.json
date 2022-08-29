@@ -14,7 +14,7 @@
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     // 配置baseUrl才可配置path
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     }
