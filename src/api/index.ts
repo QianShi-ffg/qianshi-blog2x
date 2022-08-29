@@ -30,7 +30,12 @@ export class Request {
       (res: AxiosResponse) => {
         // 直接返回res，当然你也可以只返回res.data
         // 系统如果有自定义code也可以在这里处理
-        return res
+        console.log(res, 98888)
+        if (res.data.code === 200) {
+          return res.data.data
+        } else {
+          alert('系统错误,请稍后再试')
+        }
       },
       (err: any) => {
         // 这里用来处理http常见错误，进行全局提示
