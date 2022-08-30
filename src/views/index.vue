@@ -1,48 +1,63 @@
 <template>
-  <div id="blogIndex">
-    <div class="title">
-      首页背景图抠字
-    </div>
-    <div class="mask">
-    </div>
+  <div id="home">
+    <header class="w-screen leading-none text-3xl bg-red-500 mb-6">666</header>
+    <main class="container mx-auto w-screen">
+      <router-view/>
+    </main>
+    <footer class="container mx-auto w-screen"> 晋ICP备18013488号-1 千拾 2022</footer>
   </div>
 </template>
 
 <script setup lang="ts">
+import { getArticleList } from '@/api/api'
+import { ref } from 'vue'
+import { useRouter, useRoute } from "vue-router"
 
+const artList: any = ref([])
+const router = useRouter()
+// 获取文章列表
+const articleList = async () => {
+  const res = await getArticleList({})
+  artList.value = res
+}
+articleList()
+
+const artDetail = (id: any) => {
+  router.push({ path: '/artDetail', query: { id: id } })
+}
 </script>
 
 <style lang="scss" scoped>
-#blogIndex {
-  position: relative;
+#home {
   width: 100%;
   height: 100%;
-  background: url('@/assets/111.jpg') no-repeat;
-  background-size: 100% 100%;
-  .mask {
-    position: absolute;
+  // overflow-y: overlay;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  header {
+    position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: hsla(0, 0%, 100%, .4);
-    backdrop-filter: saturate(180%), blur(2);
+    height: 65px;
     z-index: 1;
   }
-  .title {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    line-height: 100vh;
-    color: transparent;
-    background: url('@/assets/111.jpg') no-repeat;
-    background-size: 100% 100%;
-    background-clip: text;
-    font-size: 80px;
-    font-weight: 700;
-    z-index: 2;
+
+  main {
+    width: 1250px;
+    margin-top: 100px;
+    .artListItem {
+      transition: all 0.5s;
+
+      &:hover {
+        @apply scale-105
+      }
+    }
+  }
+
+  footer {
+    height: 50px;
+    line-height: 50px;
+    margin: 10px auto;
   }
 }
 </style>

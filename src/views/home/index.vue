@@ -1,14 +1,10 @@
 <template>
-  <div id="home">
-    <header class="w-screen leading-none text-3xl bg-red-500 mb-6">666</header>
-    <main class="container mx-auto w-screen">
-      <div v-for="item in artList" :key="item.id"
-        class="artListItem text-left p-8 mb-6 text-2xl bg-gray-50 rounded-xl cursor-pointer shadow-lg opacity-80"
-        @click="artDetail(item.id)">
-        {{ item.title }}
-      </div>
-    </main>
-    <footer class="container mx-auto w-screen"> 晋ICP备18013488号-1 千拾 2022</footer>
+  <div id="artlist">
+    <div v-for="item in artList" :key="item.id"
+      class="artListItem text-left p-8 mb-6 text-2xl bg-gray-50 rounded-xl cursor-pointer shadow-lg opacity-80"
+      @click="artDetail(item.id)">
+      {{ item.title }}
+    </div>
   </div>
 </template>
 
@@ -32,30 +28,4 @@ const artDetail = (id: any) => {
 </script>
 
 <style lang="scss" scoped>
-#home {
-  width: 100%;
-  height: 100%;
-
-  header {
-    height: 65px;
-  }
-
-  main {
-    width: 1250px;
-
-    .artListItem {
-      transition: all 0.5s;
-
-      &:hover {
-        @apply scale-105
-      }
-    }
-  }
-
-  footer {
-    height: 30px;
-    line-height: 30px;
-    margin: 10px auto;
-  }
-}
 </style>

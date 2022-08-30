@@ -15,7 +15,7 @@ export default defineConfig({
     open: true,
     proxy: {
       '/api': {
-        target: 'http://188.131.164.41:3000',
+        target: 'http://oss.xingyijun.cn',
         rewrite: (path) => path.replace(/^\/api/, ''),
         changeOrigin: true
       }
