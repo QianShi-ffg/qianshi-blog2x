@@ -62,9 +62,9 @@ const artDetail = (id: any) => {
     margin: auto;
   }
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1280px) {
   #artlist {
-    width: 1250px;
+    width: 1200px;
     margin: auto;
   }
 }

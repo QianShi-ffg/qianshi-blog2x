@@ -4,7 +4,7 @@
     <div id="catalogue" class="shadow-lg rounded-xl" :class="catalogueStyle">
       <ul>
         <li v-for="(item, i) in catalogList" :key="i" :class="activeIndex === i ? 'active-li' : ''">
-          <a :href="`#${item.text}`" :data-level="item.level">{{ item.text }}</a>
+          <a :href="`#${item.text}`" :data-level="item.level" :title="item.text">{{ item.text }}</a>
         </li>
       </ul>
     </div>
@@ -118,11 +118,11 @@ const onGetCatalog = (list: []) => {
     width: 95%;
   }
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1280px) {
   #artDetail {
     width: 1200px;
     #md-editor-v3 {
-      width: 820px;
+      width: 880px;
       margin: unset;
     }
     #catalogue {
@@ -150,6 +150,9 @@ const onGetCatalog = (list: []) => {
             width: 100%;
             height: 100%;
             color: #000;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
             &[data-level="1"] {
               padding-left: 10px;
             }

@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw, createWebHistory } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
+  { path: '/:catchAll(.*)', component: () => import('@/views/statePage/404.vue') },
   {
     path: '/index',
     component: () => import('@/views/index.vue'),
