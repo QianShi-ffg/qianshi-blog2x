@@ -10,9 +10,11 @@
 
 <script setup lang="ts">
 import { getArticleList } from '@/api/api'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from "vue-router"
+import { useStore } from '@/store/index'
 
+const store = useStore()
 const artList: any = ref([])
 const router = useRouter()
 // 获取文章列表
@@ -25,33 +27,35 @@ articleList()
 const artDetail = (id: any) => {
   router.push({ path: '/artDetail', query: { id: id } })
 }
+
+onMounted(() => {
+  window.addEventListener('scroll', (e:any) => {
+    if (e.target.id === 'home') {
+      store.setScroll(e.target.scrollTop)
+    }
+  }, true)
+})
+
 </script>
 
 <style lang="scss" scoped>
 #home {
   width: 100%;
   height: 100%;
-  // overflow-y: overlay;
+  background: #f4f5f5;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: overlay;
   header {
     position: fixed;
     top: 0;
     height: 65px;
     z-index: 1;
   }
-
   main {
-    width: 1250px;
+    width: 100%;
     margin-top: 100px;
-    .artListItem {
-      transition: all 0.5s;
-
-      &:hover {
-        @apply scale-105
-      }
-    }
   }
 
   footer {

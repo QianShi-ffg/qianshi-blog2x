@@ -28,4 +28,32 @@ const artDetail = (id: any) => {
 </script>
 
 <style lang="scss" scoped>
+
+#artlist {
+  margin: auto;
+  .artListItem {
+    transition: all 0.5s;
+    &:hover {
+      @apply scale-105
+    }
+  }
+}
+@media screen and (min-width: 320px) {
+  #artlist {
+    width: 95%;
+    margin: auto;
+  }
+}
+@media screen and (min-width: 800px) {
+  #artlist {
+    width: 800px;
+    margin: auto;
+  }
+}
+@media screen and (min-width: 1200px) {
+  #artlist {
+    width: 1250px;
+    margin: auto;
+  }
+}
 </style>
