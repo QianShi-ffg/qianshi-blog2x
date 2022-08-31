@@ -52,12 +52,12 @@ watch(hScroll, (newVal)=>{
 
 // v3去除 h标签内a标签
 MdEditor.config({
-  markedRenderer(renderer) {
-    renderer.heading = (text, level, _r, _s, index) => {
+  markedRenderer(renderer:any) {
+    renderer.heading = (text:String, level:Number, _r:any, _s:any, index:any) => {
       const id = generateId(text, level, index);
       // return `<h${level} id="${text}">${text}</h${level}>`
       // 添加暗锚,跳转高度下将170
-      return `<h${level} id="${id}">${text}</h${level}><a name="${text}" style="position: relative; top: -170px;" class="darkAnchor"></a>`
+      return `<h${level} id="${id}">${text}</h${level}><a name="${text}" style="position: relative; top: -270px;" class="darkAnchor"></a>`
     }
     return renderer
   }
@@ -99,12 +99,12 @@ const onGetCatalog = (list: []) => {
   .catalogueFixed {
     position: fixed;
     top: 100px;
-    right: 360px;
+    right: calc((100% - 1200px) / 2);
   }
   .catalogueAbsolute {
-    position: absolute;
-    top: 0;
-    right: 0;
+    position: fixed;
+    top: 100px;
+    right: calc((100% - 1200px) / 2);
   }
 }
 

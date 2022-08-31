@@ -1,15 +1,20 @@
 <template>
   <div id="artlist">
     <div v-for="item in artList" :key="item.id"
-      class="artListItem text-left p-8 mb-6 text-2xl bg-gray-50 rounded-xl cursor-pointer shadow-lg opacity-80"
+      class="artListItem text-left p-5 mb-6 text-2xl bg-gray-50 rounded-xl cursor-pointer shadow-lg opacity-80"
       @click="artDetail(item.id)">
-      {{ item.title }}
+      <p>{{ item.title }}</p>
+      <p class="artEpitomize">
+        <span>作者: 千拾</span>
+        <span>发布时间: {{ date(item.updataTime) }}</span>
+      </p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { getArticleList } from '@/api/api'
+import { date } from '@/util/date'
 import { ref } from 'vue'
 import { useRouter, useRoute } from "vue-router"
 
@@ -35,6 +40,13 @@ const artDetail = (id: any) => {
     transition: all 0.5s;
     &:hover {
       @apply scale-105
+    }
+    .artEpitomize {
+      margin-top: 10px;
+      font-size: 12px;
+      span {
+        margin-right: 20px;
+      }
     }
   }
 }
