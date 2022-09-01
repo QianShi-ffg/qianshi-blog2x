@@ -1,13 +1,13 @@
 <template>
   <div id="home">
     <header class="w-screen leading-none text-3xl mb-6 shadow-lg" >
-      千拾的博客
+      <span class="title">千拾的博客</span>
       <div style="position: absolute; right: 30px; margin: auto; top: 0; bottom: 0;">
         <router-link to="/" style="margin-right: 30px; font-size: 14px;">首页</router-link>
         <router-link to="/friendshipChain" style="margin-right: 30px; font-size: 14px;">友链</router-link>
       </div>
     </header>
-    <main class="container mx-auto w-screen">
+    <main class="">
       <router-view/>
     </main>
     <footer class="container mx-auto w-screen"> 晋ICP备18013488号-1 千拾 2022</footer>
@@ -35,9 +35,10 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   background: #f4f5f5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-between;
+  // align-items: center;
   overflow: overlay;
   scroll-behavior: smooth;
   header {
@@ -45,15 +46,18 @@ onMounted(() => {
     top: 0;
     height: 65px;
     z-index: 1;
-    background: radial-gradient(transparent, rgba(255, 255, 255, 1) 2px);
+    background-color: #ffffffba;
+    // background: radial-gradient(transparent, rgba(255, 255, 255, 1) 2px);
     background-size: 4px 4px;
-    backdrop-filter: blur(5px);
+    backdrop-filter: saturate(180%) blur(8px);
+    // backdrop-filter: blur(5px);
     line-height: 65px;
+    .title {
+      display: none;
+    }
   }
   main {
-    width: 100%;
-    margin: 0;
-    margin-top: 100px;
+    height: auto;
   }
 
   footer {
@@ -67,6 +71,9 @@ onMounted(() => {
     header {
       text-align: left;
       padding-left: 30px;
+      .title {
+        display: block;
+      }
     }
   }
 }
@@ -74,6 +81,9 @@ onMounted(() => {
   #home {
     header {
       text-align: center;
+      .title {
+      display: none;
+    }
     }
   }
 }
@@ -81,6 +91,13 @@ onMounted(() => {
   #home {
     header {
       text-align: center;
+      .title {
+      display: none;
+    }
+    }
+    main {
+      width: 100%;
+      height: auto;
     }
   }
 }
