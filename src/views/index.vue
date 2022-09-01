@@ -39,12 +39,12 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   overflow: overlay;
+  scroll-behavior: smooth;
   header {
     position: fixed;
     top: 0;
     height: 65px;
     z-index: 1;
-    text-align: center;
     background: radial-gradient(transparent, rgba(255, 255, 255, 1) 2px);
     background-size: 4px 4px;
     backdrop-filter: blur(5px);
@@ -60,6 +60,28 @@ onMounted(() => {
     height: 50px;
     line-height: 50px;
     margin: 10px auto;
+  }
+}
+@media screen and (min-width: 320px) {
+  #home {
+    header {
+      text-align: left;
+      padding-left: 30px;
+    }
+  }
+}
+@media screen and (min-width: 800px) {
+  #home {
+    header {
+      text-align: center;
+    }
+  }
+}
+@media screen and (min-width: 1280px) {
+  #home {
+    header {
+      text-align: center;
+    }
   }
 }
 </style>

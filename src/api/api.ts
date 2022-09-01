@@ -5,7 +5,7 @@ import axios from './index'
 //   return axios.request({ method: 'post', url: '/articleList', data: params  })
 // }
 export const getArticleList = (params: object) => {
-  return axios.get( '/articleList', { params })
+  return axios.get( '/publishArticleList', { params })
 }
 // export const getArticleList = (params: object) => {
 //   return axios.post( '/articleList', params)
