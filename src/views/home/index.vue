@@ -3,6 +3,7 @@
       <div class="bannerInner" ref="bannerInner">
         千拾的博客
       </div>
+      <div class="aWord">{{ aWordText }}</div>
     </section>
   <div id="artlist">
     <div v-for="item in artList" :key="item.id"
@@ -18,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { getArticleList } from '@/api/api'
+import { getArticleList, aWord } from '@/api/api'
 import { date } from '@/util/date'
 import { ref, onMounted, watch, computed } from 'vue'
 import { useRouter, useRoute } from "vue-router"
@@ -28,13 +29,19 @@ const store = useStore()
 const artList: any = ref([])
 const bannerInner: any = ref()
 const router = useRouter()
+const aWordText = ref<String>('') 
 // 获取文章列表
 const articleList = async () => {
   const res = await getArticleList({})
   artList.value = res
 }
-articleList()
 
+const init = async() => {
+  const res:any = await aWord({})
+  aWordText.value = `${res.hitokoto} - ${res.from}`
+  articleList()
+}
+init()
 const artDetail = (id: any) => {
   router.push({ path: '/artDetail', query: { id: id } })
 }
@@ -55,7 +62,32 @@ watch(hScroll, (newVal) => {
 </script>
 
 <style lang="scss" scoped>
-
+#banner {
+  position: relative;
+  .aWord {
+    position: absolute;
+    bottom: 35px;
+    right: 35px;
+    font-size: 20px;
+    font-weight: 700;
+    color: transparent;
+    // -webkit-text-stroke: 1px rgba(219, 219, 219, 0.411);
+    // background: linear-gradient(45deg, #ffeb3b, #009688, yellowgreen, pink, #03a9f4, #9c27b0, #8bc34a);
+    background: linear-gradient(90deg, transparent 0%, rgb(110, 110, 110) 20%, rgb(255, 255, 255) 50%, rgb(110, 110, 110) 80%, transparent 100%);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-clip: text;
+    animation: huerotate 5s linear infinite;
+  }
+}
+@keyframes huerotate {
+  from {
+    background-position: -500%;
+  }
+  to {
+    background-position: 500%;
+  }
+}
 #artlist {
   margin: auto;
   margin-top: 100px;
