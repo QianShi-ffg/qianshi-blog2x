@@ -39,3 +39,10 @@
     background-color: transparent;
   }
 }
+
+@import url('https://fonts.googleapis.com/css?family=Bubblegum+Sans&display=swap');
+@import './media.scss';
+
+body {
+  font-family: 'Bubblegum Sans', cursive;
+}

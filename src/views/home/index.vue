@@ -46,8 +46,10 @@ const hScroll = computed(() => {
 watch(hScroll, (newVal) => {
   if (newVal !== 0) {
     bannerInner.value.style.backgroundPosition = `calc(50% + ${newVal}px) calc(50% + ${newVal}px)`
+    bannerInner.value.classList.add('textStroke')
   } else {
     bannerInner.value.style.backgroundPosition = ''
+    bannerInner.value.classList.remove('textStroke')
   }
 })
 </script>
@@ -71,68 +73,7 @@ watch(hScroll, (newVal) => {
     }
   }
 }
-@media screen and (min-width: 320px) {
-  #banner {
-    display: none;
-  }
-  #artlist {
-    width: 95%;
-  }
-}
-@media screen and (min-width: 800px) {
-  #banner {
-    display: block;
-      width: 100%;
-      background: url('@/assets/111.jpg') no-repeat;
-      background-position: 50% 50%;
-      background-size: cover;
-      .bannerInner {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        color: transparent;
-        background: url('@/assets/111.jpg') no-repeat;
-        background-position: 50% 50%;
-        background-size: cover;
-        background-clip: text;
-        font-size: 7em;
-        font-weight: 900;
-        text-align: center;
-        line-height: 100vh;
-        overflow: hidden;
-
-      }
-    }
-  #artlist {
-    width: 800px;
-  }
-}
-@media screen and (min-width: 1280px) {
-  #banner {
-    display: block;
-      width: 100%;
-      background: url('@/assets/111.jpg') no-repeat;
-      background-position: 50% 50%;
-      background-size: cover;
-      .bannerInner {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        color: transparent;
-        background: url('@/assets/111.jpg') no-repeat;
-        background-position: 50% 50%;
-        background-size: cover;
-        background-clip: text;
-        font-size: 7em;
-        font-weight: 900;
-        text-align: center;
-        line-height: 100vh;
-        overflow: hidden;
-
-      }
-    }
-  #artlist {
-    width: 1200px;
-  }
+.textStroke {
+  -webkit-text-stroke: 1px rgba(219, 219, 219, 0.411);
 }
 </style>

@@ -1,0 +1,166 @@
+@media screen and (min-width: 320px) {
+  #home {
+    header {
+      text-align: left;
+      padding-left: 30px;
+      background: radial-gradient(transparent, rgba(255, 255, 255, 0.301) 2px);
+      backdrop-filter: blur(5px);
+      .title {
+        display: block;
+      }
+    }
+  }
+  #banner {
+    display: none;
+  }
+  #artlist {
+    width: 95%;
+  }
+  #md-editor-v3 {
+    width: 95%;
+  }
+}
+
+
+@media screen and (min-width: 800px) {
+  #home {
+    header {
+      text-align: center;
+      background: transparent;
+      backdrop-filter: blur(1px);
+      .title {
+        display: none;
+      }
+    }
+  }
+  #banner {
+    display: block;
+      width: 100%;
+      background: url('@/assets/111.jpg') no-repeat;
+      background-position: 50% 50%;
+      background-size: cover;
+      .bannerInner {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        color: transparent;
+        background: url('@/assets/111.jpg') no-repeat;
+        background-position: 50% 50%;
+        background-size: cover;
+        background-clip: text;
+        // -webkit-text-stroke: 1px rgba(255, 255, 255, 0.219);
+        font-size: 7em;
+        font-weight: 900;
+        text-align: center;
+        line-height: 100vh;
+        overflow: hidden;
+      }
+    }
+  #artlist {
+    width: 800px;
+  }
+  #md-editor-v3 {
+    width: 95%;
+  }
+}
+
+
+@media screen and (min-width: 1280px) {
+  #home {
+    header {
+      text-align: center;
+      background: transparent;
+      backdrop-filter: blur(1px);
+      .title {
+        display: none;
+      }
+    }
+    main {
+      width: 100%;
+      height: auto;
+    }
+  }
+  #banner {
+    display: block;
+      width: 100%;
+      background: url('@/assets/111.jpg') no-repeat;
+      background-position: 50% 50%;
+      background-size: cover;
+      .bannerInner {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        color: transparent;
+        background: url('@/assets/111.jpg') no-repeat;
+        background-position: 50% 50%;
+        background-size: cover;
+        background-clip: text;
+        font-size: 7em;
+        font-weight: 900;
+        text-align: center;
+        line-height: 100vh;
+        overflow: hidden;
+      }
+    }
+  #artlist {
+    width: 1200px;
+  }
+  #artDetail {
+    width: 1200px;
+    #md-editor-v3 {
+      width: 880px;
+      margin: unset;
+    }
+    #catalogue {
+      display: block;
+      width: 300px;
+      background: #ffffff;
+      z-index: 5;
+      text-align: left;
+      ul {
+        height: 100%;
+        list-style: none;
+        margin: 0;
+        padding: 20px;
+        li {
+          height: 30px;
+          border-radius: 6px;
+          &:hover {
+            background: #f7f8fa;
+            a {
+              font-weight: 700;
+            }
+          }
+          a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            color: #000;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            &[data-level="1"] {
+              padding-left: 10px;
+            }
+            &[data-level="2"] {
+              padding-left: 20px;
+            }
+            &[data-level="3"] {
+              padding-left: 30px;
+            }
+            &[data-level="4"] {
+              padding-left: 40px;
+            }
+            line-height: 30px;
+          }
+        }
+        .active-li {
+          background: #f7f8fa;
+          a {
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
+}
