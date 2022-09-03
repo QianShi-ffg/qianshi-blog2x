@@ -26,8 +26,8 @@ onMounted(() => {
     if (e.target.id === 'home') {
       store.setScroll(e.target.scrollTop)
       if (e.target.scrollTop !== 0) {
-        header.value.style.backgroundColor = '#ffffff4d'
-        header.value.style.backdropFilter = 'saturate(170%) blur(5px)'
+        header.value.style.backgroundColor = '#ffffff4a'
+        header.value.style.backdropFilter = 'saturate(180%) blur(6px)'
       } else {
         header.value.style.backgroundColor = 'unset'
         header.value.style.backdropFilter = 'unset'

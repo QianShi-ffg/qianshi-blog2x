@@ -67,7 +67,7 @@ watch(hScroll, (newVal) => {
   .aWord {
     position: absolute;
     bottom: 35px;
-    right: 35px;
+    right: 55px;
     font-size: 20px;
     font-weight: 700;
     color: transparent;
