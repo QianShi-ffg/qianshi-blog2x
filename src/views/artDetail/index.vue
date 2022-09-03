@@ -73,11 +73,9 @@ const onGetCatalog = (list: []) => {
 <style lang="scss" scoped>
 #artDetail {
   position: relative;
-  width: 100%;
   margin: auto;
   margin-top: 100px;
   #md-editor-v3 {
-    margin: auto;
     text-align: left;
     padding: 20px;
     @apply rounded-xl;
@@ -93,9 +91,6 @@ const onGetCatalog = (list: []) => {
       font-size: 26px;
       font-weight: 700;
     }
-  }
-  #catalogue {
-    display: none;
   }
   .catalogueFixed {
     position: fixed;

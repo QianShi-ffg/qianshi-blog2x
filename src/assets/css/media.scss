@@ -18,6 +18,7 @@
   }
   #md-editor-v3 {
     width: 95%;
+    margin: auto;
   }
 }
 
@@ -59,8 +60,15 @@
   #artlist {
     width: 800px;
   }
-  #md-editor-v3 {
-    width: 95%;
+  #artDetail {
+    width: 800px;
+    #md-editor-v3 {
+      width: 95%;
+      margin: auto;
+    }
+    #catalogue {
+      display: none;
+    }
   }
 }
 
