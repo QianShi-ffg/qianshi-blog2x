@@ -74,7 +74,6 @@ const onGetCatalog = (list: []) => {
 #artDetail {
   position: relative;
   margin: auto;
-  margin-top: 100px;
   #md-editor-v3 {
     text-align: left;
     padding: 20px;

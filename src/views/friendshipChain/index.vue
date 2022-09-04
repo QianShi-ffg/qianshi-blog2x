@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="friendshipChain">
     友链
   </div>
 </template>

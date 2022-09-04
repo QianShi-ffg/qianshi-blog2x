@@ -3,10 +3,43 @@
     header {
       text-align: left;
       padding-left: 30px;
-      background: radial-gradient(transparent, rgba(255, 255, 255, 0.301) 2px);
+      background: radial-gradient(transparent, rgba(255, 255, 255) 2px);
       backdrop-filter: blur(5px);
       .title {
         display: block;
+      }
+      .menu {
+        ul {
+          position: fixed;
+          top: 65px;
+          left: -100vw;
+          width: 100vw;
+          height: 100vh;
+          z-index: 3;
+          background: #ffffffe0;
+          backdrop-filter: saturate(180%) blur(6px);
+          transition: left .5s;
+          padding-top: 30px;
+          overflow-y: overlay;
+          li {
+            text-align: center;
+          }
+        }
+        #check:checked ~ ul {
+          left: 0;
+        }
+        #check:checked + label .menuIcon{
+          &::before {
+            transform-origin: center center;
+            transform: rotate(45deg) translate(7px, 7px);
+          }
+          i {
+            display: none;
+          }
+          &::after {
+            transform: rotate(-45deg) translate(7px, -7px);
+          }
+        }
       }
     }
   }
@@ -31,6 +64,29 @@
       backdrop-filter: blur(1px);
       .title {
         display: none;
+      }
+      .menu {
+        .menuIcon { 
+          display: none;
+        }
+        ul {
+          position: unset;
+          list-style: none;
+          width: auto;
+          height: 100%;
+          background: transparent;
+          backdrop-filter: unset;
+          padding-top: 0;
+          padding-right: 20px;
+          li {
+            float: left;
+            margin-left: 15px;
+            font-size: 14px;
+            a {
+              color: #000 !important;
+            }
+          }
+        }
       }
     }
   }
