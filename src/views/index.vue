@@ -25,7 +25,7 @@
       </div>
       <div class="aWord">{{ aWordText }}</div>
     </section>
-    <main class="">
+    <main>
       <router-view/>
     </main>
     <footer class="container mx-auto w-screen"> 晋ICP备18013488号-1 千拾 2022</footer>
@@ -187,6 +187,7 @@ const menuClick = () => {
 }
   main {
     height: auto;
+    margin: auto;
     padding-top: 100px;
   }
 
