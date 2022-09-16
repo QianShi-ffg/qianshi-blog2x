@@ -42,7 +42,6 @@ const hScroll = computed(() => {
 
 // 菜单定位模式
 watch(hScroll, (newVal)=>{
-  console.log(hScroll, 54444)
   if (newVal > 0) {
     catalogueStyle.value = 'catalogueFixed'
   } else {
