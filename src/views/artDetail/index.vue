@@ -57,7 +57,7 @@ MdEditor.config({
       const id = generateId(text, level, index);
       // return `<h${level} id="${text}">${text}</h${level}>`
       // 添加暗锚,跳转高度下将170
-      return `<h${level} id="${id}">${text}</h${level}><a name="${text}" style="position: relative; top: -270px;" class="darkAnchor"></a>`
+      return `<h${level} id="${id}">${text}</h${level}><a name="${text}" style="position: relative; top: -170px;" class="darkAnchor"></a>`
     }
     return renderer
   }

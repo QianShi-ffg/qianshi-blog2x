@@ -23,7 +23,7 @@ export default function() {
       offsetTopArr.push(item.offsetTop)
     })
     for (let i = 0; i < offsetTopArr.length; i++) {
-      if (currentScroll.value >= offsetTopArr[i] - 300) {
+      if (currentScroll.value >= offsetTopArr[i] - 100) {
         activeIndex.value = i
       }
     }
