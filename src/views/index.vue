@@ -195,6 +195,7 @@ const menuClick = () => {
     height: 50px;
     line-height: 50px;
     margin: 10px auto;
+    text-align: center;
   }
 }
 @keyframes menuUl {

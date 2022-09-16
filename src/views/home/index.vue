@@ -1,6 +1,36 @@
 <template>
   <div id="artlist">
-    <div v-for="item in artList" :key="item.id"
+    <div class="leftList">
+      <div class="artBox" v-for="item in artList" :key="item.id" @click="artDetail(item.id)">
+        <h2>{{ item.title }}</h2>
+        <div class="container">
+          <div class="imgBox">
+            <img src="@/assets/111.jpg" alt="">
+          </div>
+          <div class="content">
+            <div class="desc">
+              <div style="width:70px;height:80px;float:left; clear: both;" align="center"></div>
+              {{ item.describe }}
+              css如何控制文字换行方式？本篇文章就给大家介绍css设置文字（特别是连续的数字和英文）强制换行、强制不换行且隐藏超出部分的方法。有一定的参考价值，有需要的朋友可以参考一下，希望对你们有所帮助。
+一、css设置文字的强制换行
+
+关于换行问题，正常字符的换行是比较合理的，但连续的数字和英文字符常常将容器撑大，而不换行，就挺让人头疼了，这就需要进行强制换行。Gxlcms相关学习推荐：CSS教程！
+
+下面我们通过简单的代码示例来介绍css实现强制换行的方法。
+              <p class="artEpitomize">
+                <span>作者: 千拾</span>
+                <span>发布时间: {{ date(item.updataTime) }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="userMsg">
+
+    </div>
+
+    <!-- <div v-for="item in artList" :key="item.id"
       class="artListItem text-left p-5 mb-6 text-2xl bg-gray-50 rounded-xl cursor-pointer shadow-lg opacity-80"
       @click="artDetail(item.id)">
       <p>{{ item.title }}</p>
@@ -8,10 +38,9 @@
         <span>作者: 千拾</span>
         <span>发布时间: {{ date(item.updataTime) }}</span>
       </p>
-    </div>
+    </div> -->
   </div>
 </template>
-
 <script setup lang="ts">
 import { getArticleList, aWord } from '@/api/api'
 import { date } from '@/util/date'
@@ -38,8 +67,16 @@ const artDetail = (id: any) => {
 }
 
 
-</script>
+const hScroll = computed(() => {
+  return store.scroll
+})
 
+// 菜单定位模式
+watch(hScroll, (newVal)=>{
+  console.log(hScroll, 54444)
+})
+
+</script>
 <style lang="scss" scoped>
 #artlist {
   margin: auto;
@@ -59,5 +96,97 @@ const artDetail = (id: any) => {
 }
 .textStroke {
   -webkit-text-stroke: 1px rgba(219, 219, 219, 0.411);
+}
+
+@media screen and (min-width: 1280px) {
+  #artlist {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    .leftList {
+      width: 70%;
+      .artBox {
+        position: relative;
+        width: 100%;
+        margin-bottom: 100px;
+        transition: all 0.5s;
+        cursor: pointer;
+        &:hover {
+          filter: drop-shadow(5px 5px 8px rgba(0, 0, 0, 0.411))
+        }
+        h2 {
+          position: absolute;
+          top: 20px;
+          left: 300px;
+          margin-bottom: 20px;
+          font-size: 30px;
+          color: #000;
+        }
+        .container {
+          position: relative;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .imgBox {
+            position: relative;
+            width: 280px;
+            height: 180px;
+            overflow: hidden;
+            z-index: 2;
+            box-shadow: 2px 2px 8px 0px rgb(0, 0, 0, 0.5);
+            border-radius: 6px;
+            img {
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              margin: auto;
+              width: 100%;
+              height: 100%;
+              z-index: 2;
+              object-fit: cover;
+            }
+          }
+          .content {
+            position: absolute;
+            top: 58px;
+            left: 200px;
+            margin-bottom: 20px;
+            padding: 20px 20px 55px;
+            background: #fff;
+            font-size: 14px;
+            z-index: 1;
+            width: 630px;
+            height: 170px;
+            color: #000;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            text-align: start;
+            .desc {
+              width: 100%;
+              height: 100%;
+              word-break: break-all;           //在恰当的断字点进行换行 
+              overflow: hidden;                 //文字超出的进行隐藏
+              text-overflow: ellipsis;          //超出的文字用省略号表示
+              display: -webkit-box;             //将元素设为盒子伸缩模型显示         //利用盒子模型 
+              -webkit-box-orient: vertical;     //伸缩方向设为垂直方向
+              -webkit-line-clamp: 4; 
+            }
+            .artEpitomize {
+              position: absolute;
+              bottom: 10px;
+              left: 20px;
+              span {
+                margin-right: 20px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 </style>

@@ -65,7 +65,7 @@ MdEditor.config({
 // v3菜单
 const onGetCatalog = (list: []) => {
   catalogList.value = list
-  console.log(catalogList.value)
+  console.log(catalogList.value, 699666)
 }
 
 </script>
