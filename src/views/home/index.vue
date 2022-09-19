@@ -10,7 +10,7 @@
           </div>
           <div class="content">
             <div class="desc">
-              <div style="width:70px;height:80px;float:left; clear: both;" align="center" class="div111"></div>
+              <div style="width:45px;height:80px;float:left; clear: both;" align="center" class="div111"></div>
               {{ item.describe }}
               <p class="artEpitomize">
                 <span>作者: 千拾</span>
@@ -336,8 +336,8 @@ watch(hScroll, (newVal)=>{
           align-items: center;
           .imgBox {
             position: relative;
-            width: 280px;
-            height: 180px;
+            width: 250px;
+            height: 160px;
             overflow: hidden;
             z-index: 2;
             box-shadow: 2px 2px 8px 0px rgb(0, 0, 0, 0.5);
@@ -366,7 +366,7 @@ watch(hScroll, (newVal)=>{
             font-size: 14px;
             z-index: 1;
             width: 630px;
-            height: 170px;
+            height: 140px;
             color: #000;
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
             border-radius: 6px;
@@ -378,17 +378,17 @@ watch(hScroll, (newVal)=>{
             .desc {
               width: 100%;
               height: 100%;
-              word-break: break-all;           //在恰当的断字点进行换行 
+              word-break: break-all;            //在恰当的断字点进行换行 
               overflow: hidden;                 //文字超出的进行隐藏
               text-overflow: ellipsis;          //超出的文字用省略号表示
-              display: -webkit-box;             //将元素设为盒子伸缩模型显示         //利用盒子模型 
+              display: -webkit-box;             //将元素设为盒子伸缩模型显示      //利用盒子模型 
               -webkit-box-orient: vertical;     //伸缩方向设为垂直方向
-              -webkit-line-clamp: 4; 
+              -webkit-line-clamp: 3; 
               user-select: none;
             }
             .artEpitomize {
               position: absolute;
-              bottom: 10px;
+              bottom: 8px;
               left: 20px;
               transition: all 0.5s;
               span {
