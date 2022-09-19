@@ -11,12 +11,6 @@
             <div class="desc">
               <div style="width:70px;height:80px;float:left; clear: both;" align="center" class="div111"></div>
               {{ item.describe }}
-              css如何控制文字换行方式？本篇文章就给大家介绍css设置文字（特别是连续的数字和英文）强制换行、强制不换行且隐藏超出部分的方法。有一定的参考价值，有需要的朋友可以参考一下，希望对你们有所帮助。
-一、css设置文字的强制换行
-
-关于换行问题，正常字符的换行是比较合理的，但连续的数字和英文字符常常将容器撑大，而不换行，就挺让人头疼了，这就需要进行强制换行。Gxlcms相关学习推荐：CSS教程！
-
-下面我们通过简单的代码示例来介绍css实现强制换行的方法。
               <p class="artEpitomize">
                 <span>作者: 千拾</span>
                 <span>发布时间: {{ date(item.updataTime) }}</span>
