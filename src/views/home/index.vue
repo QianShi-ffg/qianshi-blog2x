@@ -15,6 +15,7 @@
               <p class="artEpitomize">
                 <span>作者: 千拾</span>
                 <span>发布时间: {{ date(item.updataTime) }}</span>
+                <span>分类: {{ classifyList.filter((ii:any) => { return ii.id === item.classifyId })[0].name }}</span>
               </p>
             </div>
           </div>
@@ -37,7 +38,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { getArticleList, aWord } from '@/api/api'
+import { getArticleList, aWord, getClassifyIdList } from '@/api/api'
 import { date } from '@/util/date'
 import { ref, onMounted, watch, computed } from 'vue'
 import { useRouter, useRoute } from "vue-router"
@@ -46,6 +47,7 @@ import { useStore } from '@/store'
 const store = useStore()
 const artList: any = ref([])
 const bannerInner: any = ref()
+const classifyList: any = ref([])
 const router = useRouter()
 // 获取文章列表
 const articleList = async () => {
@@ -53,13 +55,20 @@ const articleList = async () => {
   artList.value = res
 }
 
+const classify = async() => {
+  const res = await getClassifyIdList({})
+  classifyList.value = res
+} 
+
 const init = async() => {
-  articleList()
+  await classify()
+  await articleList()
 }
 init()
 const artDetail = (id: any) => {
   router.push({ path: '/artDetail', query: { id: id } })
 }
+
 
 
 const hScroll = computed(() => {

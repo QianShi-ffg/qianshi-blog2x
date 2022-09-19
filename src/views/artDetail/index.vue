@@ -112,8 +112,18 @@ const onGetCatalog = (list: []) => {
     right: calc((100% - 1200px) / 2);
   }
 }
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 320px) {
   .banner {
+    display: none;
+  }
+  #artDetail {
+    padding-top: 80px;
+    width: 95%;
+  }
+}
+@media screen and (min-width: 800px) {
+  .banner {
+    display: block;
     position: relative;
     width: 100%;
     height: 400px;
@@ -122,6 +132,36 @@ const onGetCatalog = (list: []) => {
       width: 100%;
       height: 100%;
       filter: blur(40px) brightness(.7);
+      background-size: 100% 100% !important;
+    }
+    .title {
+      position: absolute;
+      top: 40%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      font-size: 32px;
+      color: #fff;
+    }
+  }
+  #artDetail {
+    padding-top: 50px;
+    width: 800px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .banner {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    .inner {
+      width: 100%;
+      height: 100%;
+      filter: blur(40px) brightness(.7);
+      background-size: 100% 100% !important;
     }
     .title {
       position: absolute;
