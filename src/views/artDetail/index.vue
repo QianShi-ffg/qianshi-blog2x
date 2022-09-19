@@ -1,5 +1,11 @@
 <template>
+  <div class="banner">
+    <!-- <img :src="coverUrl" alt=""> -->
+    <div class="inner" :style="{background: `url(${coverUrl}) no-repeat 0 40%` }"></div>
+    <div class="title">{{ title }}</div>
+  </div>
   <div id="artDetail">
+    <!-- <div class="banner" v-show="isBannerShow"> -->
     <md-editor v-model="text" previewOnly show-code-row-number :marked-heading-id="generateId" @onGetCatalog="onGetCatalog"/>
     <div id="catalogue" class="shadow-lg rounded-xl" :class="catalogueStyle">
       <ul>
@@ -24,6 +30,8 @@ const store = useStore()
 const generateId = (_text: any, _level: any, index: any) => `heading-${index}`
 const route = useRoute()
 const text = ref<any>('')
+const title = ref<any>('')
+const coverUrl = ref<any>('')
 const catalogList = ref<any>([])
 const catalogueStyle = ref<String>('catalogueAbsolute')
 const { activeIndex, toScrollTop } = navScroll()
@@ -33,6 +41,8 @@ const articleList = async () => {
   const res: any = await getArticleList(route.query)
   console.log(res[0])
   text.value = res[0].articleContent
+  title.value = res[0].title
+  coverUrl.value = res[0].coverUrl
 }
 articleList()
 
@@ -42,7 +52,8 @@ const hScroll = computed(() => {
 
 // 菜单定位模式
 watch(hScroll, (newVal)=>{
-  if (newVal > 0) {
+  console.log(newVal)
+  if (newVal > 350) {
     catalogueStyle.value = 'catalogueFixed'
   } else {
     catalogueStyle.value = 'catalogueAbsolute'
@@ -56,7 +67,7 @@ MdEditor.config({
       const id = generateId(text, level, index);
       // return `<h${level} id="${text}">${text}</h${level}>`
       // 添加暗锚,跳转高度下将170
-      return `<h${level} id="${id}">${text}</h${level}><a name="${text}" style="position: relative; top: -170px;" class="darkAnchor"></a>`
+      return `<h${level} id="${id}">${text}</h${level}><a name="${text}" style="position: relative; top: -240px;" class="darkAnchor"></a>`
     }
     return renderer
   }
@@ -96,9 +107,35 @@ const onGetCatalog = (list: []) => {
     right: calc((100% - 1200px) / 2);
   }
   .catalogueAbsolute {
-    position: fixed;
-    top: 100px;
+    position: absolute;
+    top: 50px;
     right: calc((100% - 1200px) / 2);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .banner {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    .inner {
+      width: 100%;
+      height: 100%;
+      filter: blur(40px) brightness(.7);
+    }
+    .title {
+      position: absolute;
+      top: 40%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      font-size: 32px;
+      color: #fff;
+    }
+  }
+  #artDetail {
+    padding-top: 50px;
+    width: 1200px;
   }
 }
 </style>

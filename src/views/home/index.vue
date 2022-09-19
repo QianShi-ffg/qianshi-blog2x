@@ -74,6 +74,7 @@ watch(hScroll, (newVal)=>{
 <style lang="scss" scoped>
 #artlist {
   margin: auto;
+  padding-top: 100px;
   .artListItem {
     transition: all 0.5s;
     &:hover {
@@ -189,6 +190,7 @@ watch(hScroll, (newVal)=>{
 }
 @media screen and (min-width: 800px) {
   #artlist {
+    width: 800px;
     .leftList {
       width: 100%;
       .artBox {
@@ -285,7 +287,7 @@ watch(hScroll, (newVal)=>{
 }
 @media screen and (min-width: 1280px) {
   #artlist {
-    width: 100%;
+    width: 1200px;
     display: flex;
     justify-content: space-between;
     align-items: center;

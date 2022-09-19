@@ -188,7 +188,7 @@ const menuClick = () => {
   main {
     height: auto;
     margin: auto;
-    padding-top: 100px;
+    // padding-top: 100px;
   }
 
   footer {
