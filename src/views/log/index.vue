@@ -1,5 +1,5 @@
 <template>
-  <currencyBanner />
+  <currencyBanner :title="'更新日志'"/>
   <div id="log">
     <ul class="timeline">
       <!-- Item 1 -->

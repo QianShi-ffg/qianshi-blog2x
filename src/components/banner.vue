@@ -2,18 +2,22 @@
   <div id="currencyBanner">
     <!-- <img :src="coverUrl" alt=""> -->
     <div class="inner"></div>
-    <div class="title">更新日志</div>
+    <div class="title">{{ props.title }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
-
+import { ref } from 'vue' 
+const props = defineProps({
+  title: {
+    type: String,
+    default: ''
+  }
+})
 </script>
 
 <style lang="scss" scoped>
-@media screen and (min-width: 1280px) { 
   #currencyBanner {
-    display: block;
     position: relative;
     width: 100%;
     height: 400px;
@@ -39,6 +43,20 @@
       font-weight: 700;
       color: #fff;
     }
+  }
+@media screen and (min-width: 320px) { 
+  #currencyBanner { 
+    display: none;
+  }
+}
+@media screen and (min-width: 800px) { 
+  #currencyBanner { 
+    display: block;
+  }
+}
+@media screen and (min-width: 1280px) { 
+  #currencyBanner {
+    display: block;
   }
 }
 </style>
