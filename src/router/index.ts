@@ -22,6 +22,11 @@ const routes: Array<RouteRecordRaw> = [
         name: 'friendshipChain',
         path: '/friendshipChain',
         component: () => import('@/views/friendshipChain/index.vue')
+      },
+      {
+        name: 'log',
+        path: '/log',
+        component: () => import('@/views/log/index.vue')
       }
     ]
   }

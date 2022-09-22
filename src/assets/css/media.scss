@@ -23,6 +23,9 @@
           overflow-y: overlay;
           li {
             text-align: center;
+            a {
+              color: #000;
+            }
           }
         }
         #check:checked ~ ul {
@@ -83,7 +86,8 @@
             margin-left: 15px;
             font-size: 14px;
             a {
-              color: #000 !important;
+              color: #fff;
+              text-shadow: 1px 1px 10px #000;
             }
           }
         }

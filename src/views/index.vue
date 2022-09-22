@@ -16,6 +16,9 @@
           <li @click="menuClick">
             <router-link to="/friendshipChain">友链</router-link>
           </li>
+          <li @click="menuClick">
+            <router-link to="/log">更新日志</router-link>
+          </li>
         </ul>
       </div>
     </header>
