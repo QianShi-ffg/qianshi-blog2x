@@ -66,14 +66,14 @@ onMounted(() => {
         if (e.target.scrollTop > 300) {
           scrollTop.value.style.bottom = '150px'
         }else {
-          scrollTop.value.style.bottom = '-50px'
+          scrollTop.value.style.bottom = '-70px'
         }
       } else {
         header.value.style.backgroundColor = 'unset'
         header.value.style.backdropFilter = 'unset'
         bannerInner.value.style.backgroundPosition = ''
         bannerInner.value.classList.remove('textStroke')
-        scrollTop.value.style.bottom = '-50px'
+        scrollTop.value.style.bottom = '-70px'
       }
     }
   }, true)
@@ -233,7 +233,7 @@ const goTop = () => {
   .scrollTop {
     position: fixed;
     right: 10%;
-    bottom: -50px;
+    bottom: -70px;
     z-index: 10;
     width: 50px;
     height: 50px;
