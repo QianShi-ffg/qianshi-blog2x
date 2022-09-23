@@ -168,10 +168,11 @@ const friendshipList:any = ref([{
   #friendshipChain {
     width: 95%;
     padding-top: 80px;
+    padding-bottom: 20px;
     height: calc(100vh - 70px);
     .friendshipList {
       width: 100%;
-      height: calc(100% - 80px - 20px);
+      height: 100%;
       overflow: hidden;
       ul {
         .friendshipItem {
@@ -187,11 +188,11 @@ const friendshipList:any = ref([{
 @media screen and (min-width: 800px) {
   #friendshipChain {
     width: 800px;
-    padding-top: 50px;
+    padding: 50px 0;
     height: calc(100vh - 400px - 70px);
     .friendshipList {
       width: 100%;
-      height: calc(100% - 50px - 20px);
+      height: calc(100% - 40px);
       overflow: hidden;
       ul {
         .friendshipItem {
@@ -206,11 +207,12 @@ const friendshipList:any = ref([{
 
 @media screen and (min-width: 1280px) {
   #friendshipChain {
+    padding: 70px 0;
     width: 1200px;
     height: calc(100vh - 400px - 70px);
     .friendshipList {
       width: 100%;
-      height: calc(100% - 50px - 70px);
+      height: 100%;
       overflow: hidden;
       ul {
         .friendshipItem {

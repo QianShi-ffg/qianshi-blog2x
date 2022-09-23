@@ -4,6 +4,20 @@
     <ul class="timeline">
       <!-- Item 1 -->
       <li>
+        <div class="direction-l">
+          <div class="flag-wrapper">
+            <span class="hexa"></span>
+            <span class="flag">修复友链页面</span>
+            <span class="time-wrapper"><span class="time">2022-09-23</span></span>
+          </div>
+          <div class="desc">
+            1.修复由于布局改动导致页面错乱的友链页面,新增多个友链<br/>
+            2.新增banner字体加载效果
+          </div>
+        </div>
+      </li>
+
+      <li>
         <div class="direction-r">
           <div class="flag-wrapper">
             <span class="hexa"></span>
@@ -283,6 +297,7 @@ import currencyBanner from '@/components/banner.vue'
   margin: 1em 1em 0 1em;
   padding: 1em;
   z-index: 2;
+  text-align: left;
 }
 
 @media screen and (min-width: 320px) {
