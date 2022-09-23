@@ -23,18 +23,34 @@
       </div>
     </div>
     <div class="userMsg">
-
+      <div class="userDesc">
+        <img src="@/assets/user.jpg" alt="">
+        <span class="userName">千拾</span>
+        <div class="num-box">
+          <div class="num1">
+            <p class="p1">{{ artList.length }}</p>
+            <p class="p2">文章</p>
+          </div>
+          <div class="num1">
+            <p class="p1">{{ classifyList.length }}</p>
+            <p class="p2">分类</p>
+          </div>
+        </div>
+      </div>
+      <div class="category">
+        <p>分类</p>
+        <ul>
+          <li @click="articleList({})">
+            <span>全部</span>
+            <span>{{ artCount }}</span>
+          </li>
+          <li v-for="item in classifyList" :key="item.id" @click="selectArtList('category', item.id)">
+            <span>{{ item.name }}</span>
+            <span>{{ item.artNum }}</span>
+          </li>
+        </ul>
+      </div>
     </div>
-
-    <!-- <div v-for="item in artList" :key="item.id"
-      class="artListItem text-left p-5 mb-6 text-2xl bg-gray-50 rounded-xl cursor-pointer shadow-lg opacity-80"
-      @click="artDetail(item.id)">
-      <p>{{ item.title }}</p>
-      <p class="artEpitomize">
-        <span>作者: 千拾</span>
-        <span>发布时间: {{ date(item.updataTime) }}</span>
-      </p>
-    </div> -->
   </div>
 </template>
 <script setup lang="ts">
@@ -46,13 +62,15 @@ import { useStore } from '@/store'
 
 const store = useStore()
 const artList: any = ref([])
+const artCount: any = ref(0)
 const bannerInner: any = ref()
 const classifyList: any = ref([])
 const router = useRouter()
 // 获取文章列表
-const articleList = async () => {
-  const res = await getArticleList({})
+const articleList = async (params: object) => {
+  const res:any = await getArticleList(params)
   artList.value = res
+  return res.length
 }
 
 const classify = async() => {
@@ -62,14 +80,20 @@ const classify = async() => {
 
 const init = async() => {
   await classify()
-  await articleList()
+  artCount.value = await articleList({})
 }
 init()
 const artDetail = (id: any) => {
   router.push({ path: '/artDetail', query: { id: id } })
 }
 
-
+const selectArtList = async(value:string, item:Number) => {
+  const params = {
+    type: value,
+    id: item
+  }
+  articleList(params)
+}
 
 const hScroll = computed(() => {
   return store.scroll
@@ -111,7 +135,7 @@ watch(hScroll, (newVal)=>{
         width: 100%;
         margin-bottom: 20px;
         transition: all 0.5s;
-        box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.274);
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
         border-radius: 6px;
         cursor: pointer;
         h2 {
@@ -164,7 +188,7 @@ watch(hScroll, (newVal)=>{
             width: 100%;
             height: 170px;
             color: #000;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.1);
             border-radius: 0 0 6px 6px;
             text-align: start;
             transition: all 0.5s;
@@ -195,6 +219,9 @@ watch(hScroll, (newVal)=>{
         }
       }
     }
+    .userMsg {
+      display: none;
+    }
   }
 }
 @media screen and (min-width: 800px) {
@@ -207,7 +234,7 @@ watch(hScroll, (newVal)=>{
         width: 100%;
         margin-bottom: 20px;
         transition: all 0.5s;
-        box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.274);
+        box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
         border-radius: 6px;
         cursor: pointer;
         h2 {
@@ -292,10 +319,14 @@ watch(hScroll, (newVal)=>{
         }
       }
     }
+    .userMsg {
+      display: none;
+    }
   }
 }
 @media screen and (min-width: 1280px) {
   #artlist {
+    position: relative;
     width: 1200px;
     display: flex;
     justify-content: space-between;
@@ -311,7 +342,7 @@ watch(hScroll, (newVal)=>{
         box-shadow: none;
         cursor: pointer;
         &:hover {
-          filter: drop-shadow(5px 5px 8px rgba(0, 0, 0, 0.411));
+          filter: drop-shadow(5px 5px 8px rgba(0, 0, 0, 0.2));
           h2 {
             top: 100px;
           }
@@ -405,6 +436,89 @@ watch(hScroll, (newVal)=>{
               span {
                 margin-right: 20px;
               }
+            }
+          }
+        }
+      }
+    }
+    .userMsg {
+      display: block;
+      position: absolute;
+      top: 100px;
+      right: 0;
+      width: 300px;
+      // height: 500px;
+      box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+      background: #fff;
+      transition: all 0.5s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      &:hover {
+        box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.2);
+      }
+      .userDesc {
+        width: 100%;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 100px;
+          height: 100px;
+          border-radius: 50px;
+          margin-bottom: 15px;
+        }
+        .userName {
+          font-size: 22px;
+          font-weight: 700;
+          margin-bottom: 10px;
+        }
+        .num-box {
+          width: 100%;
+          align-items: center;
+          display: flex;
+          justify-content: center;
+          margin-bottom: 10px;
+          .num1 {
+            width: 30%;
+          }
+          .num1:first-child {
+            border-right: 2px solid #000;
+          }
+        }
+      }
+      .category {
+        width: 100%;
+        p {
+          text-align: left;
+          padding-left: 30px;
+          background: url('@/assets/category.svg') no-repeat 10px 1px;
+          background-size: 18px;
+          margin-bottom: 2px;
+        }
+        ul {
+          list-style: none;
+          padding: 5px 10px;
+          li {
+            height: 35px;
+            line-height: 35px;
+            box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            border-radius: 6px;
+            text-align: left;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: all 0.5s;
+            span:last-child {
+              float: right;
+            }
+            &:hover {
+              transform: scale(1.05);
+              box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
             }
           }
         }

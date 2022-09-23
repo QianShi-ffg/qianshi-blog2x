@@ -4,6 +4,20 @@
     <ul class="timeline">
       <!-- Item 1 -->
       <li>
+        <div class="direction-r">
+          <div class="flag-wrapper">
+            <span class="hexa"></span>
+            <span class="flag">更新首页</span>
+            <span class="time-wrapper"><span class="time">2022-09-23</span></span>
+          </div>
+          <div class="desc">
+            1.新增右侧信息模块<br/>
+            2.新增返回顶部控件
+          </div>
+        </div>
+      </li>
+
+      <li>
         <div class="direction-l">
           <div class="flag-wrapper">
             <span class="hexa"></span>

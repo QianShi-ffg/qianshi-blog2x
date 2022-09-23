@@ -120,6 +120,14 @@ const friendshipList:any = ref([{
         margin: 18px;
         border-radius: 10px;
         float: left;
+        transition: all 0.5s;
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.411);
+          a {
+            color: #000;
+          }
+        }
         a {
           position: relative;
           display: inline-block;
