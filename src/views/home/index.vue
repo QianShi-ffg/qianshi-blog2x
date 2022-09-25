@@ -21,6 +21,7 @@
           </div>
         </div>
       </div>
+      <paginationVue :total="total" :currentObj="paginationObj" @onCurrentChange="onCurrentChange" v-if="total > paginationObj.pageSize"/>
     </div>
     <div class="userMsg">
       <div class="userDesc">
@@ -28,7 +29,7 @@
         <span class="userName">千拾</span>
         <div class="num-box">
           <div class="num1">
-            <p class="p1">{{ artList.length }}</p>
+            <p class="p1">{{ total }}</p>
             <p class="p2">文章</p>
           </div>
           <div class="num1">
@@ -40,7 +41,7 @@
       <div class="category">
         <p>分类</p>
         <ul>
-          <li @click="articleList({})">
+          <li @click="selectArtList('category', 10000)">
             <span>全部</span>
             <span>{{ artCount }}</span>
           </li>
@@ -56,20 +57,27 @@
 <script setup lang="ts">
 import { getArticleList, aWord, getClassifyIdList } from '@/api/api'
 import { date } from '@/util/date'
-import { ref, onMounted, watch, computed } from 'vue'
+import { ref, reactive, watch, computed } from 'vue'
 import { useRouter, useRoute } from "vue-router"
 import { useStore } from '@/store'
+import paginationVue from '@/components/pagination.vue'
 
 const store = useStore()
 const artList: any = ref([])
 const artCount: any = ref(0)
+const total: any = ref(0)
 const bannerInner: any = ref()
 const classifyList: any = ref([])
+const paginationObj: any = reactive({
+  page: 1, 
+  pageSize: 10
+})
 const router = useRouter()
 // 获取文章列表
 const articleList = async (params: object) => {
-  const res:any = await getArticleList(params)
-  artList.value = res
+  const res:any = await getArticleList(Object.assign(params, paginationObj))
+  artList.value = res.rows
+  total.value = res.total
   return res.length
 }
 
@@ -85,20 +93,37 @@ const init = async() => {
 init()
 const artDetail = (id: any) => {
   router.push({ path: '/artDetail', query: { id: id } })
+  const homeDom:any = document.querySelector('#home')
+  homeDom.scrollTop = 0
 }
 
 const selectArtList = async(value:string, item:Number) => {
+  paginationObj.page = 1
+  if (item === 10000) {
+    paginationObj.id = null
+    paginationObj.type = null
+    articleList({})
+    return 
+  }
+  paginationObj.id = item
+  paginationObj.type = value
   const params = {
     type: value,
     id: item
   }
   articleList(params)
+  const homeDom:any = document.querySelector('#home')
+  homeDom.scrollTop = 670
 }
 
 const hScroll = computed(() => {
   return store.scroll
 })
 
+const onCurrentChange = async(value:Number) => {
+  paginationObj.page = value
+  await articleList({})
+}
 // 菜单定位模式
 watch(hScroll, (newVal)=>{
 })
@@ -442,6 +467,7 @@ watch(hScroll, (newVal)=>{
       }
     }
     .userMsg {
+      user-select: none;
       display: block;
       position: absolute;
       top: 100px;

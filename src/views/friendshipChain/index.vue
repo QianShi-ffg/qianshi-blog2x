@@ -181,7 +181,7 @@ const friendshipList:any = ref([{
     .friendshipList {
       width: 100%;
       height: 100%;
-      overflow: hidden;
+      overflow: overlay;
       ul {
         .friendshipItem {
           margin: 12px 0;
@@ -201,7 +201,7 @@ const friendshipList:any = ref([{
     .friendshipList {
       width: 100%;
       height: calc(100% - 40px);
-      overflow: hidden;
+      overflow: overlay;
       ul {
         .friendshipItem {
           margin: 18px;
@@ -221,7 +221,7 @@ const friendshipList:any = ref([{
     .friendshipList {
       width: 100%;
       height: 100%;
-      overflow: hidden;
+      overflow: overlay;
       ul {
         .friendshipItem {
           width: 262px;

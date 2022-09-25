@@ -130,6 +130,7 @@ const goTop = () => {
     transition-duration: 1s;
     background-size: 4px 4px;
     line-height: 65px;
+    user-select: none;
 
     .menu {
       position: relative;

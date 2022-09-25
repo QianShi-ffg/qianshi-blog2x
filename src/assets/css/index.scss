@@ -48,6 +48,32 @@ body {
 }
 
 
+.el-pagination {
+  justify-content: center;
+  padding: 10px 15px;
+  border-radius: 30px;
+}
+
+.el-pagination.is-background .el-pager li {
+  background: none;
+}
+
+.el-pagination.is-background .el-pager li:not(.is-disabled).is-active {
+  border-radius: 16px;
+}
+
+.el-pagination.is-background .btn-next,
+.el-pagination.is-background .btn-prev {
+  border-radius: 16px;
+  background-color: transparent;
+}
+
+.el-pagination.is-background .btn-next:disabled,
+.el-pagination.is-background .btn-prev:disabled {
+  border-radius: 16px;
+  background-color: transparent;
+}
+
 .glitch {
   span {
     &:not(:last-child) {

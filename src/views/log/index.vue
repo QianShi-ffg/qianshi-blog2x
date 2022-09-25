@@ -4,6 +4,19 @@
     <ul class="timeline">
       <!-- Item 1 -->
       <li>
+        <div class="direction-r">
+          <div class="flag-wrapper">
+            <span class="hexa"></span>
+            <span class="flag">新增分页</span>
+            <span class="time-wrapper"><span class="time">2022-09-25</span></span>
+          </div>
+          <div class="desc">
+            新增首页文章分页处理
+          </div>
+        </div>
+      </li>
+
+      <li>
         <div class="direction-l">
           <div class="flag-wrapper">
             <span class="hexa"></span>
