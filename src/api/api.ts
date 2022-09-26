@@ -11,7 +11,7 @@ export const aWord = (params: object) => {
   return axios.get( 'https://v1.hitokoto.cn/', { params })
 }
 export const getClassifyIdList = (params: object) => {
-  return axios.get( '/classifyList', { params })
+  return axios.get( '/artClassifyList', { params })
 }
 // export const getArticleList = (params: object) => {
 //   return axios.post( '/articleList', params)
