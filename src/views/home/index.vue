@@ -21,7 +21,7 @@
           </div>
         </div>
       </div>
-      <paginationVue :total="total" :currentObj="paginationObj" @onCurrentChange="onCurrentChange" v-if="total > paginationObj.pageSize"/>
+      <paginationVue :total="conditionTotal" :currentObj="paginationObj" @onCurrentChange="onCurrentChange" v-if="total > paginationObj.pageSize"/>
     </div>
     <div class="userMsg">
       <div class="userDesc">
@@ -66,6 +66,7 @@ const store = useStore()
 const artList: any = ref([])
 const artCount: any = ref(0)
 const total: any = ref(0)
+const conditionTotal: any = ref(0)
 const bannerInner: any = ref()
 const classifyList: any = ref([])
 const paginationObj: any = reactive({
@@ -78,6 +79,7 @@ const articleList = async (params: object) => {
   const res:any = await getArticleList(Object.assign(params, paginationObj))
   artList.value = res.rows
   total.value = res.total
+  conditionTotal.value = res.conditionTotal
   return res.length
 }
 
