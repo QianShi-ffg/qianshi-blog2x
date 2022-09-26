@@ -221,7 +221,7 @@ const goTop = () => {
   main {
     height: auto;
     margin: auto;
-    min-height: 600px;
+    min-height: 825px;
     // padding-top: 100px;
   }
 

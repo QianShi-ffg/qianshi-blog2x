@@ -103,17 +103,19 @@ const selectArtList = async(value:string, item:Number) => {
     paginationObj.id = null
     paginationObj.type = null
     articleList({})
-    return 
+  } else {
+    paginationObj.id = item
+    paginationObj.type = value
+    const params = {
+      type: value,
+      id: item
+    }
+    articleList(params)
   }
-  paginationObj.id = item
-  paginationObj.type = value
-  const params = {
-    type: value,
-    id: item
-  }
-  articleList(params)
   const homeDom:any = document.querySelector('#home')
-  homeDom.scrollTop = 670
+  const bannerDom:any = document.querySelector('#banner')
+  homeDom.scrollTop = bannerDom.clientHeight - 65
+  console.log(bannerDom.clientHeight - 65)
 }
 
 const hScroll = computed(() => {
