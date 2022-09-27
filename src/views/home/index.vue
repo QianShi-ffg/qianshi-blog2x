@@ -64,8 +64,8 @@ import paginationVue from '@/components/pagination.vue'
 
 const store = useStore()
 const artList: any = ref([])
-const artCount: any = ref(0)
-const total: any = ref(0)
+const artCount = ref<Number>(0)
+const total = ref<Number>(0)
 const conditionTotal: any = ref(0)
 const bannerInner: any = ref()
 const classifyList: any = ref([])
