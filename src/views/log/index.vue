@@ -234,7 +234,7 @@ import currencyBanner from '@/components/banner.vue'
   width: 16px;
   height: 10px;
   position: absolute;
-  background: #00c4f3;
+  background: #e63735;
   z-index: 1;
   left: 0;
   right: 0;
@@ -245,7 +245,7 @@ import currencyBanner from '@/components/banner.vue'
 }
 
 .timeline .hexa:before {
-  border-bottom: 4px solid #00c4f3;
+  border-bottom: 4px solid #e63735;
   border-left-width: 8px;
   border-right-width: 8px;
   top: -4px;
@@ -254,7 +254,7 @@ import currencyBanner from '@/components/banner.vue'
 .timeline .hexa:after {
   border-left-width: 8px;
   border-right-width: 8px;
-  border-top: 4px solid #00c4f3;
+  border-top: 4px solid #e63735;
   bottom: -4px;
 }
 
@@ -327,7 +327,7 @@ import currencyBanner from '@/components/banner.vue'
 }
 
 .time {
-  background: #00c4f3;
+  background: #e63735;
   display: inline-block;
   padding: 8px;
 }
