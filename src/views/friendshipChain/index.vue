@@ -70,7 +70,7 @@ const friendshipList:any = ref([{
 },
 {
   name: '月巴',
-  img: 'https://img2.baidu.com/it/u=2380653095,1521923625&fm=253&fmt=auto&app=138&f=JPEG?w=300&h=499',
+  img: 'http://ab.chenyuzj.top/logo.png',
   blog: 'http://www.chenyuzj.top/',
   introduce: '3K程序员的博客'
 },
