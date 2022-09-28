@@ -19,6 +19,9 @@
           <li @click="menuClick">
             <router-link to="/log">更新日志</router-link>
           </li>
+          <li @click="menuClick">
+            <router-link to="/about">关于</router-link>
+          </li>
         </ul>
       </div>
     </header>
