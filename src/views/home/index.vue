@@ -164,7 +164,7 @@ watch(hScroll, (newVal)=>{
         width: 100%;
         margin-bottom: 20px;
         transition: all 0.5s;
-        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        // box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
         border-radius: 6px;
         cursor: pointer;
         h2 {
@@ -217,7 +217,7 @@ watch(hScroll, (newVal)=>{
             width: 100%;
             height: 170px;
             color: #000;
-            box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.1);
+            // box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.1);
             border-radius: 0 0 6px 6px;
             text-align: start;
             transition: all 0.5s;
@@ -263,7 +263,7 @@ watch(hScroll, (newVal)=>{
         width: 100%;
         margin-bottom: 20px;
         transition: all 0.5s;
-        box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+        // box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
         border-radius: 6px;
         cursor: pointer;
         h2 {
@@ -317,7 +317,7 @@ watch(hScroll, (newVal)=>{
             width: calc(100% - 250px);
             height: 170px;
             color: #000;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+            // box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
             border-radius: 0 6px 6px 0;
             text-align: start;
             transition: all 0.5s;
@@ -371,7 +371,7 @@ watch(hScroll, (newVal)=>{
         box-shadow: none;
         cursor: pointer;
         &:hover {
-          filter: drop-shadow(5px 5px 8px rgba(0, 0, 0, 0.2));
+          filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.2));
           h2 {
             top: 100px;
           }
@@ -379,6 +379,7 @@ watch(hScroll, (newVal)=>{
             .imgBox {
               img {
                 filter: saturate(120%);
+                transform: scale(1.1);
               }
             }
             .content {
@@ -411,7 +412,7 @@ watch(hScroll, (newVal)=>{
             height: 160px;
             overflow: hidden;
             z-index: 2;
-            box-shadow: 2px 2px 8px 0px rgb(0, 0, 0, 0.5);
+            // box-shadow: 0px 0px 8px 0px rgb(0, 0, 0, 0.5);
             border-radius: 6px;
             img {
               position: absolute;
@@ -439,7 +440,7 @@ watch(hScroll, (newVal)=>{
             width: 630px;
             height: 140px;
             color: #000;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+            // box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);
             border-radius: 6px;
             text-align: start;
             transition: all 0.5s;
@@ -478,7 +479,7 @@ watch(hScroll, (newVal)=>{
       right: 0;
       width: 300px;
       // height: 500px;
-      box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);
+      // box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);
       border-radius: 6px;
       background: #fff;
       transition: all 0.5s;
@@ -487,7 +488,7 @@ watch(hScroll, (newVal)=>{
       align-items: center;
       padding: 20px;
       &:hover {
-        box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);
       }
       .userDesc {
         width: 100%;
@@ -536,7 +537,7 @@ watch(hScroll, (newVal)=>{
           li {
             height: 35px;
             line-height: 35px;
-            box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
+            // box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
             margin-bottom: 10px;
             border-radius: 6px;
             text-align: left;

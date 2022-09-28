@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <header class="w-screen leading-none text-3xl mb-6 shadow-lg" ref="header">
+    <header class="w-screen leading-none text-3xl mb-6" ref="header">
       <span class="title">千拾的博客</span>
       <div style="position: absolute; right: 30px; margin: auto; top: 0; bottom: 0;" class="menu">
         <input type="checkbox" name="check" id="check">
@@ -59,8 +59,9 @@ onMounted(() => {
     if (e.target.id === 'home') {
       store.setScroll(e.target.scrollTop)
       if (e.target.scrollTop !== 0) {
-        header.value.style.backgroundColor = '#3434344a'
+        header.value.style.backgroundColor = '#9999994a'
         header.value.style.backdropFilter = 'saturate(180%) blur(6px)'
+        header.value.style.color = '#000'
         bannerInner.value.style.backgroundPosition = `calc(50% + ${e.target.scrollTop}px) calc(50% + ${e.target.scrollTop}px)`
         bannerInner.value.classList.add('textStroke')
         if (e.target.scrollTop > 300) {
@@ -71,6 +72,7 @@ onMounted(() => {
       } else {
         header.value.style.backgroundColor = 'unset'
         header.value.style.backdropFilter = 'unset'
+        header.value.style.boxShadow = 'unset'
         bannerInner.value.style.backgroundPosition = ''
         bannerInner.value.classList.remove('textStroke')
         scrollTop.value.style.bottom = '-70px'
