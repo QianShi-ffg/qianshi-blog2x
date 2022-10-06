@@ -79,6 +79,12 @@ const friendshipList:any = ref([{
   img: 'https://xiaolongosscdn.liam0418.com/navigation/images/yutou.ico',
   blog: 'http://yutouweb.cn/',
   introduce: '一个小宇宙待爆发且充满激情的前端爱好者'
+},
+{
+  name: '轶霖',
+  img: 'http://oss.cui10.com/uploads/imgs/my_logo.jpg',
+  blog: 'http://blog.cui10.com/',
+  introduce: ''
 }
 ])
 </script>
