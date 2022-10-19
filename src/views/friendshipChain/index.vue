@@ -82,7 +82,7 @@ const friendshipList:any = ref([{
 },
 {
   name: '轶霖',
-  img: 'http://oss.cui10.com/uploads/imgs/my_logo.jpg',
+  img: 'https://oss.cui10.com/uploads/imgs/my_logo.jpg',
   blog: 'http://blog.cui10.com/',
   introduce: ''
 }
