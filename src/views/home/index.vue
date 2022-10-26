@@ -94,9 +94,11 @@ const init = async() => {
 }
 init()
 const artDetail = (id: any) => {
-  router.push({ path: '/artDetail', query: { id: id } })
-  const homeDom:any = document.querySelector('#home')
-  homeDom.scrollTop = 0
+  // router.push({ path: '/artDetail', query: { id: id } })
+  const url = router.resolve({ path: '/artDetail',query: { id: id } })
+  window.open(url.href, '_blank')
+  // const homeDom:any = document.querySelector('#home')
+  // homeDom.scrollTop = 0
 }
 
 const selectArtList = async(value:string, item:Number) => {
@@ -114,10 +116,7 @@ const selectArtList = async(value:string, item:Number) => {
     }
     articleList(params)
   }
-  const homeDom:any = document.querySelector('#home')
-  const bannerDom:any = document.querySelector('#banner')
-  homeDom.scrollTop = bannerDom.clientHeight - 65
-  console.log(bannerDom.clientHeight - 65)
+  scrollHome()
 }
 
 const hScroll = computed(() => {
@@ -126,12 +125,18 @@ const hScroll = computed(() => {
 
 const onCurrentChange = async(value:Number) => {
   paginationObj.page = value
+  scrollHome()
   await articleList({})
 }
 // 菜单定位模式
 watch(hScroll, (newVal)=>{
 })
 
+const scrollHome = () => {
+  const homeDom:any = document.querySelector('#home')
+  homeDom.scrollTop = window.innerHeight - 65
+  console.log(window.innerHeight - 65)
+}
 </script>
 <style lang="scss" scoped>
 #artlist {

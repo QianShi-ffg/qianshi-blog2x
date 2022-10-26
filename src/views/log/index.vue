@@ -4,6 +4,23 @@
     <ul class="timeline">
       <!-- Item 1 -->
       <li>
+        <div class="direction-r">
+          <div class="flag-wrapper">
+            <span class="hexa"></span>
+            <span class="flag">修复缺陷</span>
+            <span class="time-wrapper"><span class="time">2022-10-26</span></span>
+          </div>
+          <div class="desc">
+            1. 修复友链页面布局<br/>
+            2. 修复无h标签时文章详情显示空白菜单<br/>
+            3. 修复由文章详情跳转首页后滚动位置不正确<br/>
+            4. 修复分页滚动位置<br/>
+            5. 将打开文章方式切换为打开新标签
+          </div>
+        </div>
+      </li>
+
+      <li>
         <div class="direction-l">
           <div class="flag-wrapper">
             <span class="hexa"></span>

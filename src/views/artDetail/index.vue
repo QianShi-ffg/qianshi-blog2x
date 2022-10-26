@@ -7,7 +7,7 @@
   <div id="artDetail">
     <!-- <div class="banner" v-show="isBannerShow"> -->
     <md-editor v-model="text" previewOnly show-code-row-number :marked-heading-id="generateId" @onGetCatalog="onGetCatalog"/>
-    <div id="catalogue" class="shadow-lg rounded-xl" :class="catalogueStyle">
+    <div id="catalogue" class="shadow-lg rounded-xl" :class="catalogueStyle" v-if="catalogList.length !== 0">
       <ul>
         <li v-for="(item, i) in catalogList" :key="i" :class="activeIndex === i ? 'active-li' : ''">
           <a :href="`#${item.text}`" :data-level="item.level" :title="item.text">{{ item.text }}</a>

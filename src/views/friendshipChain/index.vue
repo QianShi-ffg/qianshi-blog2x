@@ -93,23 +93,6 @@ const friendshipList:any = ref([{
 #friendshipChain {
   margin: 0 auto;
   position: relative;
-  // .banner {
-  //   position: relative;
-  //   display: block;
-  //   width: 100%;
-  //   height: 300px;
-  //   overflow: hidden;
-  //   .people {
-  //     position: absolute;
-  //     left: -125px;
-  //     bottom: 0;
-  //     width: 125px;
-  //     height: 200px;
-  //     background: url('@/assets/run.png') no-repeat 0;
-  //     animation: run 1s steps(12,end) infinite,
-  //     move 10s linear infinite;
-  //   }
-  // }
   .friendshipList {
     width: 100%;
     height: calc(100% - 50px - 20px);
@@ -183,7 +166,7 @@ const friendshipList:any = ref([{
     width: 95%;
     padding-top: 80px;
     padding-bottom: 20px;
-    height: calc(100vh - 70px);
+    height: auto;
     .friendshipList {
       width: 100%;
       height: 100%;
@@ -203,7 +186,7 @@ const friendshipList:any = ref([{
   #friendshipChain {
     width: 800px;
     padding: 50px 0;
-    height: calc(100vh - 400px - 70px);
+    height: auto;
     .friendshipList {
       width: 100%;
       height: calc(100% - 40px);
@@ -223,7 +206,7 @@ const friendshipList:any = ref([{
   #friendshipChain {
     padding: 70px 0;
     width: 1200px;
-    height: calc(100vh - 400px - 70px);
+    height: auto;
     .friendshipList {
       width: 100%;
       height: 100%;

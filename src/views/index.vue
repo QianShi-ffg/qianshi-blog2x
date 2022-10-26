@@ -10,16 +10,16 @@
           </div>
         </label>
         <ul>
-          <li @click="menuClick">
+          <li @click="menuClick('home')">
             <router-link to="/">首页</router-link>
           </li>
-          <li @click="menuClick">
+          <li @click="menuClick('')">
             <router-link to="/friendshipChain">友链</router-link>
           </li>
-          <li @click="menuClick">
+          <li @click="menuClick('')">
             <router-link to="/log">更新日志</router-link>
           </li>
-          <li @click="menuClick">
+          <li @click="menuClick('')">
             <router-link to="/about">关于</router-link>
           </li>
         </ul>
@@ -104,7 +104,13 @@ const init = async () => {
 }
 init()
 
-const menuClick = () => {
+const menuClick = (value:string) => {
+  if (window.innerWidth >= 1280) {
+    if(value === 'home') {
+      const homeDom:any = document.querySelector('#home')
+      homeDom.scrollTop = window.innerHeight - 65
+    }
+  }
   if (window.innerWidth <= 800) {
     menuIcon.value.click()
   }
