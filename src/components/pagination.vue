@@ -24,6 +24,7 @@ const currentChange = (value:any) => {
   console.log(value)
   emit('onCurrentChange', value)
 }
+
 </script>
 
 <style scoped>

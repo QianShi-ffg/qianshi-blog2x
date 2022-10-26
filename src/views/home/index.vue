@@ -125,7 +125,7 @@ const hScroll = computed(() => {
 
 const onCurrentChange = async(value:Number) => {
   paginationObj.page = value
-  scrollHome()
+  await scrollHome()
   await articleList({})
 }
 // 菜单定位模式
