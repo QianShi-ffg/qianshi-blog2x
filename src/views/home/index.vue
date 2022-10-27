@@ -80,6 +80,7 @@ const articleList = async (params: object) => {
   artList.value = res.rows
   total.value = res.total
   conditionTotal.value = res.conditionTotal
+  console.log(777)
   return res.length
 }
 
@@ -123,20 +124,22 @@ const hScroll = computed(() => {
   return store.scroll
 })
 
+const scrollHome = () => {
+  const homeDom:any = document.querySelector('#home')
+  homeDom.scrollTop = window.innerHeight - 65
+  console.log(window.innerHeight - 65)
+  console.log(666)
+}
+
 const onCurrentChange = async(value:Number) => {
   paginationObj.page = value
-  await scrollHome()
   await articleList({})
+  await scrollHome()
 }
 // 菜单定位模式
 watch(hScroll, (newVal)=>{
 })
 
-const scrollHome = () => {
-  const homeDom:any = document.querySelector('#home')
-  homeDom.scrollTop = window.innerHeight - 65
-  console.log(window.innerHeight - 65)
-}
 </script>
 <style lang="scss" scoped>
 #artlist {
