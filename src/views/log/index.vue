@@ -4,6 +4,19 @@
     <ul class="timeline">
       <!-- Item 1 -->
       <li>
+        <div class="direction-l">
+          <div class="flag-wrapper">
+            <span class="hexa"></span>
+            <span class="flag">优化代码块显示</span>
+            <span class="time-wrapper"><span class="time">2022-11-02</span></span>
+          </div>
+          <div class="desc">
+            1. 配置代码块主题显示<br/>
+          </div>
+        </div>
+      </li>
+
+      <li>
         <div class="direction-r">
           <div class="flag-wrapper">
             <span class="hexa"></span>

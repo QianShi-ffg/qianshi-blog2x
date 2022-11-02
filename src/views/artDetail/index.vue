@@ -6,7 +6,7 @@
   </div>
   <div id="artDetail">
     <!-- <div class="banner" v-show="isBannerShow"> -->
-    <md-editor v-model="text" previewOnly show-code-row-number :marked-heading-id="generateId" @onGetCatalog="onGetCatalog"/>
+    <md-editor v-model="text" previewOnly show-code-row-number :marked-heading-id="generateId" @onGetCatalog="onGetCatalog" code-theme="dracula"/>
     <div id="catalogue" class="shadow-lg rounded-xl" :class="catalogueStyle" v-if="catalogList.length !== 0">
       <ul>
         <li v-for="(item, i) in catalogList" :key="i" :class="activeIndex === i ? 'active-li' : ''">
@@ -25,6 +25,23 @@ import { getArticleList } from '@/api/api'
 import { useStore } from '@/store/index'
 import { useRoute } from "vue-router"
 import navScroll from '@/hooks/navScroll'
+
+MdEditor.config({
+  editorExtensions: {
+    highlight: {
+      css: {
+        dracula: {
+          light:
+            'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/base16/snazzy.min.css',
+          dark: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/base16/snazzy.min.css'
+        }
+      }
+    }
+  }
+});
+
+
+
 
 const store = useStore()
 const generateId = (_text: any, _level: any, index: any) => `heading-${index}`
