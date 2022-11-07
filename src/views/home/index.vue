@@ -38,6 +38,9 @@
           </div>
         </div>
       </div>
+      <div class="timeDetail">
+        博客已平稳运行{{ days }}天
+      </div>
       <div class="category">
         <p>分类</p>
         <ul>
@@ -66,6 +69,7 @@ const store = useStore()
 const artList: any = ref([])
 const artCount = ref<Number>(0)
 const total = ref<Number>(0)
+const days = ref<Number>(0)
 const conditionTotal: any = ref(0)
 const bannerInner: any = ref()
 const classifyList: any = ref([])
@@ -84,12 +88,21 @@ const articleList = async (params: object) => {
   return res.length
 }
 
+const time = () => {
+  const start:any = new Date('2022-08-31'); //开始的时间
+  const end:any = new Date(); //结束的时间
+  const se = end - start; //计算两个时间之间的秒数
+  console.log((se / (24 * 3600 * 1000)))
+  days.value = Math.floor(se / (24 * 3600 * 1000)); // 计算天数
+}
+
 const classify = async() => {
   const res = await getClassifyIdList({})
   classifyList.value = res
 } 
 
 const init = async() => {
+  await time()
   await classify()
   artCount.value = await articleList({})
 }
@@ -529,6 +542,9 @@ watch(hScroll, (newVal)=>{
             border-right: 2px solid #000;
           }
         }
+      }
+      .timeDetail {
+        padding: 10px 0 20px;
       }
       .category {
         width: 100%;
