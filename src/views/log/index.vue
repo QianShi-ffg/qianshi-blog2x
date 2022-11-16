@@ -4,6 +4,19 @@
     <ul class="timeline">
       <!-- Item 1 -->
       <li>
+        <div class="direction-r">
+          <div class="flag-wrapper">
+            <span class="hexa"></span>
+            <span class="flag">更新友链页面</span>
+            <span class="time-wrapper"><span class="time">2022-11-16</span></span>
+          </div>
+          <div class="desc">
+            重构友链展示模块,添加缩略展示<br/>
+          </div>
+        </div>
+      </li>
+
+      <li>
         <div class="direction-l">
           <div class="flag-wrapper">
             <span class="hexa"></span>

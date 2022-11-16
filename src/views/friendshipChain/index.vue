@@ -1,6 +1,19 @@
 <template>
-  <currencyBanner :title="'友情链接'"/>
-  <div id="friendshipChain">
+  <currencyBanner :title="'友情链接'" />
+  <div id="friendshipChain" v-if="innerWidth >= 1280">
+    <div v-for="(item, index) in friendshipList" :key="index" class="friendsItem">
+      <div class="friendsItem_1">
+        <img :src="item.img" alt="">
+        <div class="intr">
+          <p>{{ item.name }}</p>
+          <p :title="item.introduce" class="desc">{{ item.introduce }}</p>
+          <iframe :src="item.blog" frameborder="0" width="1920" height="1080" class="iframe"></iframe>
+        </div>
+        <a :href="item.blog" target="_blank" class="btn">GO</a>
+      </div>
+    </div>
+  </div>
+  <div id="friendshipChain" v-else>
     <div class="friendshipList">
       <ul>
         <li v-for="(item, index) in friendshipList" :key="index" class="friendshipItem rounded-xl cursor-pointer shadow-lg">
@@ -18,9 +31,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import currencyBanner from '@/components/banner.vue'
-const friendshipList:any = ref([{
+
+const innerWidth = ref<number>(0)
+onMounted(() => {
+  innerWidth.value = window.innerWidth
+})
+const friendshipList: any = ref([{
   name: '小白龙',
   img: 'https://xiaolongosscdn.liam0418.com/myblog/images/logo.jpg',
   blog: 'https://blog.xiaolong0418.com/',
@@ -46,8 +64,8 @@ const friendshipList:any = ref([{
 },
 {
   name: '蒜薹炒肉加辣',
-  img: 'https://suantaichaorou.top/favicon.ico',
-  blog: 'https://suantaichaorou.top/',
+  img: 'http://suantaichaorou.top/favicon.ico',
+  blog: 'http://suantaichaorou.top/',
   introduce: '你还没真的努力过，就轻易输给了懒惰.'
 },
 {
@@ -93,6 +111,7 @@ const friendshipList:any = ref([{
 #friendshipChain {
   margin: 0 auto;
   position: relative;
+
   .friendshipList {
     width: 100%;
     height: calc(100% - 50px - 20px);
@@ -158,19 +177,23 @@ const friendshipList:any = ref([{
     }
   }
 }
+
 @media screen and (min-width: 320px) {
   .banner {
     display: none;
   }
+
   #friendshipChain {
     width: 95%;
     padding-top: 80px;
     padding-bottom: 20px;
     height: auto;
+
     .friendshipList {
       width: 100%;
       height: 100%;
       overflow: overlay;
+
       ul {
         .friendshipItem {
           margin: 12px 0;
@@ -187,10 +210,12 @@ const friendshipList:any = ref([{
     width: 800px;
     padding: 50px 0;
     height: auto;
+
     .friendshipList {
       width: 100%;
       height: calc(100% - 40px);
       overflow: overlay;
+
       ul {
         .friendshipItem {
           margin: 18px;
@@ -207,18 +232,132 @@ const friendshipList:any = ref([{
     padding: 70px 0;
     width: 1200px;
     height: auto;
-    .friendshipList {
-      width: 100%;
-      height: 100%;
-      overflow: overlay;
-      ul {
-        .friendshipItem {
-          width: 262px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 500px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    // position: relative;
+    .friendsItem {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 23%;
+      height: 125px;
+      margin-bottom: 45px;
+      .friendsItem_1 {
+        position: absolute;
+        background: #fff;
+        border-radius: 10px;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        transition: all 0.3s ease-in-out;
+        img {
+          border: 2px solid #fff;
+          position: absolute;
+          top: -40px;
+          left: 0;
+          right: 0;
+          margin: auto;
+          width: 80px;
+          height: 80px;
+          border-radius: 40px;
+          background: #fff;
+        }
+        .intr {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          padding: 40px 20px 20px;
+          p {
+            // padding-right: 25px;
+            text-align: left;
+          }
+          .desc {
+            height: 48px;
+            font-size: 13px;
+            word-break: break-all; //在恰当的断字点进行换行 
+            overflow: hidden; //文字超出的进行隐藏
+            text-overflow: ellipsis; //超出的文字用省略号表示
+            display: -webkit-box; //将元素设为盒子伸缩模型显示         //利用盒子模型 
+            -webkit-box-orient: vertical; //伸缩方向设为垂直方向
+            -webkit-line-clamp: 2;
+          }
+          .iframe {
+            position: absolute;
+            left: -822px;
+            bottom: 0;
+            top: 0;
+            margin: auto;
+            opacity: 0;
+            transform: scale(.1);
+            transition: all 0.3s;
+          }
+        }
+        .btn {
+          position: absolute;
+          bottom: 10px;
+          right: 20px;
+          display: inline-block;
+          width: 45px;
+          background: #f88140;
+          color: #fff;
+          border-radius: 6px;
+          opacity: 0;
+          transition: all 0.3s;
+        }
+      }
+
+      &:not(:nth-child(4n)) {
+        margin-right: 30px;
+      }
+
+      &:hover {
+        .friendsItem_1 {
+          filter: drop-shadow(0px 0px 15px rgba(131, 131, 131, 0.411));
+          // box-shadow: 0px 0px 15px 0px rgba(131, 131, 131, 0.411);
+          background: #fff;
+          height: 300px;
+          z-index: 10;
+          .intr {
+            position: relative;
+            .desc {
+              display: none;
+            }
+            .iframe {
+              position: absolute;
+              left: -822px;
+              bottom: 0;
+              top: 0;
+              margin: auto;
+              opacity: 1;
+              transform: scale(.13);
+            }
+          }
+          .btn {
+            opacity: 1;
+          }
         }
       }
     }
+
+    // .friendshipList {
+    //   width: 100%;
+    //   height: 100%;
+    //   overflow: overlay;
+    //   ul {
+    //     .friendshipItem {
+    //       width: 262px;
+    //     }
+    //   }
+    // }
   }
 }
+
 // @keyframes run{
 //     0%{
 //       background-position:0 0;
