@@ -4,6 +4,19 @@
     <ul class="timeline">
       <!-- Item 1 -->
       <li>
+        <div class="direction-l">
+          <div class="flag-wrapper">
+            <span class="hexa"></span>
+            <span class="flag">更新友链页面</span>
+            <span class="time-wrapper"><span class="time">2022-11-17</span></span>
+          </div>
+          <div class="desc">
+            将友链模块中iframe展示修改为缩略图展示<br/>
+          </div>
+        </div>
+      </li>
+
+      <li>
         <div class="direction-r">
           <div class="flag-wrapper">
             <span class="hexa"></span>

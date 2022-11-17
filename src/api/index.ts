@@ -30,9 +30,11 @@ export class Request {
       (res: AxiosResponse) => {
         // 直接返回res，当然你也可以只返回res.data
         // 系统如果有自定义code也可以在这里处理
-        console.log(res)
+        console.log(res, 89996)
         if (res.data.code) {
+          console.log(res, 899966)
           if (res.data.code === 200) {
+            console.log(res.data.data, 8999666)
             return res.data.data
           } else {
             alert('系统错误,请稍后再试')

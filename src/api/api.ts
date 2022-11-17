@@ -13,6 +13,9 @@ export const aWord = (params: object) => {
 export const getClassifyIdList = (params: object) => {
   return axios.get( '/artClassifyList', { params })
 }
+export const getFriendShipList = (params: object) => {
+  return axios.get( '/friendShipList', { params })
+}
 // export const getArticleList = (params: object) => {
 //   return axios.post( '/articleList', params)
 // }
