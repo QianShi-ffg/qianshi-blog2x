@@ -201,6 +201,7 @@ init()
       width: 23%;
       height: 125px;
       margin-bottom: 45px;
+      user-select: none;
       .friendsItem_1 {
         position: absolute;
         background: #fff;
