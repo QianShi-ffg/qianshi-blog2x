@@ -119,7 +119,6 @@ const menuClick = (value:string) => {
 const goTop = () => {
   const homeDom:any = document.querySelector('#home')
   homeDom.scrollTop = 0
-  console.log(scrollTop.value.childNodes[0])
 }
 
 </script>

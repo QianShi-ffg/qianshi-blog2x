@@ -7,8 +7,8 @@
         <div class="intr">
           <p>{{ item.name }}</p>
           <p :title="item.desc" class="desc">{{ item.desc }}</p>
-          <!-- <iframe :src="item.blogUrl" frameborder="0" width="1920" height="1080" class="iframe"></iframe> -->
-          <img :src="item.screenShot" alt="" class="iframe">
+          <imgLoading class="iframeLoading" :id="`imgLoading${item.id}`"/>
+          <img :src="item.screenShot" alt="" class="iframe"  @load="loadItemImg(item.id)" :id="`img${item.id}`">
         </div>
         <a :href="item.blogUrl" target="_blank" class="btn">GO</a>
       </div>
@@ -33,7 +33,9 @@
 import { onMounted, ref } from 'vue'
 import currencyBanner from '@/components/banner.vue'
 import { getFriendShipList } from '@/api/api'
+import imgLoading from '@/components/imgLoading.vue'
 
+const isImgLoaing = ref<boolean>(false)
 const innerWidth = ref<number>(0)
 onMounted(() => {
   innerWidth.value = window.innerWidth
@@ -52,6 +54,15 @@ const init = async() => {
 
 init()
 
+const loadItemImg = (id:any) => {
+  console.log(id, 633333333)
+  isImgLoaing.value = true
+  const imgDom:any = document.getElementById(`img${id}`)
+  const imgLoadingDom:any = document.getElementById(`imgLoading${id}`)
+  imgDom.style.zIndex = '5'
+  imgDom.style.opacity = '1'
+  imgLoadingDom.style.opacity = '0'
+}
 
 </script>
 
@@ -253,7 +264,9 @@ init()
             opacity: 0;
             transition: all 0.3s;
             border-radius: 0;
-            border: 2px solid rgba(201, 201, 201, 0.205);
+          }
+          .iframeLoading {
+            opacity: 0;
           }
         }
         .btn {
@@ -291,6 +304,10 @@ init()
             }
             .iframe {
               height: 130px;
+              border: 2px solid rgba(201, 201, 201, 0.205);
+              // opacity: 1;
+            }
+            .iframeLoading {
               opacity: 1;
             }
           }

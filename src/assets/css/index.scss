@@ -104,6 +104,12 @@ body {
 }
 
 
+.imgLoading {
+  width: 150px;
+  height: 150px;
+  color: rgba(255, 255, 255, 0);
+}
+
 @keyframes slide-from-left {
   from {
     transform: translateX(-20%);
