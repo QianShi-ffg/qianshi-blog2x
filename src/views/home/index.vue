@@ -15,13 +15,14 @@
               <p class="artEpitomize">
                 <span>作者: 千拾</span>
                 <span>发布时间: {{ date(item.updataTime) }}</span>
-                <span>分类: {{ classifyList.filter((ii:any) => { return ii.id === item.classifyId })[0].name }}</span>
+                <span>分类: {{ classifyList.rows.filter((ii) => { return ii.id === item.classifyId })[0].name }}</span>
               </p>
             </div>
           </div>
         </div>
       </div>
-      <paginationVue :total="conditionTotal" :currentObj="paginationObj" @onCurrentChange="onCurrentChange" v-if="total > paginationObj.pageSize"/>
+      <paginationVue :total="conditionTotal" :currentObj="paginationObj" @onCurrentChange="onCurrentChange"
+        v-if="total > paginationObj.pageSize" />
     </div>
     <div class="userMsg">
       <div class="userDesc">
@@ -33,7 +34,7 @@
             <p class="p2">文章</p>
           </div>
           <div class="num1">
-            <p class="p1">{{ classifyList.length }}</p>
+            <p class="p1">{{ classifyList.rows.length }}</p>
             <p class="p2">分类</p>
           </div>
         </div>
@@ -44,13 +45,13 @@
       <div class="category">
         <p>分类</p>
         <ul>
-          <li @click="selectArtList('category', 10000)">
+          <li @click="selectArtList(10000)">
             <span>全部</span>
-            <span>{{ artCount }}</span>
+            <span></span>
           </li>
-          <li v-for="item in classifyList" :key="item.id" @click="selectArtList('category', item.id)">
+          <li v-for="item in classifyList.rows" :key="item.id" @click="selectArtList(item.id)">
             <span>{{ item.name }}</span>
-            <span>{{ item.artNum }}</span>
+            <span>{{ item.value }}</span>
           </li>
         </ul>
       </div>
@@ -67,65 +68,66 @@ import paginationVue from '@/components/pagination.vue'
 
 const store = useStore()
 const artList: any = ref([])
-const artCount = ref<Number>(0)
 const total = ref<Number>(0)
 const days = ref<Number>(0)
 const conditionTotal: any = ref(0)
 const bannerInner: any = ref()
-const classifyList: any = ref([])
+const classifyList: any = reactive({
+  rows: [],
+  total: 0
+})
 const paginationObj: any = reactive({
-  page: 1, 
-  pageSize: 10
+  page: 1,
+  pageSize: 2
 })
 const router = useRouter()
+
 // 获取文章列表
 const articleList = async (params: object) => {
-  const res:any = await getArticleList(Object.assign(params, paginationObj))
-  artList.value = res.rows
-  total.value = res.total
-  conditionTotal.value = res.conditionTotal
-  console.log(777)
+  const res: any = await getArticleList(Object.assign(params, paginationObj))
+  artList.value = res
   return res.length
 }
 
 const time = () => {
-  const start:any = new Date('2022-08-31'); //开始的时间
-  const end:any = new Date(); //结束的时间
+  const start: any = new Date('2022-08-31'); //开始的时间
+  const end: any = new Date(); //结束的时间
   const se = end - start; //计算两个时间之间的秒数
   console.log((se / (24 * 3600 * 1000)))
   days.value = Math.floor(se / (24 * 3600 * 1000)); // 计算天数
 }
 
-const classify = async() => {
-  const res = await getClassifyIdList({})
-  classifyList.value = res
-} 
+const classify = async () => {
+  const res: any = await getClassifyIdList({})
+  classifyList.rows = res.rows
+  classifyList.total = res.total
+  // 文章总数
+  total.value = res.total
+  // 当前分类文章总数
+  conditionTotal.value = classifyList.total
+}
 
-const init = async() => {
+const init = async () => {
   await time()
   await classify()
-  artCount.value = await articleList({})
+  await articleList({})
 }
 init()
 const artDetail = (id: any) => {
-  // router.push({ path: '/artDetail', query: { id: id } })
-  const url = router.resolve({ path: '/artDetail',query: { id: id } })
+  const url = router.resolve({ path: '/artDetail', query: { id: id } })
   window.open(url.href, '_blank')
-  // const homeDom:any = document.querySelector('#home')
-  // homeDom.scrollTop = 0
 }
 
-const selectArtList = async(value:string, item:Number) => {
+const selectArtList = async (item: Number) => {
   paginationObj.page = 1
   if (item === 10000) {
     paginationObj.id = null
-    paginationObj.type = null
     articleList({})
+    conditionTotal.value = classifyList.total
   } else {
+    conditionTotal.value = Number(classifyList.rows.filter((item1:any)=> item1.id === item)[0].value)
     paginationObj.id = item
-    paginationObj.type = value
     const params = {
-      type: value,
       id: item
     }
     articleList(params)
@@ -138,19 +140,17 @@ const hScroll = computed(() => {
 })
 
 const scrollHome = () => {
-  const homeDom:any = document.querySelector('#home')
+  const homeDom: any = document.querySelector('#home')
   homeDom.scrollTop = window.innerHeight - 65
-  console.log(window.innerHeight - 65)
-  console.log(666)
 }
 
-const onCurrentChange = async(value:Number) => {
+const onCurrentChange = async (value: Number) => {
   paginationObj.page = value
   await articleList({})
   await scrollHome()
 }
 // 菜单定位模式
-watch(hScroll, (newVal)=>{
+watch(hScroll, (newVal) => {
 })
 
 </script>
@@ -158,28 +158,36 @@ watch(hScroll, (newVal)=>{
 #artlist {
   margin: auto;
   padding-top: 100px;
+
   .artListItem {
     transition: all 0.5s;
+
     &:hover {
       @apply scale-105
     }
+
     .artEpitomize {
       margin-top: 10px;
       font-size: 12px;
+
       span {
         margin-right: 20px;
       }
     }
   }
 }
+
 .textStroke {
   -webkit-text-stroke: 1px rgba(219, 219, 219, 0.411);
 }
+
 @media screen and (min-width: 320px) {
   #artlist {
     width: 95%;
+
     .leftList {
       width: 100%;
+
       .artBox {
         position: relative;
         width: 100%;
@@ -188,6 +196,7 @@ watch(hScroll, (newVal)=>{
         // box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
         border-radius: 6px;
         cursor: pointer;
+
         h2 {
           position: absolute;
           top: 58%;
@@ -199,6 +208,7 @@ watch(hScroll, (newVal)=>{
           z-index: 2;
           transition: all 0.5s;
         }
+
         .container {
           position: relative;
           display: flex;
@@ -207,12 +217,14 @@ watch(hScroll, (newVal)=>{
           justify-content: space-between;
           align-items: center;
           margin: 0;
+
           .imgBox {
             position: relative;
             width: 100%;
             height: 200px;
             overflow: hidden;
-            border-radius: 6px 6px 0 0 ;
+            border-radius: 6px 6px 0 0;
+
             img {
               position: absolute;
               top: 0;
@@ -226,6 +238,7 @@ watch(hScroll, (newVal)=>{
               transition: all 0.5s;
             }
           }
+
           .content {
             position: relative;
             // top: 58px;
@@ -242,25 +255,29 @@ watch(hScroll, (newVal)=>{
             border-radius: 0 0 6px 6px;
             text-align: start;
             transition: all 0.5s;
+
             .div111 {
               display: none;
             }
+
             .desc {
               width: 100%;
               height: 50%;
-              word-break: break-all;           //在恰当的断字点进行换行 
-              overflow: hidden;                 //文字超出的进行隐藏
-              text-overflow: ellipsis;          //超出的文字用省略号表示
-              display: -webkit-box;             //将元素设为盒子伸缩模型显示         //利用盒子模型 
-              -webkit-box-orient: vertical;     //伸缩方向设为垂直方向
-              -webkit-line-clamp: 2; 
+              word-break: break-all; //在恰当的断字点进行换行 
+              overflow: hidden; //文字超出的进行隐藏
+              text-overflow: ellipsis; //超出的文字用省略号表示
+              display: -webkit-box; //将元素设为盒子伸缩模型显示         //利用盒子模型 
+              -webkit-box-orient: vertical; //伸缩方向设为垂直方向
+              -webkit-line-clamp: 2;
               user-select: none;
             }
+
             .artEpitomize {
               position: absolute;
               bottom: 10px;
               left: 20px;
               transition: all 0.5s;
+
               span {
                 margin-right: 20px;
               }
@@ -269,16 +286,20 @@ watch(hScroll, (newVal)=>{
         }
       }
     }
+
     .userMsg {
       display: none;
     }
   }
 }
+
 @media screen and (min-width: 800px) {
   #artlist {
     width: 800px;
+
     .leftList {
       width: 100%;
+
       .artBox {
         position: relative;
         width: 100%;
@@ -287,6 +308,7 @@ watch(hScroll, (newVal)=>{
         // box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
         border-radius: 6px;
         cursor: pointer;
+
         h2 {
           position: absolute;
           top: 20px;
@@ -298,6 +320,7 @@ watch(hScroll, (newVal)=>{
           z-index: 2;
           transition: all 0.5s;
         }
+
         .container {
           position: relative;
           display: flex;
@@ -306,12 +329,14 @@ watch(hScroll, (newVal)=>{
           justify-content: space-between;
           align-items: center;
           margin: 0;
+
           .imgBox {
             position: relative;
             width: 250px;
             height: 170px;
             overflow: hidden;
             border-radius: 6px 0 0 6px;
+
             img {
               position: absolute;
               top: 0;
@@ -326,6 +351,7 @@ watch(hScroll, (newVal)=>{
               transition: all 0.5s;
             }
           }
+
           .content {
             position: relative;
             // top: 58px;
@@ -342,25 +368,29 @@ watch(hScroll, (newVal)=>{
             border-radius: 0 6px 6px 0;
             text-align: start;
             transition: all 0.5s;
+
             .div111 {
               display: none;
             }
+
             .desc {
               width: 100%;
               height: 50%;
-              word-break: break-all;           //在恰当的断字点进行换行 
-              overflow: hidden;                 //文字超出的进行隐藏
-              text-overflow: ellipsis;          //超出的文字用省略号表示
-              display: -webkit-box;             //将元素设为盒子伸缩模型显示         //利用盒子模型 
-              -webkit-box-orient: vertical;     //伸缩方向设为垂直方向
-              -webkit-line-clamp: 2; 
+              word-break: break-all; //在恰当的断字点进行换行 
+              overflow: hidden; //文字超出的进行隐藏
+              text-overflow: ellipsis; //超出的文字用省略号表示
+              display: -webkit-box; //将元素设为盒子伸缩模型显示         //利用盒子模型 
+              -webkit-box-orient: vertical; //伸缩方向设为垂直方向
+              -webkit-line-clamp: 2;
               user-select: none;
             }
+
             .artEpitomize {
               position: absolute;
               bottom: 10px;
               left: 20px;
               transition: all 0.5s;
+
               span {
                 margin-right: 20px;
               }
@@ -369,11 +399,13 @@ watch(hScroll, (newVal)=>{
         }
       }
     }
+
     .userMsg {
       display: none;
     }
   }
 }
+
 @media screen and (min-width: 1280px) {
   #artlist {
     position: relative;
@@ -382,8 +414,10 @@ watch(hScroll, (newVal)=>{
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+
     .leftList {
       width: 70%;
+
       .artBox {
         position: relative;
         width: 100%;
@@ -391,11 +425,14 @@ watch(hScroll, (newVal)=>{
         transition: all 0.5s;
         box-shadow: none;
         cursor: pointer;
+
         &:hover {
           filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.2));
+
           h2 {
             top: 100px;
           }
+
           .container {
             .imgBox {
               img {
@@ -403,14 +440,17 @@ watch(hScroll, (newVal)=>{
                 transform: scale(1.1);
               }
             }
+
             .content {
               top: 30px;
+
               .artEpitomize {
                 opacity: 0;
               }
             }
           }
         }
+
         h2 {
           position: absolute;
           top: 20px;
@@ -422,11 +462,13 @@ watch(hScroll, (newVal)=>{
           transition: all 0.5s;
           z-index: 0;
         }
+
         .container {
           position: relative;
           display: flex;
           justify-content: space-between;
           align-items: center;
+
           .imgBox {
             position: relative;
             width: 250px;
@@ -435,6 +477,7 @@ watch(hScroll, (newVal)=>{
             z-index: 2;
             // box-shadow: 0px 0px 8px 0px rgb(0, 0, 0, 0.5);
             border-radius: 6px;
+
             img {
               position: absolute;
               top: 0;
@@ -449,6 +492,7 @@ watch(hScroll, (newVal)=>{
               transition: all 0.5s;
             }
           }
+
           .content {
             position: absolute;
             top: 58px;
@@ -465,25 +509,29 @@ watch(hScroll, (newVal)=>{
             border-radius: 6px;
             text-align: start;
             transition: all 0.5s;
+
             .div111 {
               display: block;
             }
+
             .desc {
               width: 100%;
               height: 100%;
-              word-break: break-all;            //在恰当的断字点进行换行 
-              overflow: hidden;                 //文字超出的进行隐藏
-              text-overflow: ellipsis;          //超出的文字用省略号表示
-              display: -webkit-box;             //将元素设为盒子伸缩模型显示      //利用盒子模型 
-              -webkit-box-orient: vertical;     //伸缩方向设为垂直方向
-              -webkit-line-clamp: 3; 
+              word-break: break-all; //在恰当的断字点进行换行 
+              overflow: hidden; //文字超出的进行隐藏
+              text-overflow: ellipsis; //超出的文字用省略号表示
+              display: -webkit-box; //将元素设为盒子伸缩模型显示      //利用盒子模型 
+              -webkit-box-orient: vertical; //伸缩方向设为垂直方向
+              -webkit-line-clamp: 3;
               user-select: none;
             }
+
             .artEpitomize {
               position: absolute;
               bottom: 8px;
               left: 20px;
               transition: all 0.5s;
+
               span {
                 margin-right: 20px;
               }
@@ -492,6 +540,7 @@ watch(hScroll, (newVal)=>{
         }
       }
     }
+
     .userMsg {
       user-select: none;
       display: block;
@@ -508,9 +557,11 @@ watch(hScroll, (newVal)=>{
       flex-direction: column;
       align-items: center;
       padding: 20px;
+
       &:hover {
         box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);
       }
+
       .userDesc {
         width: 100%;
         margin-bottom: 10px;
@@ -518,36 +569,44 @@ watch(hScroll, (newVal)=>{
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
         img {
           width: 100px;
           height: 100px;
           border-radius: 50px;
           margin-bottom: 15px;
         }
+
         .userName {
           font-size: 22px;
           font-weight: 700;
           margin-bottom: 10px;
         }
+
         .num-box {
           width: 100%;
           align-items: center;
           display: flex;
           justify-content: center;
           margin-bottom: 10px;
+
           .num1 {
             width: 30%;
           }
+
           .num1:first-child {
             border-right: 2px solid #000;
           }
         }
       }
+
       .timeDetail {
         padding: 10px 0 20px;
       }
+
       .category {
         width: 100%;
+
         p {
           text-align: left;
           padding-left: 30px;
@@ -555,9 +614,11 @@ watch(hScroll, (newVal)=>{
           background-size: 18px;
           margin-bottom: 2px;
         }
+
         ul {
           list-style: none;
           padding: 5px 10px;
+
           li {
             height: 35px;
             line-height: 35px;
@@ -568,9 +629,11 @@ watch(hScroll, (newVal)=>{
             padding: 0 20px;
             cursor: pointer;
             transition: all 0.5s;
+
             span:last-child {
               float: right;
             }
+
             &:hover {
               transform: scale(1.05);
               box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
