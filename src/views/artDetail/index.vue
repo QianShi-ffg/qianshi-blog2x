@@ -21,7 +21,7 @@
 import { ref, computed, watch } from 'vue'
 import MdEditor from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
-import { getArticleDetail } from '@/api/api'
+import { getArticleList } from '@/api/api'
 import { useStore } from '@/store/index'
 import { useRoute } from "vue-router"
 import navScroll from '@/hooks/navScroll'
@@ -55,11 +55,11 @@ const { activeIndex, toScrollTop } = navScroll()
 
 // 获取文章详情
 const articleList = async () => {
-  const res: any = await getArticleDetail(route.query)
-  console.log(res)
-  text.value = res.articleContent
-  title.value = res.title
-  coverUrl.value = res.coverUrl
+  const res: any = await getArticleList(route.query)
+  console.log(res[0])
+  text.value = res[0].articleContent
+  title.value = res[0].title
+  coverUrl.value = res[0].coverUrl
 }
 articleList()
 
