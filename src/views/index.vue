@@ -46,7 +46,6 @@ import { ref, onMounted, watch, computed } from 'vue'
 import { useStore } from '@/store/index'
 import { useRoute } from 'vue-router'
 import { aWord } from '@/api/api'
-
 const store = useStore()
 const route = useRoute()
 const header = ref()
@@ -55,7 +54,6 @@ const scrollTop = ref()
 const aWordText = ref<String>('')
 const bannerInner: any = ref()
 const isBannerShow = ref<boolean>(true)
-
 onMounted(() => {
   isShow(window.location.pathname)
   window.addEventListener('scroll', (e: any) => {
@@ -86,7 +84,6 @@ onMounted(() => {
 const path = computed(() => {
   return route.path
 })
-
 watch(path, (newVal) => {
   isShow(newVal)
 })
@@ -97,13 +94,11 @@ const isShow = (value: string) => {
     isBannerShow.value = false
   }
 }
-
 const init = async () => {
   const res: any = await aWord({})
   aWordText.value = `${res.hitokoto} - ${res.from}`
 }
 init()
-
 const menuClick = (value:string) => {
   if (window.innerWidth >= 1280) {
     if(value === 'home') {
@@ -115,12 +110,10 @@ const menuClick = (value:string) => {
     menuIcon.value.click()
   }
 }
-
 const goTop = () => {
   const homeDom:any = document.querySelector('#home')
   homeDom.scrollTop = 0
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -130,7 +123,6 @@ const goTop = () => {
   // background: #f4f5f5;
   overflow: overlay;
   scroll-behavior: smooth;
-
   header {
     position: fixed;
     top: 0px;
@@ -141,10 +133,8 @@ const goTop = () => {
     background-size: 4px 4px;
     line-height: 65px;
     user-select: none;
-
     .menu {
       position: relative;
-
       .menuIcon {
         position: absolute;
         right: 0;
@@ -153,7 +143,6 @@ const goTop = () => {
         margin: auto;
         width: 25px;
         height: 25px;
-
         i {
           position: absolute;
           top: 0;
@@ -164,7 +153,6 @@ const goTop = () => {
           height: 3px;
           background: #000;
         }
-
         &::before {
           position: absolute;
           top: 1px;
@@ -175,7 +163,6 @@ const goTop = () => {
           background: #000;
           transition: all .5s;
         }
-
         &::after {
           position: absolute;
           bottom: 1px;
@@ -187,16 +174,13 @@ const goTop = () => {
           transition: all .5s;
         }
       }
-
       #check {
         display: none;
       }
     }
   }
-
   #banner {
     position: relative;
-
     .aWord {
       position: absolute;
       bottom: 35px;
@@ -213,28 +197,23 @@ const goTop = () => {
       animation: huerotate 5s linear infinite;
     }
   }
-
   @keyframes huerotate {
     from {
       background-position: -500%;
     }
-
     to {
       background-position: 500%;
     }
   }
-
   .textStroke {
     -webkit-text-stroke: 1px rgba(219, 219, 219, 0.411);
   }
-
   main {
     height: auto;
     margin: auto;
     min-height: 825px;
     // padding-top: 100px;
   }
-
   footer {
     height: 50px;
     line-height: 50px;
@@ -272,7 +251,6 @@ const goTop = () => {
     }
   }
 }
-
 @keyframes huojian {
   2% {
     transform: translate(0px,4px) rotate(-2.5deg);
@@ -429,7 +407,6 @@ const goTop = () => {
   to {
     transform: translateX(0);
   }
-
   from {
     transform: translateX(-100vw);
   }

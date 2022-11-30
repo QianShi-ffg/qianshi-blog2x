@@ -21,7 +21,8 @@
           </div>
         </div>
       </div>
-      <paginationVue :total="conditionTotal" :currentObj="paginationObj" @onCurrentChange="onCurrentChange" v-if="total > paginationObj.pageSize"/>
+      <paginationVue :total="conditionTotal" :currentObj="paginationObj" @onCurrentChange="onCurrentChange"
+        v-if="total > paginationObj.pageSize" />
     </div>
     <div class="userMsg">
       <div class="userDesc">
@@ -33,7 +34,7 @@
             <p class="p2">文章</p>
           </div>
           <div class="num1">
-            <p class="p1">{{ classifyList.length }}</p>
+            <p class="p1">{{ classifyList.rows.length }}</p>
             <p class="p2">分类</p>
           </div>
         </div>
@@ -44,13 +45,13 @@
       <div class="category">
         <p>分类</p>
         <ul>
-          <li @click="selectArtList('category', 10000)">
+          <li @click="selectArtList(10000)">
             <span>全部</span>
-            <span>{{ artCount }}</span>
+            <span></span>
           </li>
-          <li v-for="item in classifyList" :key="item.id" @click="selectArtList('category', item.id)">
+          <li v-for="item in classifyList.rows" :key="item.id" @click="selectArtList(item.id)">
             <span>{{ item.name }}</span>
-            <span>{{ item.artNum }}</span>
+            <span>{{ item.value }}</span>
           </li>
         </ul>  
       </div>
@@ -64,15 +65,16 @@ import { ref, reactive, watch, computed } from 'vue'
 import { useRouter, useRoute } from "vue-router"
 import { useStore } from '@/store'
 import paginationVue from '@/components/pagination.vue'
-
 const store = useStore()
 const artList: any = ref([])
-const artCount = ref<Number>(0)
 const total = ref<Number>(0)
 const days = ref<Number>(0)
 const conditionTotal: any = ref(0)
 const bannerInner: any = ref()
-const classifyList: any = ref([])
+const classifyList: any = reactive({
+  rows: [],
+  total: 0
+})
 const paginationObj: any = reactive({
   page: 1,
   pageSize: 10
@@ -80,89 +82,67 @@ const paginationObj: any = reactive({
 const router = useRouter()
 // 获取文章列表
 const articleList = async (params: object) => {
-  const res:any = await getArticleList(Object.assign(params, paginationObj))
-  artList.value = res.rows
-  total.value = res.total
-  conditionTotal.value = res.conditionTotal
-  console.log(777)
+  const res: any = await getArticleList(Object.assign(params, paginationObj))
+  artList.value = res
   return res.length
 }
-
 const time = () => {
-  const start:any = new Date('2022-08-31'); //开始的时间
-  const end:any = new Date(); //结束的时间
+  const start: any = new Date('2022-08-31'); //开始的时间
+  const end: any = new Date(); //结束的时间
   const se = end - start; //计算两个时间之间的秒数
   console.log((se / (24 * 3600 * 1000)))
   days.value = Math.floor(se / (24 * 3600 * 1000)); // 计算天数
 }
-
-const classify = async() => {
-  const res = await getClassifyIdList({})
-  classifyList.value = res
-} 
-
-const init = async() => {
+const classify = async () => {
+  const res: any = await getClassifyIdList({})
+  classifyList.rows = res.rows
+  classifyList.total = res.total
+  // 文章总数
+  total.value = res.total
+  // 当前分类文章总数
+  conditionTotal.value = classifyList.total
+}
+const init = async () => {
   await time()
   await classify()
-  artCount.value = await articleList({})
+  await articleList({})
 }
 init()
 const artDetail = (id: any) => {
-  // router.push({ path: '/artDetail', query: { id: id } })
-  // const homeDom:any = document.querySelector('#home')
-  // homeDom.scrollTop = 0
-  if (window.innerWidth <= 800) {
-    router.push({ path: '/artDetail', query: { id: id } })
-    const homeDom:any = document.querySelector('#home')
-    homeDom.scrollTop = 0
-  } else {
-    const url = router.resolve({ path: '/artDetail',query: { id: id } })
-    window.open(url.href, '_blank')
-  }
+  const url = router.resolve({ path: '/artDetail', query: { id: id } })
+  window.open(url.href, '_blank')
 }
-
-const selectArtList = async(value:string, item:Number) => {
+const selectArtList = async (item: Number) => {
   paginationObj.page = 1
   if (item === 10000) {
     paginationObj.id = null
-    paginationObj.type = null
     articleList({})
+    conditionTotal.value = classifyList.total
   } else {
+    conditionTotal.value = Number(classifyList.rows.filter((item1:any)=> item1.id === item)[0].value)
     paginationObj.id = item
-    paginationObj.type = value
     const params = {
-      type: value,
       id: item
     }
     articleList(params)
   }
   scrollHome()
 }
-
 const hScroll = computed(() => {
   return store.scroll
 })
-
 const scrollHome = () => {
-  const homeDom:any = document.querySelector('#home')
-  if (window.innerWidth <= 800) {
-    homeDom.scrollTop = 0
-  } else {
-    homeDom.scrollTop = window.innerHeight - 65
-    console.log(window.innerHeight - 65)
-  }
-  console.log(666)
+  const homeDom: any = document.querySelector('#home')
+  homeDom.scrollTop = window.innerHeight - 65
 }
-
-const onCurrentChange = async(value:Number) => {
+const onCurrentChange = async (value: Number) => {
   paginationObj.page = value
   await articleList({})
   await scrollHome()
 }
 // 菜单定位模式
-watch(hScroll, (newVal)=>{
+watch(hScroll, (newVal) => {
 })
-
 </script>
 <style lang="scss" scoped>
 #artlist {
@@ -222,7 +202,7 @@ watch(hScroll, (newVal)=>{
             width: 100%;
             height: 200px;
             overflow: hidden;
-            border-radius: 6px 6px 0 0 ;
+            border-radius: 6px 6px 0 0;
             img {
               position: absolute;
               top: 0;
@@ -258,12 +238,12 @@ watch(hScroll, (newVal)=>{
             .desc {
               width: 100%;
               height: 50%;
-              word-break: break-all;           //在恰当的断字点进行换行 
-              overflow: hidden;                 //文字超出的进行隐藏
-              text-overflow: ellipsis;          //超出的文字用省略号表示
-              display: -webkit-box;             //将元素设为盒子伸缩模型显示         //利用盒子模型 
-              -webkit-box-orient: vertical;     //伸缩方向设为垂直方向
-              -webkit-line-clamp: 2; 
+              word-break: break-all; //在恰当的断字点进行换行 
+              overflow: hidden; //文字超出的进行隐藏
+              text-overflow: ellipsis; //超出的文字用省略号表示
+              display: -webkit-box; //将元素设为盒子伸缩模型显示         //利用盒子模型 
+              -webkit-box-orient: vertical; //伸缩方向设为垂直方向
+              -webkit-line-clamp: 2;
               user-select: none;
             }
             .artEpitomize {
@@ -358,12 +338,12 @@ watch(hScroll, (newVal)=>{
             .desc {
               width: 100%;
               height: 50%;
-              word-break: break-all;           //在恰当的断字点进行换行 
-              overflow: hidden;                 //文字超出的进行隐藏
-              text-overflow: ellipsis;          //超出的文字用省略号表示
-              display: -webkit-box;             //将元素设为盒子伸缩模型显示         //利用盒子模型 
-              -webkit-box-orient: vertical;     //伸缩方向设为垂直方向
-              -webkit-line-clamp: 2; 
+              word-break: break-all; //在恰当的断字点进行换行 
+              overflow: hidden; //文字超出的进行隐藏
+              text-overflow: ellipsis; //超出的文字用省略号表示
+              display: -webkit-box; //将元素设为盒子伸缩模型显示         //利用盒子模型 
+              -webkit-box-orient: vertical; //伸缩方向设为垂直方向
+              -webkit-line-clamp: 2;
               user-select: none;
             }
             .artEpitomize {
@@ -481,12 +461,12 @@ watch(hScroll, (newVal)=>{
             .desc {
               width: 100%;
               height: 100%;
-              word-break: break-all;            //在恰当的断字点进行换行 
-              overflow: hidden;                 //文字超出的进行隐藏
-              text-overflow: ellipsis;          //超出的文字用省略号表示
-              display: -webkit-box;             //将元素设为盒子伸缩模型显示      //利用盒子模型 
-              -webkit-box-orient: vertical;     //伸缩方向设为垂直方向
-              -webkit-line-clamp: 3; 
+              word-break: break-all; //在恰当的断字点进行换行 
+              overflow: hidden; //文字超出的进行隐藏
+              text-overflow: ellipsis; //超出的文字用省略号表示
+              display: -webkit-box; //将元素设为盒子伸缩模型显示      //利用盒子模型 
+              -webkit-box-orient: vertical; //伸缩方向设为垂直方向
+              -webkit-line-clamp: 3;
               user-select: none;
             }
             .artEpitomize {

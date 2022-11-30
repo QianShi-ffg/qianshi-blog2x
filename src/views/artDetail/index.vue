@@ -21,11 +21,10 @@
 import { ref, computed, watch } from 'vue'
 import MdEditor from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
-import { getArticleList } from '@/api/api'
+import { getArticleDetail } from '@/api/api'
 import { useStore } from '@/store/index'
 import { useRoute } from "vue-router"
 import navScroll from '@/hooks/navScroll'
-
 MdEditor.config({
   editorExtensions: {
     highlight: {
@@ -39,10 +38,6 @@ MdEditor.config({
     }
   }
 });
-
-
-
-
 const store = useStore()
 const generateId = (_text: any, _level: any, index: any) => `heading-${index}`
 const route = useRoute()
@@ -52,21 +47,18 @@ const coverUrl = ref<any>('')
 const catalogList = ref<any>([])
 const catalogueStyle = ref<String>('catalogueAbsolute')
 const { activeIndex, toScrollTop } = navScroll()
-
 // 获取文章详情
 const articleList = async () => {
-  const res: any = await getArticleList(route.query)
-  console.log(res[0])
-  text.value = res[0].articleContent
-  title.value = res[0].title
-  coverUrl.value = res[0].coverUrl
+  const res: any = await getArticleDetail(route.query)
+  console.log(res)
+  text.value = res.articleContent
+  title.value = res.title
+  coverUrl.value = res.coverUrl
 }
 articleList()
-
 const hScroll = computed(() => {
   return store.scroll
 })
-
 // 菜单定位模式
 watch(hScroll, (newVal)=>{
   console.log(newVal)
@@ -76,7 +68,6 @@ watch(hScroll, (newVal)=>{
     catalogueStyle.value = 'catalogueAbsolute'
   }
 })
-
 // v3去除 h标签内a标签
 MdEditor.config({
   markedRenderer(renderer:any) {
@@ -94,7 +85,6 @@ const onGetCatalog = (list: []) => {
   catalogList.value = list
   console.log(catalogList.value, 699666)
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -112,7 +102,6 @@ const onGetCatalog = (list: []) => {
         line-height: 1.1;
       }
     }
-
     h2 {
       font-size: 26px;
       font-weight: 700;
@@ -166,7 +155,6 @@ const onGetCatalog = (list: []) => {
     width: 800px;
   }
 }
-
 @media screen and (min-width: 1280px) {
   .banner {
     display: block;
