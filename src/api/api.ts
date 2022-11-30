@@ -14,7 +14,7 @@ export const getClassifyIdList = (params: object) => {
   return axios.get( '/artClassifyList', { params })
 }
 export const getFriendShipList = (params: object) => {
-  return axios.get( '/friendShipList', { params })
+  return axios.get( '/friendShip', { params })
 }
 // export const getArticleList = (params: object) => {
 //   return axios.post( '/articleList', params)

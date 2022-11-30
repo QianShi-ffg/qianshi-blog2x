@@ -15,7 +15,7 @@
               <p class="artEpitomize">
                 <span>作者: 千拾</span>
                 <span>发布时间: {{ date(item.updataTime) }}</span>
-                <span>分类: {{ classifyList.filter((ii:any) => { return ii.id === item.classifyId })[0].name }}</span>
+                <span>分类: {{ classifyList.rows.filter((ii: any) => { return ii.id === item.classifyId })[0].name }}</span>
               </p>
             </div>
           </div>
@@ -52,7 +52,7 @@
             <span>{{ item.name }}</span>
             <span>{{ item.artNum }}</span>
           </li>
-        </ul>
+        </ul>  
       </div>
     </div>
   </div>
@@ -74,7 +74,7 @@ const conditionTotal: any = ref(0)
 const bannerInner: any = ref()
 const classifyList: any = ref([])
 const paginationObj: any = reactive({
-  page: 1, 
+  page: 1,
   pageSize: 10
 })
 const router = useRouter()
