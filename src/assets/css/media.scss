@@ -3,7 +3,7 @@
     header {
       text-align: left;
       padding-left: 30px;
-      background: radial-gradient(transparent, rgba(255, 255, 255) 2px);
+      background: radial-gradient(transparent, rgba(242, 235, 217) 2px);
       backdrop-filter: blur(5px);
       .title {
         display: block;
@@ -21,6 +21,8 @@
           transition: left .5s;
           padding-top: 30px;
           overflow-y: overlay;
+          background: url('../222.jpg') no-repeat;
+          background-size: cover;
           li {
             text-align: center;
             a {
@@ -55,12 +57,22 @@
   #md-editor-v3 {
     width: 95%;
     margin: auto;
+    background: rgba(255,255,255,.8);
+  }
+  #catalogue {
+    display: none;
+  }
+  body {
+    background: url('../222.jpg');
+    background-size: 100%;
+    background-attachment: fixed;
   }
 }
 
 
 @media screen and (min-width: 800px) {
   #home {
+    background: #f4f5f5;
     header {
       text-align: center;
       background: transparent;
@@ -119,6 +131,7 @@
     }
   main {
     width: auto;
+    background: none;
   }
   #artlist {
     width: 800px;
@@ -128,6 +141,7 @@
     #md-editor-v3 {
       width: 95%;
       margin: auto;
+      background: #fff;
     }
     #catalogue {
       display: none;
@@ -138,6 +152,7 @@
 
 @media screen and (min-width: 1280px) {
   #home {
+    background: #f4f5f5;
     header {
       text-align: center;
       background: transparent;
@@ -149,6 +164,7 @@
     main {
       width: auto;
       height: auto;
+      background: none;
     }
   }
   #banner {
@@ -181,6 +197,7 @@
     #md-editor-v3 {
       width: 880px;
       margin: unset;
+      background: #fff;
     }
     #catalogue {
       display: block;

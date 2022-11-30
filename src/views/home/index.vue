@@ -109,10 +109,16 @@ const init = async() => {
 init()
 const artDetail = (id: any) => {
   // router.push({ path: '/artDetail', query: { id: id } })
-  const url = router.resolve({ path: '/artDetail',query: { id: id } })
-  window.open(url.href, '_blank')
   // const homeDom:any = document.querySelector('#home')
   // homeDom.scrollTop = 0
+  if (window.innerWidth <= 800) {
+    router.push({ path: '/artDetail', query: { id: id } })
+    const homeDom:any = document.querySelector('#home')
+    homeDom.scrollTop = 0
+  } else {
+    const url = router.resolve({ path: '/artDetail',query: { id: id } })
+    window.open(url.href, '_blank')
+  }
 }
 
 const selectArtList = async(value:string, item:Number) => {
@@ -139,8 +145,12 @@ const hScroll = computed(() => {
 
 const scrollHome = () => {
   const homeDom:any = document.querySelector('#home')
-  homeDom.scrollTop = window.innerHeight - 65
-  console.log(window.innerHeight - 65)
+  if (window.innerWidth <= 800) {
+    homeDom.scrollTop = 0
+  } else {
+    homeDom.scrollTop = window.innerHeight - 65
+    console.log(window.innerHeight - 65)
+  }
   console.log(666)
 }
 
@@ -232,7 +242,7 @@ watch(hScroll, (newVal)=>{
             // left: 200px;
             // margin-bottom: 20px;
             padding: 60px 20px 25px;
-            background: #fff;
+            background: rgba(255,255,255,.9);
             font-size: 14px;
             z-index: 1;
             width: 100%;
