@@ -181,6 +181,14 @@ const goTop = () => {
   }
   #banner {
     position: relative;
+    &::before {
+      position: absolute;
+      content: "";
+      inset: 0;
+      backdrop-filter: grayscale(0.95);
+      z-index: 10;
+      pointer-events: none;
+    }
     .aWord {
       position: absolute;
       bottom: 35px;
