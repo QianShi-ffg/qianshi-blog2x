@@ -5,7 +5,10 @@
         <h2>{{ item.title }}</h2>
         <div class="container">
           <div class="imgBox">
-            <img :src="item.coverUrl" alt="" v-if="item.coverUrl">
+            <template v-if="item.coverUrl">
+              <imgLoading class="iframeLoading" :id="`imgLoading${item.id}`"/>
+              <img :src="item.coverUrl" alt="" @load="loadItemImg(item.id)" :id="`img${item.id}`">
+            </template>
             <img src="@/assets/111.jpg" alt="" v-else>
           </div>
           <div class="content">
@@ -65,6 +68,9 @@ import { ref, reactive, watch, computed } from 'vue'
 import { useRouter, useRoute } from "vue-router"
 import { useStore } from '@/store'
 import paginationVue from '@/components/pagination.vue'
+import imgLoading from '@/components/imgLoading.vue'
+
+const isImgLoaing = ref<boolean>(false)
 const store = useStore()
 const artList: any = ref([])
 const total = ref<Number>(0)
@@ -139,6 +145,16 @@ const onCurrentChange = async (value: Number) => {
   paginationObj.page = value
   await articleList({})
   await scrollHome()
+}
+
+const loadItemImg = (id:any) => {
+  console.log(id, 633333333)
+  isImgLoaing.value = true
+  const imgDom:any = document.getElementById(`img${id}`)
+  const imgLoadingDom:any = document.getElementById(`imgLoading${id}`)
+  imgDom.style.zIndex = '5'
+  imgDom.style.opacity = '1'
+  imgLoadingDom.style.opacity = '0'
 }
 // 菜单定位模式
 watch(hScroll, (newVal) => {
