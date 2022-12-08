@@ -14,6 +14,9 @@
             <router-link to="/">首页</router-link>
           </li>
           <li @click="menuClick('')">
+            <router-link to="/demo">demo</router-link>
+          </li>
+          <li @click="menuClick('')">
             <router-link to="/friendshipChain">友链</router-link>
           </li>
           <li @click="menuClick('')">

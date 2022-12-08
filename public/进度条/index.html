@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: #03234e;
+    }
+    .bg {
+        position: relative;
+        padding: 5px;
+        width: 500px;
+        height: 50px;
+        background-color: #03234e;
+        border: 2px solid #09559a;
+        box-sizing: border-box;
+    }
+    .content {
+        z-index: 1;
+        width: 100%;
+        height: 36px;
+        background-image: repeating-linear-gradient(45deg, #043667 -1px, #043667 20px, transparent 0px, transparent 30px);
+    }
+    /* .content::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 400px;
+        height: 85px;
+        background: linear-gradient(
+            45deg, 
+            #f06a0e, 
+            #f06a0e 11px, 
+            transparent 11px, 
+            transparent 20px, 
+            #f06a0e 20px, 
+            #f06a0e 31px, 
+            transparent 31px, 
+            transparent 40px,
+            #f06a0e 40px, 
+            #f06a0e 51px, 
+            transparent 51px, 
+            transparent 60px
+        );
+        background-position: 0 0;
+        background-repeat: no-repeat;
+    } */
+    .content1 {
+        position: absolute;
+        top: 5px;
+        z-index: 2;
+        width: 486px;
+        height: 36px;
+        background-image: repeating-linear-gradient(45deg, #03eaff -1px, #03eaff 20px, transparent 0px, transparent 30px, #03eaff 20px);
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        animation: aaa 5s linear infinite;
+    }
+    @keyframes aaa {
+        to {
+            width: 486px;
+        }
+        from {
+            width: 0px;
+        }
+    }
+</style>
+<body>
+    <div class="bg">
+        <div class="content"></div>
+        <div class="content1"></div>
+    </div>
+</body>
+</html>

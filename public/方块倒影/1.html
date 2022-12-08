@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  html,body,#main {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #ccc;
+    /* overflow: hidden; */
+  }
+  #item {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100px;
+    margin: auto;
+    width: 100%;
+    height: 50%;
+    -webkit-box-reflect: below  0 linear-gradient(transparent 30%, rgba(255, 0, 0, 0.527) 100%);
+  }
+  #itemContent {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100px;
+    margin: auto;
+    width: 300px;
+    height: 100px;
+    background: red;
+    transition: all 0.1s 0.001s linear;
+  }
+</style>
+<body>
+  <div id="main">
+    <div id="item">
+      <div id="itemContent"></div>
+    </div>
+  </div>
+  <script>
+    item.onmousemove = (e) => {
+      console.log(e.clientX, e.clientY)
+      itemContent.style.left = `${e.clientX - 950}px`
+      itemContent.style.top = `${e.clientY - 150}px`
+    }
+  </script>
+</body>
+</html>

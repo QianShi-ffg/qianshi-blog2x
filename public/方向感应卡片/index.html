@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #flex {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 150px;
+        margin: 200px auto;
+        transform-style: preserve-3d;
+        perspective: 900px;
+
+    }
+    
+    .item {
+        position: relative;
+        width: 150px;
+        height: 250px;
+        background: red;
+        transition: .3s;
+        transform: rotateY(0deg);
+        margin: 20px;
+        overflow: hidden;
+        transition-delay: .1s;
+    }
+
+    #flex:hover .item{
+        transform: rotateY(40deg);
+    }
+
+    #flex .item:hover {
+        transform: rotateY(0deg) scale(1.2);
+        z-index: 1;
+    }
+    #flex .item:hover~.item {
+        transform: rotateY(-40deg);
+        z-index: 1;
+    }
+</style>
+
+<body>
+    <div id="flex">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+</body>
+
+</html>

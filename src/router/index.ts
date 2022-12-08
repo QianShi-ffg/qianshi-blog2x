@@ -22,6 +22,13 @@ const routes: Array<RouteRecordRaw> = [
         children: []
       },
       {
+        name: 'demo',
+        path: '/demo',
+        // component: defineAsyncComponent(() => import('@/views/home/index.vue')),
+        component: moduleFiles['../views/demo/index.vue'],
+        children: []
+      },
+      {
         name: 'artDetail',
         path: '/artDetail',
         // component: defineAsyncComponent(() => import('@/views/artDetail/index.vue'))

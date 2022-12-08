@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  /* .rotate {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    width: 100%;
+    height: 100%;
+    background-color: aquamarine;
+    animation: rotate 5s linear infinite;
+  }
+
+  .reverseRotate {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    width: 500px;
+    height: 500px;
+    animation: reverseRotate 5s linear infinite;
+  }
+
+  .content {
+    width: 100%;
+    height: 100%;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotateX(0deg) rotateZ(0deg);
+    }
+
+    50% {
+      transform: rotateX(20deg) rotateZ(180deg);
+    }
+
+    100% {
+      transform: rotateX(0deg) rotateZ(360deg);
+    }
+  }
+
+
+  @keyframes reverseRotate {
+    100% {
+      transform: rotate(-360deg);
+    }
+  } */
+  body {
+    width: 100vw;
+    height: 100vh;
+    transform-style: preserve-3d;
+    perspective: 500px;
+    background: url('./111.jpg');
+    background-size: 100% 100%;
+    overflow: hidden;
+  }
+
+  div {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: all .1s;
+    background: url('./111.png');
+    background-size: 100% 100%;
+  }
+</style>
+
+<body>
+  <!-- <div class="reverseRotate">
+    <div class="rotate">
+      <div class="content">正负旋转相消3D动画</div>
+    </div>
+  </div> -->
+  <div id="element"></div>
+
+</body>
+<script>
+  const multiple = 20;
+  const mouseOverContainer = document.getElementsByTagName("body")[0];
+  const element = document.getElementById("element");
+
+  function transformElement(x, y) {
+    let box = element.getBoundingClientRect();
+    let calcX = -(x - box.x - (box.width / 2)) / multiple;
+    let calcY = -(y - box.y - (box.height / 2)) / multiple;
+    element.style.transform = "translateX("+ calcX + "px)" + "translateY("+ calcY + "px)"
+
+  }
+
+  mouseOverContainer.addEventListener('mousemove', (e) => {
+    window.requestAnimationFrame(function () {
+      transformElement(e.clientX, e.clientY);
+    });
+  });
+  mouseOverContainer.addEventListener('mouseleave', (e) => {
+    window.requestAnimationFrame(function () {
+      element.style.transform = "translateX(0px) translateY(0px)";
+    });
+  });
+</script>
+
+</html>
