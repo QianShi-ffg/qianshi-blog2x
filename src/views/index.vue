@@ -185,7 +185,6 @@ const goTop = () => {
       position: absolute;
       content: "";
       inset: 0;
-      backdrop-filter: grayscale(0.95);
       z-index: 10;
       pointer-events: none;
     }
@@ -236,8 +235,8 @@ const goTop = () => {
     width: 50px;
     height: 50px;
     border-radius: 25px;
-    background: rgb(255, 255, 255);
-    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
+    background: var(--home-box-background-color);
+    box-shadow: 0 0 10px 1px var(--hover-shadow-color);
     transition: all 0.5s;
     cursor: pointer;
     img {
@@ -250,9 +249,10 @@ const goTop = () => {
       width: 60%;
       height: 60%;
       transition: all 0.2s;
+      filter: var(--scrollTop-img-filter);
     }
     &:hover {
-      box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 10px 1px var(--home-artBox-shadow-color);
       img {
         animation: huojian 2s linear infinite;
       }

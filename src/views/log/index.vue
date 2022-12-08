@@ -329,7 +329,7 @@ import currencyBanner from '@/components/banner.vue'
 .flag {
   position: relative;
   display: inline;
-  background: rgb(255, 255, 255);
+  background: var(--home-box-background-color);
   font-weight: 600;
   z-index: 2;
   padding: 6px 10px;
@@ -347,7 +347,7 @@ import currencyBanner from '@/components/banner.vue'
   width: 0;
   margin-left: -8px;
   border: solid transparent;
-  border-bottom-color: rgb(255, 255, 255);
+  border-bottom-color: var(--home-box-background-color);
   border-width: 8px;
   pointer-events: none;
 }
@@ -392,7 +392,7 @@ import currencyBanner from '@/components/banner.vue'
   position: relative;
   margin: 1em 0 0 0;
   padding: 1em;
-  background: rgb(254, 254, 254);
+  background: var(--home-box-background-color);
   -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.20);
   -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.20);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.20);
@@ -474,7 +474,7 @@ import currencyBanner from '@/components/banner.vue'
       top: 50%;
       margin-top: -8px;
       border: solid transparent;
-      border-left-color: rgb(254, 254, 254);
+      border-left-color: var(--home-box-background-color);
       border-width: 8px;
     }
 
@@ -482,7 +482,7 @@ import currencyBanner from '@/components/banner.vue'
       top: 50%;
       margin-top: -8px;
       border: solid transparent;
-      border-right-color: rgb(254, 254, 254);
+      border-right-color: var(--home-box-background-color);
       border-width: 8px;
       left: -8px;
     }

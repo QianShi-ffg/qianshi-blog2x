@@ -83,7 +83,7 @@ const loadItemImg = (id:any) => {
       .friendshipItem {
         width: 262px;
         height: 125px;
-        background: #f8f9fa;
+        background: var(--home-box-background-color);
         margin: 18px;
         border-radius: 10px;
         float: left;
@@ -215,14 +215,14 @@ const loadItemImg = (id:any) => {
       user-select: none;
       .friendsItem_1 {
         position: absolute;
-        background: #fff;
+        background: var(--home-box-background-color);
         border-radius: 10px;
         width: 100%;
         height: 100%;
         z-index: 0;
         transition: all 0.3s ease-in-out;
         img {
-          border: 2px solid #fff;
+          border: 2px solid var(--home-box-background-color);
           position: absolute;
           top: -40px;
           left: 0;
@@ -231,7 +231,7 @@ const loadItemImg = (id:any) => {
           width: 80px;
           height: 80px;
           border-radius: 40px;
-          background: #fff;
+          background: var(--home-box-background-color);
         }
         .intr {
           height: 100%;
@@ -295,7 +295,7 @@ const loadItemImg = (id:any) => {
         .friendsItem_1 {
           filter: drop-shadow(0px 0px 15px rgba(131, 131, 131, 0.411));
           // box-shadow: 0px 0px 15px 0px rgba(131, 131, 131, 0.411);
-          background: #fff;
+          background: var(--home-box-background-color);
           height: 300px;
           z-index: 10;
           .intr {

@@ -22,7 +22,7 @@ import currencyBanner from '@/components/banner.vue'
     .content {
       width: 80%;
       height: 500px;
-      background: #fff;
+      background: var(--home-box-background-color);
       margin: 0 auto;
     }
   }

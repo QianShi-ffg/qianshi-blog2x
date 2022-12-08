@@ -191,7 +191,7 @@ watch(hScroll, (newVal) => {
         width: 100%;
         margin-bottom: 20px;
         transition: all 0.5s;
-        // box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        // box-shadow: 0px 0px 10px 0px var(--hover-shadow-color);
         border-radius: 6px;
         cursor: pointer;
         h2 {
@@ -238,13 +238,13 @@ watch(hScroll, (newVal) => {
             // left: 200px;
             // margin-bottom: 20px;
             padding: 60px 20px 25px;
-            background: rgba(255,255,255,.9);
+            background: var(--home-box-background-color);
             font-size: 14px;
             z-index: 1;
             width: 100%;
             height: 170px;
-            color: #000;
-            // box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.1);
+            color: var(--color);
+            // box-shadow: 0 0 15px 2px var(--hover-shadow-color);
             border-radius: 0 0 6px 6px;
             text-align: start;
             transition: all 0.5s;
@@ -290,7 +290,7 @@ watch(hScroll, (newVal) => {
         width: 100%;
         margin-bottom: 20px;
         transition: all 0.5s;
-        // box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+        // box-shadow: 0px 0px 10px 1px var(--hover-shadow-color);
         border-radius: 6px;
         cursor: pointer;
         h2 {
@@ -338,13 +338,13 @@ watch(hScroll, (newVal) => {
             // left: 200px;
             // margin-bottom: 20px;
             padding: 60px 20px 25px;
-            background: #fff;
+            // background: var(--home-box-background-color);
             font-size: 14px;
             z-index: 1;
             width: calc(100% - 250px);
             height: 170px;
-            color: #000;
-            // box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+            // color: #000;
+            // box-shadow: 0 15px 25px var(--hover-shadow-color);
             border-radius: 0 6px 6px 0;
             text-align: start;
             transition: all 0.5s;
@@ -398,7 +398,7 @@ watch(hScroll, (newVal) => {
         box-shadow: none;
         cursor: pointer;
         &:hover {
-          filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.2));
+          filter: drop-shadow(2px 2px 8px var(--home-artBox-shadow-color));
           h2 {
             top: 100px;
           }
@@ -424,7 +424,7 @@ watch(hScroll, (newVal) => {
           width: auto;
           margin-bottom: 20px;
           font-size: 30px;
-          color: #000;
+          color: var(--color);
           transition: all 0.5s;
           z-index: 0;
         }
@@ -461,13 +461,13 @@ watch(hScroll, (newVal) => {
             left: 200px;
             margin-bottom: 20px;
             padding: 20px 20px 55px;
-            background: #fff;
+            // background: var(--home-box-background-color);
             font-size: 14px;
             z-index: 1;
             width: 630px;
             height: 140px;
-            color: #000;
-            // box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);
+            // color: var(--color);
+            // box-shadow: 0 0 15px 5px var(--hover-shadow-color);
             border-radius: 6px;
             text-align: start;
             transition: all 0.5s;
@@ -506,24 +506,28 @@ watch(hScroll, (newVal) => {
       right: 0;
       width: 300px;
       // height: 500px;
-      // box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);
-      border-radius: 6px;
-      background: #fff;
-      transition: all 0.5s;
+      // box-shadow: 0 0 15px 5px var(--hover-shadow-color);
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
-      &:hover {
-        box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.1);
+      .userDesc,.timeDetail,.category {
+        border-radius: 6px;
+        transition: all 0.5s;
+        background: var(--home-box-background-color);
+        padding: 20px;
+        &:hover {
+          box-shadow: 0 0 15px 5px var(--hover-shadow-color);
+        }
       }
+      
       .userDesc {
         width: 100%;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        padding: 20px;
         img {
           width: 100px;
           height: 100px;
@@ -550,7 +554,12 @@ watch(hScroll, (newVal) => {
         }
       }
       .timeDetail {
-        padding: 10px 0 20px;
+        width: 100%;
+        height: 36px;
+        line-height: 36px;
+        padding: 0;
+        box-sizing: border-box;
+        margin-bottom: 15px;
       }
       .category {
         width: 100%;
@@ -567,7 +576,7 @@ watch(hScroll, (newVal) => {
           li {
             height: 35px;
             line-height: 35px;
-            // box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
+            // box-shadow: 0 0 10px 1px var(--hover-shadow-color);
             margin-bottom: 10px;
             border-radius: 6px;
             text-align: left;
@@ -579,7 +588,7 @@ watch(hScroll, (newVal) => {
             }
             &:hover {
               transform: scale(1.05);
-              box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
+              box-shadow: 0 0 10px 2px var(--hover-shadow-color);
             }
           }
         }

@@ -57,7 +57,8 @@
   #md-editor-v3 {
     width: 95%;
     margin: auto;
-    background: rgba(255,255,255,.8);
+    background: var(--home-box-background-color);
+    color: var(--color);
   }
   #catalogue {
     display: none;
@@ -72,7 +73,7 @@
 
 @media screen and (min-width: 800px) {
   #home {
-    background: #f4f5f5;
+    background: var(--background-color);
     header {
       text-align: center;
       background: transparent;
@@ -141,7 +142,7 @@
     #md-editor-v3 {
       width: 95%;
       margin: auto;
-      background: #fff;
+      // background: var(--home-box-background-color);
     }
     #catalogue {
       display: none;
@@ -152,7 +153,7 @@
 
 @media screen and (min-width: 1280px) {
   #home {
-    background: #f4f5f5;
+    background: var(--background-color);
     header {
       text-align: center;
       background: transparent;
@@ -197,12 +198,13 @@
     #md-editor-v3 {
       width: 880px;
       margin: unset;
-      background: #fff;
+      // background: var(--home-box-background-color);
+      // color: var(--color);
     }
     #catalogue {
       display: block;
       width: 300px;
-      background: #ffffff;
+      background: var(--home-box-background-color);
       z-index: 5;
       text-align: left;
       ul {
@@ -214,7 +216,7 @@
           height: 30px;
           border-radius: 6px;
           &:hover {
-            background: #f7f8fa;
+            background: var(--catalogue-hover-color);
             a {
               font-weight: 700;
             }
@@ -223,7 +225,7 @@
             display: block;
             width: 100%;
             height: 100%;
-            color: #000;
+            color: var(--color);
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
@@ -243,7 +245,7 @@
           }
         }
         .active-li {
-          background: #f7f8fa;
+          background: var(--catalogue-hover-color);
           a {
             font-weight: 700;
           }
