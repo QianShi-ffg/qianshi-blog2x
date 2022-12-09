@@ -1,35 +1,63 @@
 <template>
   <div id="artlist">
     <div class="leftList">
-      <div class="artBox" v-for="item in artList" :key="item.id" @click="artDetail(item.id)">
+      <div
+        class="artBox wow animate__animated animate__backInUp animate__fast"
+        :class="`animate__delay-${index}s`"
+        data-wow-duration="2s"
+        v-for="(item, index) in artList"
+        :key="item.id"
+        @click="artDetail(item.id)"
+      >
         <h2>{{ item.title }}</h2>
         <div class="container">
           <div class="imgBox">
             <template v-if="item.coverUrl">
-              <imgLoading class="iframeLoading" :id="`imgLoading${item.id}`"/>
-              <img :src="item.coverUrl" alt="" @load="loadItemImg(item.id)" :id="`img${item.id}`">
+              <imgLoading class="iframeLoading" :id="`imgLoading${item.id}`" />
+              <img
+                :src="item.coverUrl"
+                alt=""
+                @load="loadItemImg(item.id)"
+                :id="`img${item.id}`"
+              />
             </template>
-            <img src="@/assets/111.jpg" alt="" v-else>
+            <img src="@/assets/111.jpg" alt="" v-else />
           </div>
           <div class="content">
             <div class="desc">
-              <div style="width:45px;height:80px;float:left; clear: both;" align="center" class="div111"></div>
+              <div
+                style="width: 45px; height: 80px; float: left; clear: both"
+                align="center"
+                class="div111"
+              ></div>
               {{ item.describe }}
               <p class="artEpitomize">
                 <span>作者: 千拾</span>
                 <span>发布时间: {{ date(item.updataTime) }}</span>
-                <span>分类: {{ classifyList.rows.filter((ii: any) => { return ii.id === item.classifyId })[0].name }}</span>
+                <span
+                  >分类:
+                  {{
+                    classifyList.rows.filter((ii: any) => {
+                      return ii.id === item.classifyId;
+                    })[0].name
+                  }}</span
+                >
               </p>
             </div>
           </div>
         </div>
       </div>
-      <paginationVue :total="conditionTotal" :currentObj="paginationObj" @onCurrentChange="onCurrentChange"
-        v-if="total > paginationObj.pageSize" />
+
+      <paginationVue
+        :total="conditionTotal"
+        :currentObj="paginationObj"
+        @onCurrentChange="onCurrentChange"
+        v-if="total > paginationObj.pageSize"
+      />
     </div>
     <div class="userMsg">
       <div class="userDesc">
-        <img src="@/assets/user.jpg" alt="">
+        <img src="@/assets/user.jpg" alt="" />
         <span class="userName">千拾</span>
         <div class="num-box">
           <div class="num1">
@@ -42,9 +70,7 @@
           </div>
         </div>
       </div>
-      <div class="timeDetail">
-        博客已平稳运行{{ days }}天
-      </div>
+      <div class="timeDetail">博客已平稳运行{{ days }}天</div>
       <div class="category">
         <p>分类</p>
         <ul>
@@ -52,113 +78,136 @@
             <span>全部</span>
             <span></span>
           </li>
-          <li v-for="item in classifyList.rows" :key="item.id" @click="selectArtList(item.id)">
+          <li
+            v-for="item in classifyList.rows"
+            :key="item.id"
+            @click="selectArtList(item.id)"
+          >
             <span>{{ item.name }}</span>
             <span>{{ item.value }}</span>
           </li>
-        </ul>  
+        </ul>
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { getArticleList, aWord, getClassifyIdList } from '@/api/api'
-import { date } from '@/util/date'
-import { ref, reactive, watch, computed } from 'vue'
-import { useRouter, useRoute } from "vue-router"
-import { useStore } from '@/store'
-import paginationVue from '@/components/pagination.vue'
-import imgLoading from '@/components/imgLoading.vue'
+import { getArticleList, aWord, getClassifyIdList } from "@/api/api";
+import { date } from "@/util/date";
+import { ref, reactive, watch, computed, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { useStore } from "@/store";
+import paginationVue from "@/components/pagination.vue";
+import imgLoading from "@/components/imgLoading.vue";
+// import WOW from 'wowjs';
+import { WOW } from "wowjs";
+import "wowjs/css/libs/animate.css";
+import "animate.css";
 
-const isImgLoaing = ref<boolean>(false)
-const store = useStore()
-const artList: any = ref([])
-const total = ref<Number>(0)
-const days = ref<Number>(0)
-const conditionTotal: any = ref(0)
-const bannerInner: any = ref()
+onMounted(() => {
+  const wow = new WOW({
+    boxClass: "wow", // default
+    animateClass: "animated", // default
+    offset: 150, // default
+    mobile: true, // default
+    live: false,
+    // live为true时，控制台会提示：MutationObserver is not supported by your browser. & WOW.js cannot detect dom mutations, please call .sync() after loading new content.
+    callback: function (box: any) {
+      console.log("WOW: animating <" + box.tagName.toLowerCase() + ">");
+    },
+  });
+  wow.init();
+});
+const isImgLoaing = ref<boolean>(false);
+const store = useStore();
+const artList: any = ref([]);
+const total = ref<Number>(0);
+const days = ref<Number>(0);
+const conditionTotal: any = ref(0);
+const bannerInner: any = ref();
 const classifyList: any = reactive({
   rows: [],
-  total: 0
-})
+  total: 0,
+});
 const paginationObj: any = reactive({
   page: 1,
-  pageSize: 10
-})
-const router = useRouter()
+  pageSize: 10,
+});
+const router = useRouter();
 // 获取文章列表
 const articleList = async (params: object) => {
-  const res: any = await getArticleList(Object.assign(params, paginationObj))
-  artList.value = res
-  return res.length
-}
+  const res: any = await getArticleList(Object.assign(params, paginationObj));
+  artList.value = res;
+  return res.length;
+};
 const time = () => {
-  const start: any = new Date('2022-08-31'); //开始的时间
+  const start: any = new Date("2022-08-31"); //开始的时间
   const end: any = new Date(); //结束的时间
   const se = end - start; //计算两个时间之间的秒数
-  console.log((se / (24 * 3600 * 1000)))
+  console.log(se / (24 * 3600 * 1000));
   days.value = Math.floor(se / (24 * 3600 * 1000)); // 计算天数
-}
+};
 const classify = async () => {
-  const res: any = await getClassifyIdList({})
-  classifyList.rows = res.rows
-  classifyList.total = res.total
+  const res: any = await getClassifyIdList({});
+  classifyList.rows = res.rows;
+  classifyList.total = res.total;
   // 文章总数
-  total.value = res.total
+  total.value = res.total;
   // 当前分类文章总数
-  conditionTotal.value = classifyList.total
-}
+  conditionTotal.value = classifyList.total;
+};
 const init = async () => {
-  await time()
-  await classify()
-  await articleList({})
-}
-init()
+  await time();
+  await classify();
+  await articleList({});
+};
+init();
 const artDetail = (id: any) => {
-  const url = router.resolve({ path: '/artDetail', query: { id: id } })
-  window.open(url.href, '_blank')
-}
+  const url = router.resolve({ path: "/artDetail", query: { id: id } });
+  window.open(url.href, "_blank");
+};
 const selectArtList = async (item: Number) => {
-  paginationObj.page = 1
+  paginationObj.page = 1;
   if (item === 10000) {
-    paginationObj.id = null
-    articleList({})
-    conditionTotal.value = classifyList.total
+    paginationObj.id = null;
+    articleList({});
+    conditionTotal.value = classifyList.total;
   } else {
-    conditionTotal.value = Number(classifyList.rows.filter((item1:any)=> item1.id === item)[0].value)
-    paginationObj.id = item
+    conditionTotal.value = Number(
+      classifyList.rows.filter((item1: any) => item1.id === item)[0].value
+    );
+    paginationObj.id = item;
     const params = {
-      id: item
-    }
-    articleList(params)
+      id: item,
+    };
+    articleList(params);
   }
-  scrollHome()
-}
+  scrollHome();
+};
 const hScroll = computed(() => {
-  return store.scroll
-})
+  return store.scroll;
+});
 const scrollHome = () => {
-  const homeDom: any = document.querySelector('#home')
-  homeDom.scrollTop = window.innerHeight - 65
-}
+  const homeDom: any = document.querySelector("#home");
+  homeDom.scrollTop = window.innerHeight - 65;
+};
 const onCurrentChange = async (value: Number) => {
-  paginationObj.page = value
-  await articleList({})
-  await scrollHome()
-}
+  paginationObj.page = value;
+  await articleList({});
+  await scrollHome();
+};
 
-const loadItemImg = (id:any) => {
-  console.log(id, 633333333)
-  isImgLoaing.value = true
-  const imgDom:any = document.getElementById(`img${id}`)
-  const imgLoadingDom:any = document.getElementById(`imgLoading${id}`)
-  imgDom.style.zIndex = '5'
-  imgDom.style.opacity = '1'
-  imgLoadingDom.style.opacity = '0'
-}
+const loadItemImg = (id: any) => {
+  console.log(id, 633333333);
+  isImgLoaing.value = true;
+  const imgDom: any = document.getElementById(`img${id}`);
+  const imgLoadingDom: any = document.getElementById(`imgLoading${id}`);
+  imgDom.style.zIndex = "5";
+  imgDom.style.opacity = "1";
+  imgLoadingDom.style.opacity = "0";
+};
 // 菜单定位模式
-watch(hScroll, (newVal) => {
-})
+watch(hScroll, (newVal) => {});
 </script>
 <style lang="scss" scoped>
 #artlist {
@@ -167,7 +216,7 @@ watch(hScroll, (newVal) => {
   .artListItem {
     transition: all 0.5s;
     &:hover {
-      @apply scale-105
+      @apply scale-105;
     }
     .artEpitomize {
       margin-top: 10px;
@@ -190,7 +239,7 @@ watch(hScroll, (newVal) => {
         position: relative;
         width: 100%;
         margin-bottom: 20px;
-        transition: all 0.5s;
+        // transition: all 0.5s;
         // box-shadow: 0px 0px 10px 0px var(--hover-shadow-color);
         border-radius: 6px;
         cursor: pointer;
@@ -254,10 +303,10 @@ watch(hScroll, (newVal) => {
             .desc {
               width: 100%;
               height: 50%;
-              word-break: break-all; //在恰当的断字点进行换行 
+              word-break: break-all; //在恰当的断字点进行换行
               overflow: hidden; //文字超出的进行隐藏
               text-overflow: ellipsis; //超出的文字用省略号表示
-              display: -webkit-box; //将元素设为盒子伸缩模型显示         //利用盒子模型 
+              display: -webkit-box; //将元素设为盒子伸缩模型显示         //利用盒子模型
               -webkit-box-orient: vertical; //伸缩方向设为垂直方向
               -webkit-line-clamp: 2;
               user-select: none;
@@ -354,10 +403,10 @@ watch(hScroll, (newVal) => {
             .desc {
               width: 100%;
               height: 50%;
-              word-break: break-all; //在恰当的断字点进行换行 
+              word-break: break-all; //在恰当的断字点进行换行
               overflow: hidden; //文字超出的进行隐藏
               text-overflow: ellipsis; //超出的文字用省略号表示
-              display: -webkit-box; //将元素设为盒子伸缩模型显示         //利用盒子模型 
+              display: -webkit-box; //将元素设为盒子伸缩模型显示         //利用盒子模型
               -webkit-box-orient: vertical; //伸缩方向设为垂直方向
               -webkit-line-clamp: 2;
               user-select: none;
@@ -477,10 +526,10 @@ watch(hScroll, (newVal) => {
             .desc {
               width: 100%;
               height: 100%;
-              word-break: break-all; //在恰当的断字点进行换行 
+              word-break: break-all; //在恰当的断字点进行换行
               overflow: hidden; //文字超出的进行隐藏
               text-overflow: ellipsis; //超出的文字用省略号表示
-              display: -webkit-box; //将元素设为盒子伸缩模型显示      //利用盒子模型 
+              display: -webkit-box; //将元素设为盒子伸缩模型显示      //利用盒子模型
               -webkit-box-orient: vertical; //伸缩方向设为垂直方向
               -webkit-line-clamp: 3;
               user-select: none;
@@ -510,7 +559,9 @@ watch(hScroll, (newVal) => {
       display: flex;
       flex-direction: column;
       align-items: center;
-      .userDesc,.timeDetail,.category {
+      .userDesc,
+      .timeDetail,
+      .category {
         border-radius: 6px;
         transition: all 0.5s;
         background: var(--home-box-background-color);
@@ -519,7 +570,7 @@ watch(hScroll, (newVal) => {
           box-shadow: 0 0 15px 5px var(--hover-shadow-color);
         }
       }
-      
+
       .userDesc {
         width: 100%;
         margin-bottom: 15px;
@@ -566,7 +617,7 @@ watch(hScroll, (newVal) => {
         p {
           text-align: left;
           padding-left: 30px;
-          background: url('@/assets/category.svg') no-repeat 10px 1px;
+          background: url("@/assets/category.svg") no-repeat 10px 1px;
           background-size: 18px;
           margin-bottom: 2px;
         }

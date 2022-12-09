@@ -17,8 +17,8 @@ const routes: Array<RouteRecordRaw> = [
       {
         name: 'home',
         path: '/',
-        // component: defineAsyncComponent(() => import('@/views/home/index.vue')),
-        component: moduleFiles['../views/home/index.vue'],
+        component: defineAsyncComponent(() => import('@/views/home/index.vue')),
+        // component: moduleFiles['../views/home/index.vue'],
         children: []
       },
       {

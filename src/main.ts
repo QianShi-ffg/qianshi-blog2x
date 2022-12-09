@@ -6,6 +6,7 @@ import 'element-plus/dist/index.css'
 import '@/assets/css/index.scss'
 import Router from './router/index'
 import { store } from './store/index'
+
 const app = createApp(App)
 app.use(Router)
 app.use(store)

@@ -49,6 +49,7 @@ import { ref, onMounted, watch, computed } from 'vue'
 import { useStore } from '@/store/index'
 import { useRoute } from 'vue-router'
 import { aWord } from '@/api/api'
+
 const store = useStore()
 const route = useRoute()
 const header = ref()
