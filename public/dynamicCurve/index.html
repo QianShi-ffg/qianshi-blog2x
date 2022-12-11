@@ -1,0 +1,35 @@
+
+<!-- 可动线条 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .path {
+        width: 50%;
+        stroke-dasharray: 2 2 2 2 2 19;
+        /* stroke-dashoffset: 10; */
+        animation: dash 70s linear infinite ;
+    }
+    @keyframes dash {
+        to {
+            stroke-dashoffset: 0;
+        }
+        from {
+            stroke-dashoffset: 10000;
+        }
+    }
+</style>
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" style="background-color: #000;" viewBox="0,0,300,150">
+        <path d="M0,120C150,130 150,50 300,50" stroke='#053a6d' stroke-width='8px' fill='none'></path>
+        <path class="path" d="M0,120C150,130 150,50 300,50" stroke='#01cbd6' stroke-width='5px' fill='none'
+         ></path>
+        <!-- stroke-dasharray虚线间隔 两两一组   stroke-dashoffset 虚线起始偏移量 -->
+    </svg>
+</body>
+</html>

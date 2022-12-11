@@ -6,8 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <style></style>
-
+  <style>
+    body {
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
   <body>
     <canvas id="canvas"></canvas>
     <script>
@@ -47,7 +53,7 @@
               let r = imageData[position],
                 g = imageData[position + 1],
                 b = imageData[position + 2];
-              if (r + g + b !== 738) {
+              if (r + g + b < 700) {
                 let initialx = (Math.random() * img.width) >> 0
                 let initialy = (Math.random() * img.height) >> 0
                 let thisx = (w - initialx) / 80
@@ -70,7 +76,7 @@
               g = imageData[position + 1],
               b = imageData[position + 2];
             // if (r + g + b < 24) {
-            if (r + g + b !== 738) {
+            if (r + g + b < 700) {
               // console.log(selectDotData[i],666)
               selectDotData[i].movex = (selectDotData[i].w - selectDotData[i].x) / 100
               selectDotData[i].movey = (selectDotData[i].h - selectDotData[i].y) / 100

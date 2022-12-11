@@ -2,9 +2,7 @@
   <div id="artlist">
     <div class="leftList">
       <div
-        class="artBox wow animate__animated animate__backInUp animate__fast"
-        :class="`animate__delay-${index}s`"
-        data-wow-duration="2s"
+        class="artBox"
         v-for="(item, index) in artList"
         :key="item.id"
         @click="artDetail(item.id)"
@@ -100,24 +98,7 @@ import { useStore } from "@/store";
 import paginationVue from "@/components/pagination.vue";
 import imgLoading from "@/components/imgLoading.vue";
 // import WOW from 'wowjs';
-import { WOW } from "wowjs";
-import "wowjs/css/libs/animate.css";
-import "animate.css";
 
-onMounted(() => {
-  const wow = new WOW({
-    boxClass: "wow", // default
-    animateClass: "animated", // default
-    offset: 150, // default
-    mobile: true, // default
-    live: false,
-    // live为true时，控制台会提示：MutationObserver is not supported by your browser. & WOW.js cannot detect dom mutations, please call .sync() after loading new content.
-    callback: function (box: any) {
-      console.log("WOW: animating <" + box.tagName.toLowerCase() + ">");
-    },
-  });
-  wow.init();
-});
 const isImgLoaing = ref<boolean>(false);
 const store = useStore();
 const artList: any = ref([]);

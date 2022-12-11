@@ -27,23 +27,23 @@
     let x = 0
     let oldX = 0
     // 鼠标按下
-    window.onmousedown = (e)=> {
-      // console.log(e, '已经触发')
-      //鼠标在pan内移动
-      pan.onmousemove = (e1)=> {
-        // console.log(e, '已经触发111')
-        x =  oldX + e.clientX - e1.clientX
-        console.log(x, e.clientX - e1.clientX)
-        // x/4 控制鼠标划过旋转的角度 x越大角度越大
-        pan.style.transform = `rotateX(70deg) rotateZ(${x/4}deg)`
-      }
-    }
-    // 鼠标放开 注销pan.onmousemove
-    window.onmouseup = (e)=> {
-      // console.log(e, '已经松开')
-      oldX = x
-      pan.onmousemove = ''
-    }
+    // window.onmousedown = (e)=> {
+    //   // console.log(e, '已经触发')
+    //   //鼠标在pan内移动
+    //   pan.onmousemove = (e1)=> {
+    //     // console.log(e, '已经触发111')
+    //     x =  oldX + e.clientX - e1.clientX
+    //     console.log(x, e.clientX - e1.clientX)
+    //     // x/4 控制鼠标划过旋转的角度 x越大角度越大
+    //     pan.style.transform = `rotateX(70deg) rotateZ(${x/4}deg)`
+    //   }
+    // }
+    // // 鼠标放开 注销pan.onmousemove
+    // window.onmouseup = (e)=> {
+    //   // console.log(e, '已经松开')
+    //   oldX = x
+    //   pan.onmousemove = ''
+    // }
     let index = 0
     let index11 = 1
     left.addEventListener('click',function(){
