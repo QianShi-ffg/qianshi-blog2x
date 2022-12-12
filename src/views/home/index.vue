@@ -30,16 +30,26 @@
               ></div>
               {{ item.describe }}
               <p class="artEpitomize">
-                <span>作者: 千拾</span>
-                <span>发布时间: {{ date(item.updataTime) }}</span>
-                <span
-                  >分类:
+                <span>
+                  <img src="@/assets/author.svg" alt="" width="14" height="14">
+                  千拾
+                </span>
+                <span>
+                  <img src="@/assets/time.svg" alt="" width="14" height="14">
+                  {{ date(item.updataTime) }}
+                </span>
+                <span>
+                  <img src="@/assets/classify.svg" alt="" width="14" height="14">
                   {{
                     classifyList.rows.filter((ii: any) => {
                       return ii.id === item.classifyId;
                     })[0].name
                   }}</span
                 >
+                <span>
+                  <img src="@/assets/views.svg" alt="" width="14" height="14">
+                  {{ item.Views }}
+                </span>
               </p>
             </div>
           </div>
@@ -297,8 +307,14 @@ watch(hScroll, (newVal) => {});
               bottom: 10px;
               left: 20px;
               transition: all 0.5s;
+              display: flex;
               span {
+                display: flex;
+                justify-content: flex-start;
                 margin-right: 20px;
+                img {
+                  margin: 5px;
+                }
               }
             }
           }
@@ -398,7 +414,9 @@ watch(hScroll, (newVal) => {});
               left: 20px;
               transition: all 0.5s;
               span {
-                margin-right: 20px;
+                &:not(:last-child) {
+                  margin-right: 30px;
+                }
               }
             }
           }
@@ -441,8 +459,11 @@ watch(hScroll, (newVal) => {});
             }
             .content {
               top: 30px;
+              .desc {}
               .artEpitomize {
-                opacity: 0;
+                span img {
+                  filter: saturate(90);
+                }
               }
             }
           }
@@ -518,7 +539,7 @@ watch(hScroll, (newVal) => {});
             .artEpitomize {
               position: absolute;
               bottom: 8px;
-              left: 20px;
+              left: 60px;
               transition: all 0.5s;
               span {
                 margin-right: 20px;
