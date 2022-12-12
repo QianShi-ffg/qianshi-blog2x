@@ -35,7 +35,20 @@
       <div class="aWord">{{ aWordText }}</div>
     </section>
     <main>
-      <router-view />
+      <css-doodle click-to-update style="">
+      :doodle {
+        @grid: 7 / 100vmax;
+        pointer-events: none;
+      }
+      @shape: clover 5;
+      background: hsla(
+        calc(360 - @i * 4), 70%, 68%, @r.8
+      );
+      transform:
+        scale(@r(.2, 1.5))
+        translate(@m2.@r(±50%));
+    </css-doodle>
+      <router-view/>
     </main>
     <footer class="container mx-auto w-screen"> 晋ICP备18013488号-1 千拾 2022</footer>
     <div class="scrollTop" ref="scrollTop" @click="goTop">
@@ -220,10 +233,28 @@ const goTop = () => {
     -webkit-text-stroke: 1px rgba(219, 219, 219, 0.411);
   }
   main {
+    position: relative;
     height: auto;
     margin: auto;
     min-height: 825px;
-    // padding-top: 100px;
+    overflow: hidden;
+    css-doodle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      z-index: 0;
+      // &::after {
+      //   content: "";
+      //   position: absolute;
+      //   top: 0;
+      //   left: 0;
+      //   right: 0;
+      //   bottom: 0;
+      //   backdrop-filter: blur(20px);
+      //   z-index: 0;
+      // }
+    }
   }
   footer {
     height: 50px;
