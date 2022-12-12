@@ -13,9 +13,9 @@
           <li @click="menuClick('home')">
             <router-link to="/">首页</router-link>
           </li>
-          <li @click="menuClick('')">
+          <!-- <li @click="menuClick('')">
             <router-link to="/demo">demo</router-link>
-          </li>
+          </li> -->
           <li @click="menuClick('')">
             <router-link to="/friendshipChain">友链</router-link>
           </li>
@@ -36,17 +36,17 @@
     </section>
     <main>
       <css-doodle click-to-update style="">
-      :doodle {
-        @grid: 7 / 100vmax;
-        pointer-events: none;
-      }
-      @shape: clover 5;
-      background: hsla(
-        calc(360 - @i * 4), 70%, 68%, @r.8
-      );
-      transform:
-        scale(@r(.2, 1.5))
-        translate(@m2.@r(±50%));
+        :doodle {
+          @grid: 8 / 100vmax;
+          @grid: 8 / 100vmax;
+        }
+        @shape: clover 5;
+        background: hsla(
+          calc(360 - @i * 4), 70%, 68%, @r.8
+        );
+        transform:
+          scale(@r(.1, 1))
+          translate(@m2.@r(±200%));
     </css-doodle>
       <router-view/>
     </main>
@@ -244,16 +244,16 @@ const goTop = () => {
       bottom: 0;
       margin: auto;
       z-index: 0;
-      // &::after {
-      //   content: "";
-      //   position: absolute;
-      //   top: 0;
-      //   left: 0;
-      //   right: 0;
-      //   bottom: 0;
-      //   backdrop-filter: blur(20px);
-      //   z-index: 0;
-      // }
+      &::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: 0;
+        right: 0;
+        bottom: -50%;
+        backdrop-filter: blur(20px);
+        z-index: 0;
+      }
     }
   }
   footer {

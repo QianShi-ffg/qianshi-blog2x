@@ -28,6 +28,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 #demo {
+  position: relative;
   max-width: 1280px;
   margin: 100px auto;
   display: flex;
