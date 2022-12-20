@@ -4,6 +4,19 @@
     <ul class="timeline">
       <!-- Item 1 -->
       <li>
+        <div class="direction-r">
+          <div class="flag-wrapper">
+            <span class="hexa"></span>
+            <span class="flag">新增实况天气组件</span>
+            <span class="time-wrapper"><span class="time">2022-12-20</span></span>
+          </div>
+          <div class="desc">
+            在首页与文章详情中添加实况天气组件,显示访问者当地的天气状况<br/>
+          </div>
+        </div>
+      </li>
+
+      <li>
         <div class="direction-l">
           <div class="flag-wrapper">
             <span class="hexa"></span>
@@ -397,7 +410,7 @@ import currencyBanner from '@/components/banner.vue'
   -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.20);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.20);
   z-index: 2;
-  border-radius: 5px;
+  border-radius: 12px;
 }
 
 .direction-l .desc,

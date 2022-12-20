@@ -70,7 +70,6 @@ const loadItemImg = (id:any) => {
 #friendshipChain {
   margin: 0 auto;
   position: relative;
-
   .friendshipList {
     width: 100%;
     height: calc(100% - 50px - 20px);

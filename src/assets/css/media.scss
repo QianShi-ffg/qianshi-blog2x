@@ -204,14 +204,16 @@
     #catalogue {
       display: block;
       width: 300px;
-      background: var(--home-box-background-color);
       z-index: 5;
       text-align: left;
+      background: transparent;
       ul {
         height: 100%;
         list-style: none;
         margin: 0;
         padding: 20px;
+        background: var(--home-box-background-color);
+        margin-bottom: 15px;
         li {
           height: 30px;
           border-radius: 6px;

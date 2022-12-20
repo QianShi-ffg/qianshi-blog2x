@@ -7,12 +7,13 @@
   <div id="artDetail">
     <!-- <div class="banner" v-show="isBannerShow"> -->
     <md-editor v-model="text" previewOnly show-code-row-number :marked-heading-id="generateId" @onGetCatalog="onGetCatalog" code-theme="dracula"/>
-    <div id="catalogue" class="shadow-lg rounded-xl" :class="catalogueStyle" v-if="catalogList.length !== 0">
-      <ul>
+    <div id="catalogue" :class="catalogueStyle">
+      <ul class="rounded-xl" v-if="catalogList.length !== 0">
         <li v-for="(item, i) in catalogList" :key="i" :class="activeIndex === i ? 'active-li' : ''">
           <a :href="`#${item.text}`" :data-level="item.level" :title="item.text">{{ item.text }}</a>
         </li>
       </ul>
+      <cityWeather />
     </div>
   </div>
 </template>
@@ -25,6 +26,8 @@ import { getArticleDetail } from '@/api/api'
 import { useStore } from '@/store/index'
 import { useRoute } from "vue-router"
 import navScroll from '@/hooks/navScroll'
+import cityWeather from '@/components/cityWeather.vue'
+
 MdEditor.config({
   editorExtensions: {
     highlight: {

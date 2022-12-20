@@ -79,6 +79,7 @@
         </div>
       </div>
       <div class="timeDetail">博客已平稳运行{{ days }}天</div>
+      <cityWeather />
       <div class="category">
         <p>分类</p>
         <ul>
@@ -107,6 +108,7 @@ import { useRouter, useRoute } from "vue-router";
 import { useStore } from "@/store";
 import paginationVue from "@/components/pagination.vue";
 import imgLoading from "@/components/imgLoading.vue";
+import cityWeather from '@/components/cityWeather.vue'
 // import WOW from 'wowjs';
 
 const isImgLoaing = ref<boolean>(false);
@@ -258,7 +260,7 @@ watch(hScroll, (newVal) => {});
             width: 100%;
             height: 200px;
             overflow: hidden;
-            border-radius: 6px 6px 0 0;
+            border-radius: 12px 12px 0 0;
             img {
               position: absolute;
               top: 0;
@@ -285,7 +287,7 @@ watch(hScroll, (newVal) => {});
             height: 170px;
             color: var(--color);
             // box-shadow: 0 0 15px 2px var(--hover-shadow-color);
-            border-radius: 0 0 6px 6px;
+            border-radius: 0 0 12px 12px;
             text-align: start;
             transition: all 0.5s;
             .div111 {
@@ -363,7 +365,7 @@ watch(hScroll, (newVal) => {});
             width: 250px;
             height: 170px;
             overflow: hidden;
-            border-radius: 6px 0 0 6px;
+            border-radius: 12px 0 0 12px;
             img {
               position: absolute;
               top: 0;
@@ -391,7 +393,7 @@ watch(hScroll, (newVal) => {});
             height: 170px;
             // color: #000;
             // box-shadow: 0 15px 25px var(--hover-shadow-color);
-            border-radius: 0 6px 6px 0;
+            border-radius: 0 12px 12px 0;
             text-align: start;
             transition: all 0.5s;
             .div111 {
@@ -491,7 +493,7 @@ watch(hScroll, (newVal) => {});
             overflow: hidden;
             z-index: 2;
             // box-shadow: 0px 0px 8px 0px rgb(0, 0, 0, 0.5);
-            border-radius: 6px;
+            border-radius: 12px;
             img {
               position: absolute;
               top: 0;
@@ -519,7 +521,7 @@ watch(hScroll, (newVal) => {});
             height: 140px;
             // color: var(--color);
             // box-shadow: 0 0 15px 5px var(--hover-shadow-color);
-            border-radius: 6px;
+            border-radius: 12px;
             text-align: start;
             transition: all 0.5s;
             .div111 {
@@ -564,7 +566,8 @@ watch(hScroll, (newVal) => {});
       .userDesc,
       .timeDetail,
       .category {
-        border-radius: 6px;
+        @apply rounded-xl;
+        // border-radius: 6px;
         transition: all 0.5s;
         background: var(--home-box-background-color);
         padding: 20px;
