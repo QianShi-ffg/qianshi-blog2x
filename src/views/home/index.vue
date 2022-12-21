@@ -158,8 +158,14 @@ const init = async () => {
 };
 init();
 const artDetail = (id: any) => {
-  const url = router.resolve({ path: "/artDetail", query: { id: id } });
-  window.open(url.href, "_blank");
+  if (window.innerWidth <= 800) {
+    router.push({ path: '/artDetail', query: { id: id } })
+    const homeDom:any = document.querySelector('#home')
+    homeDom.scrollTop = 0
+  } else {
+    const url = router.resolve({ path: '/artDetail',query: { id: id } })
+    window.open(url.href, '_blank')
+  }
 };
 const selectArtList = async (item: Number) => {
   paginationObj.page = 1;

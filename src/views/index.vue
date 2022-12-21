@@ -2,8 +2,8 @@
   <div id="home">
     <header class="w-screen leading-none text-3xl mb-6" ref="header">
       <span class="title">千拾的博客</span>
-      <switchBtn />
-      <div style="position: absolute; right: 60px; margin: auto; top: 0; bottom: 0;" class="menu">
+      <switchVue v-if="wInnerWidth >= 800"/>
+      <div :style="{ position: 'absolute',right: wInnerWidth < 800 ? '30px' : '60px',margin: 'auto',top: 0,bottom: 0 }" class="menu">
         <input type="checkbox" name="check" id="check">
         <label for="check">
           <div class="menuIcon" ref="menuIcon">
@@ -53,7 +53,7 @@ import { ref, onMounted, watch, computed } from 'vue'
 import { useStore } from '@/store/index'
 import { useRoute } from 'vue-router'
 import { aWord } from '@/api/api'
-import switchBtn from '@/components/switch.vue'
+import switchVue from '@/components/switch.vue'
 import newFooterVue from '@/components/newFooter.vue'
 
 const store = useStore()
@@ -64,7 +64,11 @@ const scrollTop = ref()
 const aWordText = ref<String>('')
 const bannerInner: any = ref()
 const isBannerShow = ref<boolean>(true)
+const wInnerWidth = ref<number>(0)
+
+
 onMounted(() => {
+  wInnerWidth.value = window.innerWidth
   isShow(window.location.pathname)
   window.addEventListener('scroll', (e: any) => {
     if (e.target.id === 'home') {
