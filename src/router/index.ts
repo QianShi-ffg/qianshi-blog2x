@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw, createWebHistory } from 'vue-router'
 import { defineAsyncComponent } from 'vue'
+import { useStore } from '@/store'
 
 const moduleFiles = import.meta.glob('../views/*/*.vue')
 console.log(moduleFiles, 36669999)
@@ -59,6 +60,11 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(),
   routes: routes
+})
+
+router.beforeEach((to, from, next) => {
+  useStore().setMyLoading(true)
+  next()
 })
 
 export default router

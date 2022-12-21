@@ -8,6 +8,9 @@
       .title {
         display: block;
       }
+      #switch {
+        display: none;
+      }
       .menu {
         ul {
           position: fixed;
@@ -47,6 +50,9 @@
         }
       }
     }
+    footer.newFooter {
+      display: none;
+    }
   }
   #banner {
     display: none;
@@ -78,6 +84,9 @@
       text-align: center;
       background: transparent;
       backdrop-filter: blur(1px);
+      #switch {
+        display: block;
+      }
       .title {
         display: none;
       }
@@ -105,6 +114,12 @@
           }
         }
       }
+    }
+    footer.footer {
+      display: none;
+    }
+    footer.newFooter {
+      display: block;
     }
   }
   #banner {
@@ -152,12 +167,18 @@
 
 
 @media screen and (min-width: 1280px) {
+  body {
+    background: transparent;
+  }
   #home {
     background: var(--background-color);
     header {
       text-align: center;
       background: transparent;
       backdrop-filter: blur(1px);
+      #switch {
+        display: block;
+      }
       .title {
         display: none;
       }
@@ -167,6 +188,12 @@
       height: auto;
       background: none;
     }
+    footer.footer {
+      display: none;
+    }
+    footer.newFooter {
+      display: block;
+    }
   }
   #banner {
     display: block;
@@ -174,6 +201,7 @@
     background: url('@/assets/111.jpg') no-repeat;
     background-position: 50% 50%;
     background-size: cover;
+    filter: brightness(var(--banner-filter-brightness));
     .bannerInner {
       position: relative;
       width: 100%;
@@ -188,6 +216,17 @@
       text-align: center;
       line-height: 100vh;
       overflow: hidden;
+      &::after {
+        content: attr(data-content);
+        position: absolute;
+        inset: 0;
+        background: #fff;
+        background-clip: text;
+        color: transparent;
+        clip-path: ellipse(100px 100px at 0% 50%);
+        animation: hd 5s ease-in infinite;
+        // mix-blend-mode: difference;
+      }
     }
   }
   #artlist {
@@ -254,5 +293,14 @@
         }
       }
     }
+  }
+}
+
+@keyframes hd {
+  50% {
+    clip-path: ellipse(100px 100px at 100% 50%);
+  }
+  to {
+    clip-path: ellipse(100px 100px at 0% 50%);
   }
 }

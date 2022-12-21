@@ -2,7 +2,8 @@
   <div id="home">
     <header class="w-screen leading-none text-3xl mb-6" ref="header">
       <span class="title">千拾的博客</span>
-      <div style="position: absolute; right: 30px; margin: auto; top: 0; bottom: 0;" class="menu">
+      <switchBtn />
+      <div style="position: absolute; right: 60px; margin: auto; top: 0; bottom: 0;" class="menu">
         <input type="checkbox" name="check" id="check">
         <label for="check">
           <div class="menuIcon" ref="menuIcon">
@@ -19,7 +20,7 @@
           <li @click="menuClick('')">
             <router-link to="/friendshipChain">友链</router-link>
           </li>
-          <li @click="menuClick('')">
+          <li @click="menuClick('log')">
             <router-link to="/log">更新日志</router-link>
           </li>
           <li @click="menuClick('')">
@@ -29,28 +30,18 @@
       </div>
     </header>
     <section id="banner" v-show="isBannerShow">
-      <div class="bannerInner" ref="bannerInner">
+      <div class="bannerInner" ref="bannerInner" data-content="千拾的博客">
         千拾的博客
       </div>
       <div class="aWord">{{ aWordText }}</div>
     </section>
     <main>
-      <css-doodle click-to-update style="">
-        :doodle {
-          @grid: 8 / 100vmax;
-          @grid: 8 / 100vmax;
-        }
-        @shape: clover 5;
-        background: hsla(
-          calc(360 - @i * 4), 70%, 68%, @r.8
-        );
-        transform:
-          scale(@r(.1, 1))
-          translate(@m2.@r(±200%));
-    </css-doodle>
-      <router-view/>
+      <router-view />
     </main>
-    <footer class="container mx-auto w-screen"> 晋ICP备18013488号-1 千拾 2022</footer>
+    <footer class="newFooter">
+      <newFooterVue />
+    </footer>
+    <footer class="footer">晋ICP备18013488号-1 千拾 2022</footer>
     <div class="scrollTop" ref="scrollTop" @click="goTop">
       <img src="@/assets/scrollTop.svg" alt="">
     </div>
@@ -62,6 +53,8 @@ import { ref, onMounted, watch, computed } from 'vue'
 import { useStore } from '@/store/index'
 import { useRoute } from 'vue-router'
 import { aWord } from '@/api/api'
+import switchBtn from '@/components/switch.vue'
+import newFooterVue from '@/components/newFooter.vue'
 
 const store = useStore()
 const route = useRoute()
@@ -84,7 +77,7 @@ onMounted(() => {
         bannerInner.value.classList.add('textStroke')
         if (e.target.scrollTop > 300) {
           scrollTop.value.style.bottom = '150px'
-        }else {
+        } else {
           scrollTop.value.style.bottom = '-70px'
         }
       } else {
@@ -97,6 +90,8 @@ onMounted(() => {
       }
     }
   }, true)
+
+  theme()
 })
 const path = computed(() => {
   return route.path
@@ -116,20 +111,63 @@ const init = async () => {
   aWordText.value = `${res.hitokoto} - ${res.from}`
 }
 init()
-const menuClick = (value:string) => {
-  if (window.innerWidth >= 1280) {
-    if(value === 'home') {
-      const homeDom:any = document.querySelector('#home')
+const menuClick = (value: string) => {
+  goTop()
+  if (window.innerWidth >= 800) {
+    if (value === 'home') {
+      const homeDom: any = document.querySelector('#home')
       homeDom.scrollTop = window.innerHeight - 65
     }
-  }
-  if (window.innerWidth <= 800) {
+  } else {
     menuIcon.value.click()
   }
 }
 const goTop = () => {
-  const homeDom:any = document.querySelector('#home')
+  const homeDom: any = document.querySelector('#home')
   homeDom.scrollTop = 0
+}
+
+const theme = () => {
+  const html: any = document.getElementsByTagName("html")[0];
+  // 先判断浏览器本身是否存储用户设置的主题
+  if (localStorage.getItem('theme')) {
+    if (localStorage.getItem('theme') === 'light') {
+      html.className = 'light'
+      store.setSwitchChecked(true)
+    } else {
+      html.className = 'dark'
+      store.setSwitchChecked(false)
+    }
+  } else {
+    // 浏览器没有存储的值再跟随系统
+    // 判断初始值
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      html.className = 'dark'
+      store.setSwitchChecked(false)
+    } else {
+      html.className = 'light'
+      store.setSwitchChecked(true)
+    }
+    // 跟随系统代表用户没有设置主题, 因此在跟随系统,或者系统切换时,一旦改变switch的值需要将theme清除,保证下次是初始值
+    localStorage.removeItem('theme')
+    // 监听变更
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        if (event.matches) {
+          html.className = 'dark'
+          store.setSwitchChecked(false)
+        } else {
+          html.className = 'light'
+          store.setSwitchChecked(true)
+        }
+        // 跟随系统代表用户没有设置主题, 因此在跟随系统,或者系统切换时,一旦改变switch的值需要将theme清除,保证下次是初始值
+        localStorage.removeItem('theme')
+      });
+  }
 }
 </script>
 
@@ -140,6 +178,7 @@ const goTop = () => {
   // background: #f4f5f5;
   overflow: overlay;
   scroll-behavior: smooth;
+
   header {
     position: fixed;
     top: 0px;
@@ -150,8 +189,10 @@ const goTop = () => {
     background-size: 4px 4px;
     line-height: 65px;
     user-select: none;
+
     .menu {
       position: relative;
+
       .menuIcon {
         position: absolute;
         right: 0;
@@ -160,6 +201,7 @@ const goTop = () => {
         margin: auto;
         width: 25px;
         height: 25px;
+
         i {
           position: absolute;
           top: 0;
@@ -170,6 +212,7 @@ const goTop = () => {
           height: 3px;
           background: #000;
         }
+
         &::before {
           position: absolute;
           top: 1px;
@@ -180,6 +223,7 @@ const goTop = () => {
           background: #000;
           transition: all .5s;
         }
+
         &::after {
           position: absolute;
           bottom: 1px;
@@ -191,13 +235,16 @@ const goTop = () => {
           transition: all .5s;
         }
       }
+
       #check {
         display: none;
       }
     }
   }
+
   #banner {
     position: relative;
+
     &::before {
       position: absolute;
       content: "";
@@ -205,6 +252,7 @@ const goTop = () => {
       z-index: 10;
       pointer-events: none;
     }
+
     .aWord {
       position: absolute;
       bottom: 35px;
@@ -221,47 +269,37 @@ const goTop = () => {
       animation: huerotate 5s linear infinite;
     }
   }
+
   @keyframes huerotate {
     from {
       background-position: -500%;
     }
+
     to {
       background-position: 500%;
     }
   }
+
   .textStroke {
     -webkit-text-stroke: 1px rgba(219, 219, 219, 0.411);
   }
+
   main {
     position: relative;
     height: auto;
     margin: auto;
     min-height: 825px;
     overflow: hidden;
-    css-doodle {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-      z-index: 0;
-      &::after {
-        content: "";
-        position: absolute;
-        top: -50%;
-        left: 0;
-        right: 0;
-        bottom: -50%;
-        backdrop-filter: blur(20px);
-        z-index: 0;
-      }
-    }
   }
+
   footer {
     height: 50px;
     line-height: 50px;
     margin: 10px auto;
     text-align: center;
+    color: var(--color);
   }
+
   .scrollTop {
     position: fixed;
     right: 10%;
@@ -274,6 +312,7 @@ const goTop = () => {
     box-shadow: 0 0 10px 1px var(--hover-shadow-color);
     transition: all 0.5s;
     cursor: pointer;
+
     img {
       position: absolute;
       top: 0;
@@ -286,170 +325,224 @@ const goTop = () => {
       transition: all 0.2s;
       filter: var(--scrollTop-img-filter);
     }
+
     &:hover {
       box-shadow: 0 0 10px 1px var(--home-artBox-shadow-color);
+
       img {
         animation: huojian 2s linear infinite;
       }
     }
   }
 }
+
 @keyframes huojian {
   2% {
-    transform: translate(0px,4px) rotate(-2.5deg);
-}
-4% {
+    transform: translate(0px, 4px) rotate(-2.5deg);
+  }
+
+  4% {
     transform: translateY(6px) rotate(-2.5deg);
-}
-6% {
-    transform: translate(0px,-3px) rotate(-2.5deg);
-}
-8% {
-    transform: translate(0px,7px) rotate(2.5deg);
-}
-10% {
-    transform: translate(0px,-2px) rotate(-.5deg);
-}
-12% {
-    transform: translate(0px,6px) rotate(-1.5deg);
-}
-14% {
-    transform: translate(0px,3px) rotate(2.5deg);
-}
-16% {
-    transform: translate(0px,8px) rotate(2.5deg);
-}
-18% {
-    transform: translate(0px,-8px) rotate(1.5deg);
-}
-20% {
-    transform: translate(0px,1px) rotate(-2.5deg);
-}
-22% {
-    transform: translate(0px,-3px) rotate(.5deg);
-}
-24% {
-    transform: translate(0px,-2px) rotate(-.5deg);
-}
-26% {
-    transform: translate(0px,-3px) rotate(2.5deg);
-}
-28% {
-    transform: translate(0px,5px) rotate(-1.5deg);
-}
-30% {
+  }
+
+  6% {
+    transform: translate(0px, -3px) rotate(-2.5deg);
+  }
+
+  8% {
+    transform: translate(0px, 7px) rotate(2.5deg);
+  }
+
+  10% {
+    transform: translate(0px, -2px) rotate(-.5deg);
+  }
+
+  12% {
+    transform: translate(0px, 6px) rotate(-1.5deg);
+  }
+
+  14% {
+    transform: translate(0px, 3px) rotate(2.5deg);
+  }
+
+  16% {
+    transform: translate(0px, 8px) rotate(2.5deg);
+  }
+
+  18% {
+    transform: translate(0px, -8px) rotate(1.5deg);
+  }
+
+  20% {
+    transform: translate(0px, 1px) rotate(-2.5deg);
+  }
+
+  22% {
+    transform: translate(0px, -3px) rotate(.5deg);
+  }
+
+  24% {
+    transform: translate(0px, -2px) rotate(-.5deg);
+  }
+
+  26% {
+    transform: translate(0px, -3px) rotate(2.5deg);
+  }
+
+  28% {
+    transform: translate(0px, 5px) rotate(-1.5deg);
+  }
+
+  30% {
     transform: translateY(-1px) rotate(-2.5deg);
-}
-32% {
-    transform: translate(0px,9px) rotate(2.5deg);
-}
-34% {
-    transform: translate(0px,4px) rotate(.5deg);
-}
-36% {
-    transform: translate(0px,3px) rotate(-2.5deg);
-}
-38% {
-    transform: translate(0px,-6px) rotate(1.5deg);
-}
-40% {
-    transform: translate(0px,9px) rotate(2.5deg);
-}
-42% {
-    transform: translate(0px,6px) rotate(2.5deg);
-}
-44% {
-    transform: translate(0px,1px) rotate(1.5deg);
-}
-46% {
-    transform: translate(0px,-2px) rotate(1.5deg);
-}
-48% {
-    transform: translate(0px,1px) rotate(-2.5deg);
-}
-50% {
-    transform: translate(0px,5px) rotate(-.5deg);
-}
-52% {
-    transform: translate(0px,2px) rotate(-.5deg);
-}
-54% {
-    transform: translate(0px,-1px) rotate(-1.5deg);
-}
-56% {
-    transform: translate(0px,5px) rotate(1.5deg);
-}
-58% {
-    transform: translate(0px,-9px) rotate(-1.5deg);
-}
-60% {
-    transform: translate(0px,-9px) rotate(-1.5deg);
-}
-62% {
-    transform: translate(0px,5px) rotate(1.5deg);
-}
-64% {
-    transform: translate(0px,-9px) rotate(-.5deg);
-}
-66% {
-    transform: translate(0px,3px) rotate(-1.5deg);
-}
-68% {
+  }
+
+  32% {
+    transform: translate(0px, 9px) rotate(2.5deg);
+  }
+
+  34% {
+    transform: translate(0px, 4px) rotate(.5deg);
+  }
+
+  36% {
+    transform: translate(0px, 3px) rotate(-2.5deg);
+  }
+
+  38% {
+    transform: translate(0px, -6px) rotate(1.5deg);
+  }
+
+  40% {
+    transform: translate(0px, 9px) rotate(2.5deg);
+  }
+
+  42% {
+    transform: translate(0px, 6px) rotate(2.5deg);
+  }
+
+  44% {
+    transform: translate(0px, 1px) rotate(1.5deg);
+  }
+
+  46% {
+    transform: translate(0px, -2px) rotate(1.5deg);
+  }
+
+  48% {
+    transform: translate(0px, 1px) rotate(-2.5deg);
+  }
+
+  50% {
+    transform: translate(0px, 5px) rotate(-.5deg);
+  }
+
+  52% {
+    transform: translate(0px, 2px) rotate(-.5deg);
+  }
+
+  54% {
+    transform: translate(0px, -1px) rotate(-1.5deg);
+  }
+
+  56% {
+    transform: translate(0px, 5px) rotate(1.5deg);
+  }
+
+  58% {
+    transform: translate(0px, -9px) rotate(-1.5deg);
+  }
+
+  60% {
+    transform: translate(0px, -9px) rotate(-1.5deg);
+  }
+
+  62% {
+    transform: translate(0px, 5px) rotate(1.5deg);
+  }
+
+  64% {
+    transform: translate(0px, -9px) rotate(-.5deg);
+  }
+
+  66% {
+    transform: translate(0px, 3px) rotate(-1.5deg);
+  }
+
+  68% {
     transform: translateY(0px) rotate(2.5deg);
-}
-70% {
-    transform: translate(0px,5px) rotate(3.5deg);
-}
-72% {
-    transform: translate(0px,2px) rotate(-.5deg);
-}
-74% {
-    transform: translate(0px,-2px) rotate(-1.5deg);
-}
-76% {
-    transform: translate(0px,2px) rotate(3.5deg);
-}
-78% {
+  }
+
+  70% {
+    transform: translate(0px, 5px) rotate(3.5deg);
+  }
+
+  72% {
+    transform: translate(0px, 2px) rotate(-.5deg);
+  }
+
+  74% {
+    transform: translate(0px, -2px) rotate(-1.5deg);
+  }
+
+  76% {
+    transform: translate(0px, 2px) rotate(3.5deg);
+  }
+
+  78% {
     transform: translateY(-7px) rotate(-1.5deg);
-}
-80% {
-    transform: translate(0px,8px) rotate(-.5deg);
-}
-82% {
-    transform: translate(0px,4px) rotate(-.5deg);
-}
-84% {
-    transform: translate(0px,1px) rotate(2.5deg);
-}
-86% {
+  }
+
+  80% {
+    transform: translate(0px, 8px) rotate(-.5deg);
+  }
+
+  82% {
+    transform: translate(0px, 4px) rotate(-.5deg);
+  }
+
+  84% {
+    transform: translate(0px, 1px) rotate(2.5deg);
+  }
+
+  86% {
     transform: translate(8px) rotate(-2.5deg);
-}
-88% {
-    transform: translate(0px,-3px) rotate(.5deg);
-}
-90% {
-    transform: translate(0px,7px) rotate(-2.5deg);
-}
-92% {
-    transform: translate(0px,1px) rotate(-2.5deg);
-}
-94% {
-    transform: translate(0px,6px) rotate(1.5deg);
-}
-96% {
-    transform: translate(0px,-5px) rotate(2.5deg);
-}
-98% {
+  }
+
+  88% {
+    transform: translate(0px, -3px) rotate(.5deg);
+  }
+
+  90% {
+    transform: translate(0px, 7px) rotate(-2.5deg);
+  }
+
+  92% {
+    transform: translate(0px, 1px) rotate(-2.5deg);
+  }
+
+  94% {
+    transform: translate(0px, 6px) rotate(1.5deg);
+  }
+
+  96% {
+    transform: translate(0px, -5px) rotate(2.5deg);
+  }
+
+  98% {
     transform: translate(-4px) rotate(.5deg);
-}
-100% {
+  }
+
+  100% {
     transform: translate(0px) rotate(0deg);
+  }
 }
-}
+
 @keyframes menuUl {
   to {
     transform: translateX(0);
   }
+
   from {
     transform: translateX(-100vw);
   }

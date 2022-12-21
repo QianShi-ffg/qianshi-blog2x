@@ -17,7 +17,15 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue';
+import { useStore } from '@/store';
 import currencyBanner from '@/components/banner.vue'
+
+const store = useStore()
+
+onMounted(() => {
+  store.setMyLoading(false)
+})
 </script>
 
 <style scoped lang="scss">

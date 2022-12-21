@@ -150,9 +150,11 @@ const classify = async () => {
   conditionTotal.value = classifyList.total;
 };
 const init = async () => {
+  // store.setMyLoading(true)
   await time();
   await classify();
   await articleList({});
+  store.setMyLoading(false)
 };
 init();
 const artDetail = (id: any) => {

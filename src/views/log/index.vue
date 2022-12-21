@@ -4,6 +4,21 @@
     <ul class="timeline">
       <!-- Item 1 -->
       <li>
+        <div class="direction-l">
+          <div class="flag-wrapper">
+            <span class="hexa"></span>
+            <span class="flag">新增loading,配置主题</span>
+            <span class="time-wrapper"><span class="time">2022-12-21</span></span>
+          </div>
+          <div class="desc">
+            1.添加页面跳转时的loading效果,缓冲页面跳转时的视觉效果<br/>
+            2.菜单新增主题切换按钮,新增切换主题功能<br/>
+            3.首页文字聚光灯效果
+          </div>
+        </div>
+      </li>
+
+      <li>
         <div class="direction-r">
           <div class="flag-wrapper">
             <span class="hexa"></span>
@@ -222,8 +237,15 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue';
+import { useStore } from '@/store';
 import currencyBanner from '@/components/banner.vue'
 
+const store = useStore()
+
+onMounted(() => {
+  store.setMyLoading(false)
+})
 </script>
 
 <style lang="scss" scoped>

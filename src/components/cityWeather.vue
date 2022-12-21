@@ -1,5 +1,5 @@
 <template>
-  <div id="cityWeather" class="rounded-xl" v-if="weatherData.temperature">
+  <div id="cityWeather" class="rounded-xl" v-if="weatherData.address">
     <div class="city">{{ cityData }}</div>
     <div class="currentTemperature">{{ weatherData.temperature }}℃</div>
     <div class="currentSkycon">
@@ -7,7 +7,7 @@
       {{ weatherData.skyconCn }}
     </div>
     <div class="detail">
-      {{ 'PM2.5:' + ' ' +weatherData.pm25 }}
+      {{ 'PM2.5:' + ' ' + weatherData.pm25 }}
     </div>
   </div>
 </template>

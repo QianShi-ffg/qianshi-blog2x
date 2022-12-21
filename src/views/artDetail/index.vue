@@ -57,6 +57,7 @@ const articleList = async () => {
   text.value = res.articleContent
   title.value = res.title
   coverUrl.value = res.coverUrl
+  store.setMyLoading(false)
 }
 articleList()
 const hScroll = computed(() => {

@@ -34,7 +34,9 @@ import { onMounted, ref } from 'vue'
 import currencyBanner from '@/components/banner.vue'
 import { getFriendShipList } from '@/api/api'
 import imgLoading from '@/components/imgLoading.vue'
+import { useStore } from '@/store'
 
+const store = useStore()
 const isImgLoaing = ref<boolean>(false)
 const innerWidth = ref<number>(0)
 onMounted(() => {
@@ -49,6 +51,7 @@ const init = async() => {
     item.screenShot = `${import.meta.env.VITE_BASE_URL}${item.screenShot}`
     return item
   })
+  store.setMyLoading(false)
   console.log(listData.value, 785222)
 }
 

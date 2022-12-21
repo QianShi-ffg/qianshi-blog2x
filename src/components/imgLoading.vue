@@ -22,7 +22,6 @@
           <!-- lol -->
         </div>
       </div>
-      <p>loading</p>
     </div>
   </div>
 </template>
