@@ -52,6 +52,7 @@ const catalogueStyle = ref<String>('catalogueAbsolute')
 const { activeIndex, toScrollTop } = navScroll()
 // 获取文章详情
 const articleList = async () => {
+  // store.setMyLoading(true)
   const res: any = await getArticleDetail(route.query)
   console.log(res)
   text.value = res.articleContent

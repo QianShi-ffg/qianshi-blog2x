@@ -31,7 +31,7 @@ export const useStore = defineStore('store',{
                 const timeout = setTimeout(() => {
                     this.myLoading = myLoading
                     clearTimeout(timeout)
-                },2000)
+                },1000)
             }
            
         },

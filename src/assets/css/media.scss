@@ -214,8 +214,8 @@
         background: #fff;
         background-clip: text;
         color: transparent;
-        clip-path: ellipse(100px 100px at 0% 50%);
-        animation: hd 5s ease-in infinite;
+        clip-path: ellipse(100px 100px at 28% 50%);
+        animation: hd 8s ease-in infinite;
         // mix-blend-mode: difference;
       }
     }
@@ -289,9 +289,9 @@
 
 @keyframes hd {
   50% {
-    clip-path: ellipse(100px 100px at 100% 50%);
+    clip-path: ellipse(100px 100px at 72% 50%);
   }
   to {
-    clip-path: ellipse(100px 100px at 0% 50%);
+    clip-path: ellipse(100px 100px at 28% 50%);
   }
 }

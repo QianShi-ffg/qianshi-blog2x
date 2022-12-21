@@ -111,6 +111,7 @@ const isShow = (value: string) => {
   }
 }
 const init = async () => {
+  store.setMyLoading(true)
   const res: any = await aWord({})
   aWordText.value = `${res.hitokoto} - ${res.from}`
 }
