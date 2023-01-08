@@ -12,14 +12,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useStore } from '@/store';
 
 const store = useStore()
-const checked = ref<boolean>(true)
+// const checked = ref<boolean>(true)
 
-watch(()=>store.switchChecked, (newVal) => {
-  checked.value = newVal
+// watch(()=>store.switchChecked, (newVal) => {
+//   console.log(checked.value, newVal)
+//   checked.value = newVal
+// })
+
+const checked = computed(() => {
+  return store.switchChecked
 })
 
 const schange = (e:any) => {
@@ -50,7 +55,7 @@ const schange = (e:any) => {
 }
 
 input[type=checkbox]+label {
-  /* background-color: #040d1c; */
+  background-color: #19191980;
   width: 45px;
   height: 20px;
   border-radius: 10px;

@@ -523,7 +523,7 @@ watch(hScroll, (newVal) => {});
             margin-bottom: 20px;
             padding: 20px 20px 55px;
             // background: var(--home-box-background-color);
-            font-size: 14px;
+            font-size: 16px;
             z-index: 1;
             width: 630px;
             height: 140px;

@@ -149,7 +149,8 @@ const theme = () => {
     if (
       window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
+      ) {
+      console.log('000000000000')
       html.className = 'dark'
       store.setSwitchChecked(false)
     } else {
