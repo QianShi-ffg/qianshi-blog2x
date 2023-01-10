@@ -36,7 +36,7 @@
                 </span>
                 <span>
                   <img src="@/assets/time.svg" alt="" width="14" height="14">
-                  {{ date(item.updataTime) }}
+                  {{ date(item.createTime) }}
                 </span>
                 <span>
                   <img src="@/assets/classify.svg" alt="" width="14" height="14">

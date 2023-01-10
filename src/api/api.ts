@@ -21,6 +21,10 @@ export const getClassifyIdList = (params: object) => {
 export const getFriendShipList = (params: object) => {
   return axios.get( '/friendShip', { params })
 }
+// 友链列表单个刷新
+export const setRefreshScreenShot = (params: object) => {
+  return axios.post( '/refreshScreenShot', params)
+}
 // 实况天气
 export const getCityWeather = (params: object) => {
   return axios.get( '/cityWeather', { params })

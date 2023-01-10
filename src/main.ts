@@ -8,6 +8,7 @@ import Router from './router/index'
 import { store } from './store/index'
 import 'css-doodle';
 
+
 const app = createApp(App)
 app.use(Router)
 app.use(store)
