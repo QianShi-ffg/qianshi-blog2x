@@ -4,6 +4,19 @@
     <ul class="timeline">
       <!-- Item 1 -->
       <li>
+        <div class="direction-r">
+          <div class="flag-wrapper">
+            <span class="hexa"></span>
+            <span class="flag">新增友链刷新截屏</span>
+            <span class="time-wrapper"><span class="time">2023-01-10</span></span>
+          </div>
+          <div class="desc">
+            新增友链单独刷新重新加载截屏的功能
+          </div>
+        </div>
+      </li>
+
+      <li>
         <div class="direction-l">
           <div class="flag-wrapper">
             <span class="hexa"></span>

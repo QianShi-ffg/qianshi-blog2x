@@ -10,8 +10,9 @@
             {{ item.name }}
           </p>
           <p :title="item.desc" class="desc">{{ item.desc }}</p>
-          <!-- <imgLoading class="iframeLoading" :id="`imgLoading${item.id}`" /> -->
-          <img :src="item.screenShot" alt="" class="iframe" :class="isload" @load="loadItemImg(item)" :id="`img${item.id}`">
+          <imgLoading class="iframeLoading" :id="`imgLoading${item.id}`" />
+          <!-- <img src="@/assets/loading.gif" alt="" class="iframeLoading" :id="`imgLoading${item.id}`"> -->
+          <img :src="item.screenShot" alt="" class="iframe" @load="loadItemImg(item)" :id="`img${item.id}`">
         </div>
         <a :href="item.blogUrl" target="_blank" class="btn">GO</a>
       </div>
@@ -40,10 +41,7 @@ import imgLoading from '@/components/imgLoading.vue'
 import { useStore } from '@/store'
 
 const store = useStore()
-const isImgLoaing = ref<boolean>(false)
 const innerWidth = ref<number>(0)
-const showLoading = ref<boolean>(false)
-const isload = ref<string>('load')
 
 onMounted(() => {
   innerWidth.value = window.innerWidth
@@ -64,30 +62,28 @@ const init = async () => {
 init()
 
 const loadItemImg = (item: any) => {
-  isload.value = ''
-//   console.log(item.id, 633333333)
-//   isImgLoaing.value = true
-// const imgDom: any = document.getElementById(`img${item.id}`)
-// const imgLoadingDom: any = document.getElementById(`imgLoading${item.id}`)
-// imgDom.src = `${import.meta.env.VITE_BASE_URL}${item.screenShot}?${Math.random()}`
-  // imgDom.style.opacity = '1'
-//   // imgLoadingDom.style.opacity = '0'
+  console.log(item.id, 633333333)
+  const imgDom: any = document.getElementById(`img${item.id}`)
+  const imgLoadingDom: any = document.getElementById(`imgLoading${item.id}`)
+  // imgDom.src = `${item.screenShot}?${Math.random()}`
+  imgDom.style.opacity = '1'
+  imgLoadingDom.style.opacity = '0'
 }
 
 const refresh = async (item: any) => {
   const imgDom: any = document.getElementById(`img${item.id}`)
-  imgDom.src = '/src/assets/loading.gif'
-  // const imgLoadingDom: any = document.getElementById(`imgLoading${item.id}`)
+  const imgLoadingDom: any = document.getElementById(`imgLoading${item.id}`)
+  // imgDom.src = '/src/assets/loading.gif'
   // 隐藏旧图
-  // imgDom.style.opacity = '0'
-  // imgLoadingDom.style.opacity = '1'
+  imgDom.style.opacity = '0'
+  imgLoadingDom.style.opacity = '1'
   const res: any = await setRefreshScreenShot(item)
   console.log(res, import.meta.env.VITE_BASE_URL, res.path)
   console.dir(imgDom)
   imgDom.src = `${import.meta.env.VITE_BASE_URL}${res.path}?${Math.random()}`
   // 关闭loading 打开新图
-  // imgDom.style.opacity = '1'
-  // imgLoadingDom.style.opacity = '0'
+  imgDom.style.opacity = '1'
+  imgLoadingDom.style.opacity = '0'
 }
 
 </script>
@@ -326,6 +322,8 @@ const refresh = async (item: any) => {
           }
 
           .iframeLoading {
+            // display: none;
+            transform: scale(0);
             opacity: 0;
           }
         }
@@ -377,24 +375,12 @@ const refresh = async (item: any) => {
             .iframe {
               height: 130px;
               border: 2px solid rgba(201, 201, 201, 0.205);
-              opacity: 1;
-            }
-            .iframe.load {
-              
-            }
-            .iframe.load::before {
-              content: "";
-              position: absolute;
-              top: 0;
-              left: 0;
-              bottom: 0;
-              right: 0;
-              background: url(@/assets/loading.gif);
-              background-size: 100% 100%;
+              opacity: 0;
             }
 
             .iframeLoading {
               opacity: 1;
+              transform: scale(1);
             }
           }
 
