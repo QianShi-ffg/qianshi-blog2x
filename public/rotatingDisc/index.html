@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <title>Document</title>
+</head>
+<body>
+  <div id="pan">
+    <div class="kuai kuai1"></div>
+    <div class="kuai kuai2"></div>
+    <div class="kuai kuai3"></div>
+    <div class="kuai kuai4"></div>
+    <div class="kuai kuai5"></div>
+    <div class="kuai kuai6"></div>
+    <div class="kuai kuai7"></div>
+    <div class="kuai kuai8"></div>
+    <div class="kuai kuai9"></div>
+  </div>
+  <div class="btn">
+    <div id="left">左</div>
+    <div id="right">右</div>
+  </div>
+  <script>
+    let x = 0
+    let oldX = 0
+    // 鼠标按下
+    // window.onmousedown = (e)=> {
+    //   // console.log(e, '已经触发')
+    //   //鼠标在pan内移动
+    //   pan.onmousemove = (e1)=> {
+    //     // console.log(e, '已经触发111')
+    //     x =  oldX + e.clientX - e1.clientX
+    //     console.log(x, e.clientX - e1.clientX)
+    //     // x/4 控制鼠标划过旋转的角度 x越大角度越大
+    //     pan.style.transform = `rotateX(70deg) rotateZ(${x/4}deg)`
+    //   }
+    // }
+    // // 鼠标放开 注销pan.onmousemove
+    // window.onmouseup = (e)=> {
+    //   // console.log(e, '已经松开')
+    //   oldX = x
+    //   pan.onmousemove = ''
+    // }
+    let index = 0
+    let index11 = 1
+    left.addEventListener('click',function(){
+      // 最大值为列表长度时重置为1
+      if(index11<pan.children.length){
+        index11 += 1
+      } else {
+        index11 = 1
+      }
+      index += 1
+      pan.style.transform = `rotateX(70deg) rotateZ(${index * 40}deg)`
+      console.log(`${index11}/ ${pan.children.length}`)
+    })
+    right.addEventListener('click',function(){
+       // 最小值为列表1时重置为最大长度
+      if(index11 === 1){
+        index11 = pan.children.length
+      }
+      else {
+        index11 -= 1
+      }
+      index -= 1
+      pan.style.transform = `rotateX(70deg) rotateZ(${index * 40}deg)`
+      console.log(`${index11}/ ${pan.children.length}`)
+    })
+  </script>
+</body>
+</html>

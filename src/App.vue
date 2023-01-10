@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import loading from '@/components/loading.vue'
 </script>
 
 <template>
+  <loading />
   <suspense>
     <router-view/>
   </suspense>

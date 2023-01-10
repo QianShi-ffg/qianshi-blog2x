@@ -4,6 +4,47 @@
     <ul class="timeline">
       <!-- Item 1 -->
       <li>
+        <div class="direction-r">
+          <div class="flag-wrapper">
+            <span class="hexa"></span>
+            <span class="flag">新增友链刷新截屏</span>
+            <span class="time-wrapper"><span class="time">2023-01-10</span></span>
+          </div>
+          <div class="desc">
+            新增友链单独刷新重新加载截屏的功能
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="direction-l">
+          <div class="flag-wrapper">
+            <span class="hexa"></span>
+            <span class="flag">新增loading,配置主题</span>
+            <span class="time-wrapper"><span class="time">2022-12-21</span></span>
+          </div>
+          <div class="desc">
+            1.添加页面跳转时的loading效果,缓冲页面跳转时的视觉效果<br/>
+            2.菜单新增主题切换按钮,新增切换主题功能<br/>
+            3.首页文字聚光灯效果
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="direction-r">
+          <div class="flag-wrapper">
+            <span class="hexa"></span>
+            <span class="flag">新增实况天气组件</span>
+            <span class="time-wrapper"><span class="time">2022-12-20</span></span>
+          </div>
+          <div class="desc">
+            在首页与文章详情中添加实况天气组件,显示访问者当地的天气状况<br/>
+          </div>
+        </div>
+      </li>
+
+      <li>
         <div class="direction-l">
           <div class="flag-wrapper">
             <span class="hexa"></span>
@@ -209,8 +250,15 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue';
+import { useStore } from '@/store';
 import currencyBanner from '@/components/banner.vue'
 
+const store = useStore()
+
+onMounted(() => {
+  store.setMyLoading(false)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -329,7 +377,7 @@ import currencyBanner from '@/components/banner.vue'
 .flag {
   position: relative;
   display: inline;
-  background: rgb(255, 255, 255);
+  background: var(--home-box-background-color);
   font-weight: 600;
   z-index: 2;
   padding: 6px 10px;
@@ -347,7 +395,7 @@ import currencyBanner from '@/components/banner.vue'
   width: 0;
   margin-left: -8px;
   border: solid transparent;
-  border-bottom-color: rgb(255, 255, 255);
+  border-bottom-color: var(--home-box-background-color);
   border-width: 8px;
   pointer-events: none;
 }
@@ -392,12 +440,12 @@ import currencyBanner from '@/components/banner.vue'
   position: relative;
   margin: 1em 0 0 0;
   padding: 1em;
-  background: rgb(254, 254, 254);
+  background: var(--home-box-background-color);
   -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.20);
   -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.20);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.20);
   z-index: 2;
-  border-radius: 5px;
+  border-radius: 12px;
 }
 
 .direction-l .desc,
@@ -474,7 +522,7 @@ import currencyBanner from '@/components/banner.vue'
       top: 50%;
       margin-top: -8px;
       border: solid transparent;
-      border-left-color: rgb(254, 254, 254);
+      border-left-color: var(--home-box-background-color);
       border-width: 8px;
     }
 
@@ -482,7 +530,7 @@ import currencyBanner from '@/components/banner.vue'
       top: 50%;
       margin-top: -8px;
       border: solid transparent;
-      border-right-color: rgb(254, 254, 254);
+      border-right-color: var(--home-box-background-color);
       border-width: 8px;
       left: -8px;
     }

@@ -22,7 +22,6 @@
           <!-- lol -->
         </div>
       </div>
-      <p>loading</p>
     </div>
   </div>
 </template>
@@ -81,7 +80,7 @@ p {
     width: 80px;
     height: 80px;
     background: transparent;
-    box-shadow: 0px 0px 0px 30px rgba(255, 255, 255, 0.67), 0px 0px 19px 0px rgba(0, 0, 0, 0.16) inset;
+    box-shadow: var(--imgLoading-overlay-shadow);
     border-radius: 100%;
     z-index: -1;
     @include center;

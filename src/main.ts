@@ -6,6 +6,9 @@ import 'element-plus/dist/index.css'
 import '@/assets/css/index.scss'
 import Router from './router/index'
 import { store } from './store/index'
+import 'css-doodle';
+
+
 const app = createApp(App)
 app.use(Router)
 app.use(store)

@@ -9,11 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "animate.css": "^4.1.1",
     "axios": "^0.27.2",
+    "css-doodle": "^0.31.2",
     "element-plus": "^2.2.19",
     "jarallax": "^2.0.4",
     "md-editor-v3": "^2.3.0",
     "pinia": "^2.0.23",
+    "sal.js": "^0.8.5",
     "sass": "^1.55.0",
     "vue": "^3.2.41",
     "vue-router": "^4.1.6"

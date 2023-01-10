@@ -4,7 +4,7 @@ export class Request {
   // axios 实例
   instance: AxiosInstance
   // 基础配置，url和超时时间
-  baseConfig: AxiosRequestConfig = { baseURL: import.meta.env.VITE_BASE_URL, timeout: 6000 }
+  baseConfig: AxiosRequestConfig = { baseURL: import.meta.env.VITE_BASE_URL }
 
   constructor(config: AxiosRequestConfig) {
     // 使用axios.create创建axios实例，配置为基础配置和我们传递进来的配置
@@ -49,6 +49,7 @@ export class Request {
       (err: any) => {
         // 这里用来处理http常见错误，进行全局提示
         let message = '';
+        console.log(err, err.response, 22222222)
         switch (err.response.status) {
           case 400:
             message = '请求错误(400)'

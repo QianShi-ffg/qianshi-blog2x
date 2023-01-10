@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <canvas id="canvas"></canvas>
+    <script>
+      // 将图片绘制到canvas中
+      const canvasDom = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      const img = new Image();
+      let imageData = null
+      let selectDotData = []
+      
+      img.src = "./111.webp";
+
+      const dotData = (w,h,initialx,initialy,movex,movey) => {
+        return {
+          w,
+          h,
+          x:initialx,
+          y:initialy,
+          movex,
+          movey 
+        }
+      }
+      img.onload = function () {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+        imageData = ctx.getImageData(0, 0, img.width, img.height).data;
+        // console.log(imageData);
+        ctx.clearRect(0, 0, img.width, img.height);
+        // ctx.fillRect(0, 0, img.width, img.height);
+        // console.log(distance) // 打印当前帧
+        const gap = 4;
+        // const changeColor = () => {
+          for (let h = 0; h < img.height; h += gap) {
+            for (let w = 0; w < img.width; w += gap) {
+              let position = (img.width * h + w) * 4;
+              let r = imageData[position],
+                g = imageData[position + 1],
+                b = imageData[position + 2];
+              if (r + g + b < 700) {
+                let initialx = (Math.random() * img.width) >> 0
+                let initialy = (Math.random() * img.height) >> 0
+                let thisx = (w - initialx) / 80
+                let thisy = (h - initialy) / 80
+                console.log(`rgb(${r},${g},${b})`,11)
+                // console.log(initialx, initialy)
+                // ctx.fillStyle = `hsl(1deg 100% 50%)`;
+                ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+                ctx.fillRect(initialx, initialy, 2, 2);
+                selectDotData.push(dotData(w, h, initialx, initialy, thisx, thisy))
+              }
+            }
+          }
+        // };
+        const update = () => {
+          ctx.clearRect(0, 0, img.width, img.height);
+          for (let i = 0; i < selectDotData.length; i++) {
+            let position = (img.width * selectDotData[i].h + selectDotData[i].w) * 4;
+            let r = imageData[position],
+              g = imageData[position + 1],
+              b = imageData[position + 2];
+            // if (r + g + b < 24) {
+            if (r + g + b < 700) {
+              // console.log(selectDotData[i],666)
+              selectDotData[i].movex = (selectDotData[i].w - selectDotData[i].x) / 100
+              selectDotData[i].movey = (selectDotData[i].h - selectDotData[i].y) / 100
+              if (Math.abs(selectDotData[i].w - selectDotData[i].x) <= Math.abs(selectDotData[i].movex)) {
+                selectDotData[i].x = selectDotData[i].w
+              } else {
+                selectDotData[i].x += selectDotData[i].movex
+              }
+              if (Math.abs(selectDotData[i].h - selectDotData[i].y) <= Math.abs(selectDotData[i].movey)) {
+                selectDotData[i].y = selectDotData[i].h
+              } else {
+                selectDotData[i].y += selectDotData[i].movey
+              }
+              // ctx.fillStyle = `hsl(${num}deg 100% 50%)`;
+              ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+              ctx.fillRect(selectDotData[i].x, selectDotData[i].y, 2, 2);
+            }
+          }
+          // imageData = ctx.getImageData(0, 0, img.width, img.height).data;
+        }
+        let n = 1;
+        let num = 0; // 颜色变量
+        function init() {
+          num += n;
+          if (num >= 320) {
+            n = -1;
+          } else if (num <= 0) {
+            n = 1;
+          }
+          // console.log(num);
+          update();
+          requestAnimationFrame(init);
+        }
+        init();
+      };
+      // animationId = window.requestAnimationFrame(init); // 通知浏览器开始绘制下一帧的时候
+      // }
+    </script>
+  </body>
+</html>

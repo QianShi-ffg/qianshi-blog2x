@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'sal.js/dist/sal.css';
 
 // 滚动条美化
 * {
@@ -40,13 +41,12 @@
   }
 }
 
-@import url('https://fonts.googleapis.com/css?family=Bubblegum+Sans&display=swap');
+// @import url('https://fonts.googleapis.com/css?family=Bubblegum+Sans&display=swap');
 @import './media.scss';
 
 body {
-  font-family: 'Bubblegum Sans', cursive;
+  font-family: cursive;
 }
-
 
 .el-pagination {
   justify-content: center;
