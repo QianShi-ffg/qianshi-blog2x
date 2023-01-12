@@ -8,6 +8,9 @@
       .title {
         display: block;
       }
+      #switch {
+        display: none;
+      }
       .menu {
         ul {
           position: fixed;
@@ -76,13 +79,16 @@
 
 @media screen and (min-width: 800px) {
   #home {
-    background: var(--background-color);
+    background-color: var(--background-color);
     header {
       text-align: center;
       background: transparent;
       backdrop-filter: blur(1px);
       .title {
         display: none;
+      }
+      #switch {
+        display: block;
       }
       .menu {
         .menuIcon { 
@@ -165,13 +171,16 @@
     background: transparent;
   }
   #home {
-    background: var(--background-color);
+    background-color: var(--background-color);
     header {
       text-align: center;
       background: transparent;
       backdrop-filter: blur(1px);
       .title {
         display: none;
+      }
+      #switch {
+        display: block;
       }
     }
     main {
