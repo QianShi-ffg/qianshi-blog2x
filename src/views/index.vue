@@ -3,7 +3,7 @@
     <header class="w-screen leading-none text-3xl mb-6" ref="header">
       <span class="title">千拾的博客</span>
       <switchVue v-if="wInnerWidth >= 800"/>
-      <div :style="{ position: 'absolute',right: wInnerWidth < 800 ? '30px' : '60px',margin: 'auto',top: 0,bottom: 0 }" class="menu">
+      <div :style="{ position: 'absolute',right: wInnerWidth < 800 ? '20px' : '60px',margin: 'auto',top: 0,bottom: 0 }" class="menu">
         <input type="checkbox" name="check" id="check">
         <label for="check">
           <div class="menuIcon" ref="menuIcon">
@@ -181,7 +181,7 @@ const theme = () => {
 #home {
   width: 100%;
   height: 100%;
-  // background: #f4f5f5;
+  background-image: url('@/assets/bg.png');
   overflow: overlay;
   scroll-behavior: smooth;
 

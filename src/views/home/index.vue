@@ -65,7 +65,8 @@
     </div>
     <div class="userMsg">
       <div class="userDesc">
-        <img src="@/assets/user.jpg" alt="" />
+        <img src="@/assets/user.jpg" alt="" class="userIcon"/>
+        <img src="@/assets/iconKuang.png" alt="" class="userIconFrame"/>
         <span class="userName">千拾</span>
         <div class="num-box">
           <div class="num1">
@@ -580,11 +581,13 @@ watch(hScroll, (newVal) => {});
         background: var(--home-box-background-color);
         padding: 20px;
         &:hover {
-          box-shadow: 0 0 15px 5px var(--hover-shadow-color);
+          // box-shadow: 0 0 15px 5px var(--hover-shadow-color);
+          filter: drop-shadow(0 0 5px var(--hover-shadow-color));
         }
       }
 
       .userDesc {
+        position: relative;
         width: 100%;
         margin-bottom: 15px;
         display: flex;
@@ -592,11 +595,30 @@ watch(hScroll, (newVal) => {});
         justify-content: center;
         align-items: center;
         padding: 20px;
+        border-radius: 40px;
+        &::after {
+          position: absolute;
+          top: -25px;
+          width: 352px;
+          height: 276px;
+          background: url(/src/assets/frame.png) no-repeat;
+          background-size: 100% 100%;
+          content: "";
+        }
         img {
           width: 100px;
           height: 100px;
           border-radius: 50px;
           margin-bottom: 15px;
+        }
+        .userIconFrame {
+          position: absolute;
+          top: 4px;
+          left: -6px;
+          right: 0;
+          margin: auto;
+          width: 138px;
+          height: 138px;
         }
         .userName {
           font-size: 22px;
@@ -618,14 +640,25 @@ watch(hScroll, (newVal) => {});
         }
       }
       .timeDetail {
+        position: relative;
         width: 100%;
         height: 36px;
         line-height: 36px;
         padding: 0;
         box-sizing: border-box;
         margin-bottom: 15px;
+        &::after {
+          position: absolute;
+          top: -25px;
+          width: 352px;
+          height: 276px;
+          background: url("@/assets/timeBorder.png") no-repeat;
+          background-size: 100% 100%;
+          content: "";
+        }
       }
       .category {
+        position: relative;
         width: 100%;
         p {
           text-align: left;
