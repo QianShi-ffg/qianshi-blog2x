@@ -41,6 +41,7 @@ const weatherUrl = computed(() => {
 
 <style lang="scss" scoped>
 #cityWeather {
+  position: relative;
   width: 100%;
   height: 135px;
   background: var(--home-box-background-color);
@@ -52,6 +53,16 @@ const weatherUrl = computed(() => {
   // &:hover {
   //   box-shadow: 0 0 15px 5px var(--hover-shadow-color);
   // }
+  &::after {
+    position: absolute;
+    top: -5px;
+    left: -10px;
+    width: 330px;
+    height: 155px;
+    background: url("@/assets/cityWeatherBorder.png") no-repeat;
+    background-size: 100% 100%;
+    content: "";
+  }
   .city,.currentTemperature {
     text-align: center;
     color: var(--color);

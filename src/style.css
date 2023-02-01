@@ -18,14 +18,16 @@
 
 /* @media (prefers-color-scheme: light) { */
   .light {
-    --color: #000;
+    /* --color: #000; */
+    --color: #fff;
     --background-color: #f4f5f5;
     --imgLoading-hole-color: #f4f5f5;
     --imgLoading-overlay-shadow: 0px 0px 0px 30px rgba(255, 255, 255, 0.67), 0px 0px 19px 0px rgba(0, 0, 0, 0.16) inset;
     --hover-shadow-color: rgba(0, 0, 0, 0.37);
     --home-artBox-shadow-color: rgba(0, 0, 0, 0.2);
-    --home-box-background-color: #fff;
-    /* --home-box-background-color: #2c777f; */
+    /* --home-box-background-color: #fff; */
+    /* --home-box-background-color: #7f2c2c; */
+    --home-box-background-color: #1f9787;
     --catalogue-hover-color: #f7f8fa;
     --body-img: '../222.jpg';
     --scrollTop-img-filter: none;
