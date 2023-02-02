@@ -649,9 +649,10 @@ watch(hScroll, (newVal) => {});
         margin-bottom: 15px;
         &::after {
           position: absolute;
-          top: -25px;
-          width: 352px;
-          height: 276px;
+          top: -5px;
+          left: -6px;
+          width: 313px;
+          height: 46px;
           background: url("@/assets/timeBorder.png") no-repeat;
           background-size: 100% 100%;
           content: "";
