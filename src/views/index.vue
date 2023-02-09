@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <header class="w-screen leading-none text-3xl mb-6" ref="header">
-      <showLanterns></showLanterns>
+      <!-- <showLanterns></showLanterns> -->
       <span class="title">千拾的博客</span>
       <switchVue v-if="wInnerWidth >= 800"/>
       <div :style="{ position: 'absolute',right: wInnerWidth < 800 ? '20px' : '60px',margin: 'auto',top: 0,bottom: 0 }" class="menu">
@@ -56,7 +56,7 @@ import { useRoute } from 'vue-router'
 import { aWord } from '@/api/api'
 import switchVue from '@/components/switch.vue'
 import newFooterVue from '@/components/newFooter.vue'
-import showLanterns from '@/components/showLanterns.vue'
+// import showLanterns from '@/components/showLanterns.vue'
 
 const store = useStore()
 const route = useRoute()
