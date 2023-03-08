@@ -595,16 +595,6 @@ watch(hScroll, (newVal) => {});
         justify-content: center;
         align-items: center;
         padding: 20px;
-        border-radius: 40px;
-        &::after {
-          position: absolute;
-          top: -25px;
-          width: 352px;
-          height: 276px;
-          background: url(/src/assets/frame.png) no-repeat;
-          background-size: 100% 100%;
-          content: "";
-        }
         img {
           width: 100px;
           height: 100px;
@@ -612,13 +602,7 @@ watch(hScroll, (newVal) => {});
           margin-bottom: 15px;
         }
         .userIconFrame {
-          position: absolute;
-          top: 4px;
-          left: -6px;
-          right: 0;
-          margin: auto;
-          width: 138px;
-          height: 138px;
+          display: none;
         }
         .userName {
           font-size: 22px;
@@ -647,16 +631,6 @@ watch(hScroll, (newVal) => {});
         padding: 0;
         box-sizing: border-box;
         margin-bottom: 15px;
-        &::after {
-          position: absolute;
-          top: -5px;
-          left: -6px;
-          width: 313px;
-          height: 46px;
-          background: url("@/assets/timeBorder.png") no-repeat;
-          background-size: 100% 100%;
-          content: "";
-        }
       }
       .category {
         position: relative;
@@ -690,6 +664,42 @@ watch(hScroll, (newVal) => {});
             }
           }
         }
+      }
+    }
+  }
+  .guo-feng {
+    .userDesc {
+      border-radius: 40px;
+      &::after {
+        position: absolute;
+        top: -25px;
+        width: 352px;
+        height: 276px;
+        background: url(/src/assets/frame.png) no-repeat;
+        background-size: 100% 100%;
+        content: "";
+      }
+      .userIconFrame {
+        position: absolute;
+        top: 4px;
+        left: -6px;
+        right: 0;
+        display: inline-block;
+        margin: auto;
+        width: 138px;
+        height: 138px;
+      }
+    }
+    .timeDetail {
+      &::after {
+        position: absolute;
+        top: -5px;
+        left: -6px;
+        width: 313px;
+        height: 46px;
+        background: url("@/assets/timeBorder.png") no-repeat;
+        background-size: 100% 100%;
+        content: "";
       }
     }
   }

@@ -50,19 +50,6 @@ const weatherUrl = computed(() => {
   margin-bottom: 15px;
   transition: all 0.5s;
   padding: 20px;
-  // &:hover {
-  //   box-shadow: 0 0 15px 5px var(--hover-shadow-color);
-  // }
-  &::after {
-    position: absolute;
-    top: -5px;
-    left: -10px;
-    width: 330px;
-    height: 155px;
-    background: url("@/assets/cityWeatherBorder.png") no-repeat;
-    background-size: 100% 100%;
-    content: "";
-  }
   .city,.currentTemperature {
     text-align: center;
     color: var(--color);
@@ -86,6 +73,21 @@ const weatherUrl = computed(() => {
     padding-left: 5px;
     text-align: left;
     font-size: 12px;
+  }
+}
+
+.guo-feng {
+  #cityWeather {
+    &::after {
+      position: absolute;
+      top: -5px;
+      left: -10px;
+      width: 330px;
+      height: 155px;
+      background: url("@/assets/cityWeatherBorder.png") no-repeat;
+      background-size: 100% 100%;
+      content: "";
+    }
   }
 }
 </style>
