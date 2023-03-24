@@ -76,8 +76,8 @@ onMounted(() => {
     if (e.target.id === 'home') {
       store.setScroll(e.target.scrollTop)
       if (e.target.scrollTop !== 0) {
-        header.value.style.backgroundColor = '#9999994a'
-        header.value.style.backdropFilter = 'saturate(180%) blur(6px)'
+        header.value.style.backgroundColor = '#600808d9'
+        header.value.style.backdropFilter = 'saturate(180%) blur(50px)'
         header.value.style.color = '#000'
         bannerInner.value.style.backgroundPosition = `calc(50% + ${e.target.scrollTop}px) calc(50% + ${e.target.scrollTop}px)`
         bannerInner.value.classList.add('textStroke')
