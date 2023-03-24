@@ -189,30 +189,40 @@
           justify-content: center;
           align-items: center;
           li {
-            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 65px;
             a {
-              position: relative;
-              display: flex;
-              justify-content: center;
-              align-items: center;
+              display: inline-block;
               height: 35px;
+              line-height: 35px;
               padding: 0 2px;
-              &::after {
-                content: '';
-                display: inline-block;
-                width: 0%;
-                height: 2px;
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                background: linear-gradient(to right, #e86a42, #ca434e) no-repeat;
-                transition: all 0.3s;
-              }
+              background: linear-gradient(to right, #e86a42, #ca434e) no-repeat right bottom;
+              background-size: 0 2px;
+              transition: background-size 0.5s;
               &:hover {
-                &::after {
-                  width: 100%;
-                }
+                background-position-x: left;
+                background-size: 100% 2px;
               }
+              // &::after {
+              //   content: '';
+              //   display: inline-block;
+              //   height: 2px;
+              //   width: 0%;
+              //   position: absolute;
+              //   right: 0;
+              //   bottom: 0;
+              //   background: linear-gradient(to right, #e86a42, #ca434e);
+              //   transition: all 0.3s;
+              // }
+              // &:hover {
+              //   &::after {
+              //     width: 100%;
+              //     left: 0;
+              //     right: unset;
+              //   }
+              // }
             }
           }
         }

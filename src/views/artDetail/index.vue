@@ -142,7 +142,7 @@ const onGetCatalog = (list: []) => {
     .inner {
       width: 100%;
       height: 100%;
-      filter: blur(40px) brightness(.7);
+      filter: blur(100px) brightness(.8) contrast(1.2);
       background-size: 100% 100% !important;
     }
     .title {
@@ -168,10 +168,11 @@ const onGetCatalog = (list: []) => {
     height: 400px;
     overflow: hidden;
     .inner {
-      width: 100%;
-      height: 100%;
-      filter: blur(40px) brightness(.7);
-      background-size: 100% 100% !important;
+      width: 120%;
+      height: 120%;
+      transform: translate(-10%, -10%);
+      filter: blur(100px) brightness(.8) contrast(1.2);
+      background-size: 100% 150% !important;
     }
     .title {
       position: absolute;
