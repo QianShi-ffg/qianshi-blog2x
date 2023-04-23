@@ -57,7 +57,7 @@ const articleList = async () => {
   console.log(res)
   text.value = res.articleContent
   title.value = res.title
-  coverUrl.value = res.coverUrl
+  coverUrl.value = res.coverUrl ? res.coverUrl : 'http://blog.xingyijun.cn/assets/111-92b95fe0.jpg'
   store.setMyLoading(false)
 }
 articleList()

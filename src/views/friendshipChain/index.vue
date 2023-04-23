@@ -50,7 +50,7 @@ onMounted(() => {
 const listData = ref<any>([])
 
 const init = async () => {
-  const res: any = await getFriendShipList({})
+  const res: any = await getFriendShipList({ page: 1, pageSize: 1000, sort: 'ASC' })
   listData.value = res.map((item: any) => {
     item.screenShot = `${import.meta.env.VITE_BASE_URL}${item.screenShot}`
     return item
