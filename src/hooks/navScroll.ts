@@ -17,11 +17,12 @@ export default function() {
     // 根据结构获取当前滚动dom,进行赋值 不一定是e.target.children[0] 可能是e.target 或者其他,看页面结构
     currentScroll.value = e.target.scrollTop
     // 锚点list
-    const darkAnchorList = document.querySelectorAll('.header-anchor')
+    const darkAnchorList = document.querySelectorAll('.darkAnchor')
     const offsetTopArr:any = []
     darkAnchorList.forEach((item:any) => {
-      offsetTopArr.push(item.offsetTop)
+      offsetTopArr.push(item.parentNode.offsetTop)
     })
+    console.log(offsetTopArr, 'activeIndexactiveIndex')
     for (let i = 0; i < offsetTopArr.length; i++) {
       if (currentScroll.value >= offsetTopArr[i] + 100) {
         activeIndex.value = i
