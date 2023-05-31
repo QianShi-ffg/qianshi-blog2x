@@ -20,8 +20,9 @@ export default function() {
     const darkAnchorList = document.querySelectorAll('.darkAnchor')
     const offsetTopArr:any = []
     darkAnchorList.forEach((item:any) => {
-      offsetTopArr.push(item.offsetTop)
+      offsetTopArr.push(item.parentNode.offsetTop)
     })
+    console.log(offsetTopArr, 'activeIndexactiveIndex')
     for (let i = 0; i < offsetTopArr.length; i++) {
       if (currentScroll.value >= offsetTopArr[i] + 100) {
         activeIndex.value = i

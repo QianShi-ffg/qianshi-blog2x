@@ -1,16 +1,34 @@
 <template>
   <div class="banner">
     <!-- <img :src="coverUrl" alt=""> -->
-    <div class="inner" :style="{background: `url(${coverUrl}) no-repeat 0 40%` }"></div>
+    <div
+      class="inner"
+      :style="{ background: `url(${coverUrl}) no-repeat 0 40%` }"
+    ></div>
     <div class="title">{{ title }}</div>
   </div>
   <div id="artDetail">
     <!-- <div class="banner" v-show="isBannerShow"> -->
-    <md-editor v-model="text" previewOnly show-code-row-number :marked-heading-id="generateId" @onGetCatalog="onGetCatalog" code-theme="dracula"/>
+    <MdPreview
+      :editorId="id"
+      :modelValue="text"
+      @onGetCatalog="onGetCatalog"
+      :mdHeadingId="mdHeadingId"
+    />
+    <!-- <md-editor v-model="text" previewOnly show-code-row-number :marked-heading-id="generateId" @onGetCatalog="onGetCatalog" code-theme="dracula"/> -->
     <div id="catalogue" :class="catalogueStyle">
       <ul class="rounded-xl" v-if="catalogList.length !== 0">
-        <li v-for="(item, i) in catalogList" :key="i" :class="activeIndex === i ? 'active-li' : ''">
-          <a :href="`#${item.text}`" :data-level="item.level" :title="item.text">{{ item.text }}</a>
+        <li
+          v-for="(item, i) in catalogList"
+          :key="i"
+          :class="activeIndex === i ? 'active-li' : ''"
+        >
+          <a
+            :href="`#${item.text}`"
+            :data-level="item.level"
+            :title="item.text"
+            >{{ item.text }}</a
+          >
         </li>
       </ul>
       <cityWeather />
@@ -19,84 +37,99 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
-import MdEditor from 'md-editor-v3';
-import 'md-editor-v3/lib/style.css';
-import { getArticleDetail } from '@/api/api'
-import { useStore } from '@/store/index'
-import { useRoute } from "vue-router"
-import navScroll from '@/hooks/navScroll'
-import cityWeather from '@/components/cityWeather.vue'
+import { ref, computed, watch, onMounted, nextTick } from "vue";
+import { MdPreview, config } from "md-editor-v3";
+import "md-editor-v3/lib/preview.css";
+import { getArticleDetail } from "@/api/api";
+import { useStore } from "@/store/index";
+import { useRoute } from "vue-router";
+import navScroll from "@/hooks/navScroll";
+import cityWeather from "@/components/cityWeather.vue";
+import ancher from "markdown-it-anchor";
 
-MdEditor.config({
+const id = "preview-only";
+
+config({
   editorExtensions: {
     highlight: {
       css: {
         dracula: {
           light:
-            'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/base16/snazzy.min.css',
-          dark: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/base16/snazzy.min.css'
-        }
-      }
-    }
-  }
+            "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/base16/snazzy.min.css",
+          dark: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/base16/snazzy.min.css",
+        },
+      },
+    },
+  },
 });
-const store = useStore()
-const generateId = (_text: any, _level: any, index: any) => `heading-${index}`
-const route = useRoute()
-const text = ref<any>('')
-const title = ref<any>('')
-const coverUrl = ref<any>('')
-const catalogList = ref<any>([])
-const catalogueStyle = ref<String>('catalogueAbsolute')
-const { activeIndex, toScrollTop } = navScroll()
+const store = useStore();
+const route = useRoute();
+const text = ref<any>("");
+const title = ref<any>("");
+const coverUrl = ref<any>("");
+const catalogList = ref<any>([]);
+const catalogueStyle = ref<String>("catalogueAbsolute");
+const { activeIndex, toScrollTop } = navScroll();
 // 获取文章详情
 const articleList = async () => {
   // store.setMyLoading(true)
-  const res: any = await getArticleDetail(route.query)
-  console.log(res)
-  text.value = res.articleContent
-  title.value = res.title
-  coverUrl.value = res.coverUrl ? res.coverUrl : 'http://blog.xingyijun.cn/assets/111-92b95fe0.jpg'
-  store.setMyLoading(false)
-}
-articleList()
+  const res: any = await getArticleDetail(route.query);
+  console.log(res);
+  text.value = res.articleContent;
+  title.value = res.title;
+  coverUrl.value = res.coverUrl
+    ? res.coverUrl
+    : "http://blog.xingyijun.cn/assets/111-92b95fe0.jpg";
+  store.setMyLoading(false);
+};
+articleList();
 const hScroll = computed(() => {
-  return store.scroll
-})
+  return store.scroll;
+});
+
 // 菜单定位模式
-watch(hScroll, (newVal)=>{
-  console.log(newVal)
+watch(hScroll, (newVal) => {
   if (newVal > 350) {
-    catalogueStyle.value = 'catalogueFixed'
+    catalogueStyle.value = "catalogueFixed";
   } else {
-    catalogueStyle.value = 'catalogueAbsolute'
+    catalogueStyle.value = "catalogueAbsolute";
   }
-})
+});
 // v3去除 h标签内a标签
-MdEditor.config({
-  markedRenderer(renderer:any) {
-    renderer.heading = (text:String, level:Number, _r:any, _s:any, index:any) => {
-      const id = generateId(text, level, index);
-      // return `<h${level} id="${text}">${text}</h${level}>`
-      // 添加暗锚,跳转高度下将170
-      return `<h${level} id="${id}">${text}</h${level}><a name="${text}" style="position: relative; top: -240px;" class="darkAnchor"></a>`
-    }
-    return renderer
+const mdHeadingId = (_text: any, _level: any, index: any) => {
+  console.log(_text, _level, index);
+  return `heading-${index}`;
+};
+
+onMounted(() => {
+  const aa = setTimeout(async () => {
+    await getHTag();
+    clearTimeout(aa);
+  }, 300);
+  // })
+});
+const getHTag = () => {
+  const hList: any = document.querySelectorAll("h1,h2,h3,h4,h5");
+  console.log(hList, "hListhListhListhListhList");
+  for (const h of hList) {
+    const slug = h.getAttribute("id");
+    h.setAttribute("id", slug);
+    h.innerHTML = `${h.innerHTML}<a name="${h.innerHTML}" style="position: relative; top: -180px;" class="darkAnchor"></a>`;
   }
-})
+};
+// });
 // v3菜单
 const onGetCatalog = (list: []) => {
-  catalogList.value = list
-  console.log(catalogList.value, 699666)
-}
+  catalogList.value = list;
+  console.log(catalogList.value, 699666);
+};
 </script>
 
 <style lang="scss" scoped>
 #artDetail {
   position: relative;
   margin: auto;
-  #md-editor-v3 {
+  #preview-only {
     text-align: left;
     padding: 20px;
     @apply rounded-xl;
@@ -115,7 +148,7 @@ const onGetCatalog = (list: []) => {
   .catalogueFixed {
     position: fixed;
     top: 100px;
-    right: calc((100% - 1200px) / 2);
+    right: calc((100% - 1196px) / 2);
   }
   .catalogueAbsolute {
     position: absolute;
@@ -142,7 +175,7 @@ const onGetCatalog = (list: []) => {
     .inner {
       width: 100%;
       height: 100%;
-      filter: blur(100px) brightness(.8) contrast(1.2);
+      filter: blur(100px) brightness(0.8) contrast(1.2);
       background-size: 100% 100% !important;
     }
     .title {
@@ -171,7 +204,7 @@ const onGetCatalog = (list: []) => {
       width: 120%;
       height: 120%;
       transform: translate(-10%, -10%);
-      filter: blur(100px) brightness(.8) contrast(1.2);
+      filter: blur(100px) brightness(0.8) contrast(1.2);
       background-size: 100% 150% !important;
     }
     .title {
