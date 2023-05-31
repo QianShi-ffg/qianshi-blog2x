@@ -17,7 +17,7 @@ export default function() {
     // 根据结构获取当前滚动dom,进行赋值 不一定是e.target.children[0] 可能是e.target 或者其他,看页面结构
     currentScroll.value = e.target.scrollTop
     // 锚点list
-    const darkAnchorList = document.querySelectorAll('.darkAnchor')
+    const darkAnchorList = document.querySelectorAll('.header-anchor')
     const offsetTopArr:any = []
     darkAnchorList.forEach((item:any) => {
       offsetTopArr.push(item.offsetTop)

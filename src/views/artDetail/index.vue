@@ -6,7 +6,8 @@
   </div>
   <div id="artDetail">
     <!-- <div class="banner" v-show="isBannerShow"> -->
-    <md-editor v-model="text" previewOnly show-code-row-number :marked-heading-id="generateId" @onGetCatalog="onGetCatalog" code-theme="dracula"/>
+    <MdPreview :editorId="id" :modelValue="text" @onGetCatalog="onGetCatalog" :mdHeadingId="mdHeadingId"/>
+    <!-- <md-editor v-model="text" previewOnly show-code-row-number :marked-heading-id="generateId" @onGetCatalog="onGetCatalog" code-theme="dracula"/> -->
     <div id="catalogue" :class="catalogueStyle">
       <ul class="rounded-xl" v-if="catalogList.length !== 0">
         <li v-for="(item, i) in catalogList" :key="i" :class="activeIndex === i ? 'active-li' : ''">
@@ -20,15 +21,18 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import MdEditor from 'md-editor-v3';
-import 'md-editor-v3/lib/style.css';
+import { MdPreview, MdCatalog, config, MdEditor } from 'md-editor-v3';
+import 'md-editor-v3/lib/preview.css';
 import { getArticleDetail } from '@/api/api'
 import { useStore } from '@/store/index'
 import { useRoute } from "vue-router"
 import navScroll from '@/hooks/navScroll'
 import cityWeather from '@/components/cityWeather.vue'
+import ancher from 'markdown-it-anchor';
 
-MdEditor.config({
+const id = 'preview-only';
+
+config({
   editorExtensions: {
     highlight: {
       css: {
@@ -74,16 +78,26 @@ watch(hScroll, (newVal)=>{
   }
 })
 // v3去除 h标签内a标签
-MdEditor.config({
-  markedRenderer(renderer:any) {
-    renderer.heading = (text:String, level:Number, _r:any, _s:any, index:any) => {
-      const id = generateId(text, level, index);
-      // return `<h${level} id="${text}">${text}</h${level}>`
-      // 添加暗锚,跳转高度下将170
-      return `<h${level} id="${id}">${text}</h${level}><a name="${text}" style="position: relative; top: -240px;" class="darkAnchor"></a>`
-    }
-    return renderer
+const mdHeadingId = (_text: any, _level: any, index: any) => {
+  console.log(_text, _level, index)
+  return `heading-${index}`
+};
+
+config({
+  markdownItConfig(mdit: any) {
+    mdit.use(ancher, {
+      permalink: true
+    });
   }
+  // markedRenderer(renderer:any) {
+  //   renderer.heading = (text:String, level:Number, _r:any, _s:any, index:any) => {
+  //     const id = generateId(text, level, index);
+  //     // return `<h${level} id="${text}">${text}</h${level}>`
+  //     // 添加暗锚,跳转高度下将170
+  //     return `<h${level} id="${id}">${text}</h${level}><a name="${text}" style="position: relative; top: -240px;" class="darkAnchor"></a>`
+  //   }
+  //   return renderer
+  // }
 })
 // v3菜单
 const onGetCatalog = (list: []) => {
@@ -96,7 +110,7 @@ const onGetCatalog = (list: []) => {
 #artDetail {
   position: relative;
   margin: auto;
-  #md-editor-v3 {
+  #preview-only {
     text-align: left;
     padding: 20px;
     @apply rounded-xl;

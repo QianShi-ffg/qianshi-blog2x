@@ -60,9 +60,9 @@
   #artlist {
     width: 95%;
   }
-  #md-editor-v3 {
+  #preview-only {
     width: 95%;
-    margin: auto;
+    // margin: auto;
     background: var(--home-box-background-color);
     color: var(--color);
   }
@@ -154,9 +154,9 @@
   }
   #artDetail {
     width: 100%;
-    #md-editor-v3 {
+    #preview-only {
       width: 95%;
-      margin: auto;
+      // margin: auto;
       // background: var(--home-box-background-color);
     }
     #catalogue {
@@ -279,7 +279,7 @@
   }
   #artDetail {
     width: 100%;
-    #md-editor-v3 {
+    #preview-only {
       width: 880px;
       margin: unset;
       // background: var(--home-box-background-color);
