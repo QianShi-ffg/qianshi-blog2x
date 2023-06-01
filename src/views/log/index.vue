@@ -4,6 +4,19 @@
     <ul class="timeline">
       <!-- Item 1 -->
       <li>
+        <div class="direction-l">
+          <div class="flag-wrapper">
+            <span class="hexa"></span>
+            <span class="flag">blog2.0最终版</span>
+            <span class="time-wrapper"><span class="time">2023-06-01</span></span>
+          </div>
+          <div class="desc">
+            blog2.0功能不再更新,依赖不定时更新<br>
+            博客已开源,持续维护......<br>
+          </div>
+        </div>
+      </li>
+      <li>
         <div class="direction-r">
           <div class="flag-wrapper">
             <span class="hexa"></span>
