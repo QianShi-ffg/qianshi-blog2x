@@ -78,9 +78,9 @@ const refresh = async (item: any) => {
   imgDom.style.opacity = '0'
   imgLoadingDom.style.opacity = '1'
   const res: any = await setRefreshScreenShot(item)
-  console.log(res, import.meta.env.VITE_BASE_URL, res.path)
-  console.dir(imgDom)
+  console.log(res,11, import.meta.env.VITE_BASE_URL, res.path)
   imgDom.src = `${import.meta.env.VITE_BASE_URL}${res.path}?${Math.random()}`
+  console.dir(imgDom.src, 'guihoioyhohjojopjpjljl')
   // 关闭loading 打开新图
   imgDom.style.opacity = '1'
   imgLoadingDom.style.opacity = '0'
